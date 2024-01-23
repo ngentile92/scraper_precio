@@ -1,2 +1,1 @@
-# news_evaluation
-Scrapear noticias, evaluar sesgos.
+# scraper de precios
