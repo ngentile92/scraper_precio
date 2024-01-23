@@ -1,0 +1,23 @@
+
+Development
+Create and activate virtual environment:
+
+python -m venv venv
+Activate virtual environment:
+
+For Linux and MacOS:
+
+source venv/bin/activate
+For Windows:
+
+source venv/Scripts/activate
+Install dependencies:
+
+$ pip install -e .
+or
+
+pip install -r requirements.txt
+pip install -r requirements-dev.txt
+
+
+$ export $(cat .env | xargs)
