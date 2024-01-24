@@ -10,6 +10,15 @@ import json
 import os
 import datetime
 
+
+def get_store_name_from_url(url):
+    if 'disco.com.ar' in url:
+        return 'disco'
+    elif 'mercadolibre.com.ar' in url:
+        return 'MELI'
+    else:
+        return 'unknown'
+
 def extract_product_name_disco(url):
     response = requests.get(url)
     if response.status_code == 200:
@@ -49,9 +58,10 @@ def process_urls(url_list):
     today = datetime.datetime.now().strftime("%d/%m/%Y") 
 
     for url in url_list:
-        if 'disco.com.ar' in url:
+        store_name = get_store_name_from_url(url)
+        if store_name == 'disco':
             product_name = extract_product_name_disco(url)
-        elif 'mercadolibre.com.ar' in url:
+        elif store_name == 'MELI':
             product_name = extract_product_name_meli(url)
         else:
             print(f"URL no reconocida: {url}")
@@ -65,26 +75,34 @@ def process_urls(url_list):
         print(f"Nombre del Producto: {product_name}")
         print(f"Precio: {price}")
         print("-" * 50)
-    data = {today: products}
 
-    os.makedirs('../data', exist_ok=True)
-    json_filename = 'productos.json' if 'disco.com.ar' in url_list[0] else 'productos_meli.json'
-    with open(os.path.join('../data', json_filename), 'w', encoding='utf-8') as f:
-        json.dump(data, f, ensure_ascii=False, indent=4)
+    return {today: {store_name: products}}
 
-urls_disco = [
+urls = [
     'https://www.disco.com.ar/gaseosa-coca-cola-sabor-original-1-5-lt/p',
     'https://www.disco.com.ar/yerba-mate-suave-playadito-500-gr/p',
-    'https://www.disco.com.ar/fernet-branca-750-ml-2/p'
-]
-urls_meli = [
+    'https://www.disco.com.ar/fernet-branca-750-ml-2/p',
     'https://www.mercadolibre.com.ar/yerba-mate-playadito-suave-500grs/p/MLA19991741#reco_item_pos=2&reco_backend=item_decorator&reco_backend_type=function&reco_client=home_items-decorator-legacy&reco_id=9d1675cb-71bb-4632-a70c-ecb878920ab6&c_id=/home/second-best-navigation-trend-recommendations/element&c_uid=d47963a0-c512-4d20-aeca-3d3ec910f11d&da_id=second_best_navigation_trend&da_position=2&id_origin=/home/dynamic_access&da_sort_algorithm=ranker',
     'https://www.mercadolibre.com.ar/branca-fernet-750-ml/p/MLA20034085?pdp_filters=category:MLA403668#searchVariation=MLA20034085&position=2&search_layout=stack&type=product&tracking_id=32f2a960-6d7c-4000-9622-954513392276',
     'https://articulo.mercadolibre.com.ar/MLA-1144240255-gaseosa-coca-cola-sabor-original-15-lt-_JM#position=13&search_layout=stack&type=item&tracking_id=6c69d958-94e8-43a8-bb15-582f02730e8d'
 ]
 
-# Procesar URLs de cada tienda
-print("Procesando URLs de Disco")
-process_urls(urls_disco)
-print("\nProcesando URLs de MercadoLibre")
-process_urls(urls_meli)
+all_data = {}
+
+# Procesar todas las URLs
+for url in urls:
+    data = process_urls([url])
+    date, store_products = next(iter(data.items()))
+    store_name, products = next(iter(store_products.items()))
+
+    if date not in all_data:
+        all_data[date] = {}
+    if store_name not in all_data[date]:
+        all_data[date][store_name] = {}
+
+    all_data[date][store_name].update(products)
+
+# Crear la carpeta 'data' si no existe y guardar el archivo JSON
+os.makedirs('../data', exist_ok=True)
+with open(os.path.join('../data', 'productos.json'), 'w', encoding='utf-8') as f:
+    json.dump(all_data, f, ensure_ascii=False, indent=4)
