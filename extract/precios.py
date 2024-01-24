@@ -87,22 +87,26 @@ urls = [
     'https://articulo.mercadolibre.com.ar/MLA-1144240255-gaseosa-coca-cola-sabor-original-15-lt-_JM#position=13&search_layout=stack&type=item&tracking_id=6c69d958-94e8-43a8-bb15-582f02730e8d'
 ]
 
-all_data = {}
 
-# Procesar todas las URLs
-for url in urls:
-    data = process_urls([url])
-    date, store_products = next(iter(data.items()))
-    store_name, products = next(iter(store_products.items()))
+def process_all(urls: list):
+    all_data = {}
 
-    if date not in all_data:
-        all_data[date] = {}
-    if store_name not in all_data[date]:
-        all_data[date][store_name] = {}
+    # Procesar todas las URLs
+    for url in urls:
+        data = process_urls([url])
+        date, store_products = next(iter(data.items()))
+        store_name, products = next(iter(store_products.items()))
 
-    all_data[date][store_name].update(products)
+        if date not in all_data:
+            all_data[date] = {}
+        if store_name not in all_data[date]:
+            all_data[date][store_name] = {}
 
-# Crear la carpeta 'data' si no existe y guardar el archivo JSON
-os.makedirs('../data', exist_ok=True)
-with open(os.path.join('../data', 'productos.json'), 'w', encoding='utf-8') as f:
-    json.dump(all_data, f, ensure_ascii=False, indent=4)
+        all_data[date][store_name].update(products)
+
+    # Crear la carpeta 'data' si no existe y guardar el archivo JSON
+    os.makedirs('../data', exist_ok=True)
+    with open(os.path.join('../data', 'productos.json'), 'w', encoding='utf-8') as f:
+        json.dump(all_data, f, ensure_ascii=False, indent=4)
+
+process_all(urls)
