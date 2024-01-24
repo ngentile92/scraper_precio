@@ -84,7 +84,24 @@ urls = [
     'https://www.disco.com.ar/fernet-branca-750-ml-2/p',
     'https://www.mercadolibre.com.ar/yerba-mate-playadito-suave-500grs/p/MLA19991741#reco_item_pos=2&reco_backend=item_decorator&reco_backend_type=function&reco_client=home_items-decorator-legacy&reco_id=9d1675cb-71bb-4632-a70c-ecb878920ab6&c_id=/home/second-best-navigation-trend-recommendations/element&c_uid=d47963a0-c512-4d20-aeca-3d3ec910f11d&da_id=second_best_navigation_trend&da_position=2&id_origin=/home/dynamic_access&da_sort_algorithm=ranker',
     'https://www.mercadolibre.com.ar/branca-fernet-750-ml/p/MLA20034085?pdp_filters=category:MLA403668#searchVariation=MLA20034085&position=2&search_layout=stack&type=product&tracking_id=32f2a960-6d7c-4000-9622-954513392276',
-    'https://articulo.mercadolibre.com.ar/MLA-1144240255-gaseosa-coca-cola-sabor-original-15-lt-_JM#position=13&search_layout=stack&type=item&tracking_id=6c69d958-94e8-43a8-bb15-582f02730e8d'
+    'https://articulo.mercadolibre.com.ar/MLA-1144240255-gaseosa-coca-cola-sabor-original-15-lt-_JM#position=13&search_layout=stack&type=item&tracking_id=6c69d958-94e8-43a8-bb15-582f02730e8d',
+    'https://www.disco.com.ar/q-procesado-finlandia-light-180g/p',
+    'https://www.disco.com.ar/pan-blanco-artesano-bimbo-500-gr/p',
+    'https://www.disco.com.ar/crema-de-leche-tonadita-pasteurizada-200-gr/p',
+    'https://www.disco.com.ar/manteca-ls-bienestar-animal-200-g/p',
+    'https://www.disco.com.ar/mayonesa-clasica-hellmann-s-950-gr/p',
+    'https://www.disco.com.ar/ketchup-hellmanns-250-gr/p',
+    'https://www.disco.com.ar/salchichas-paladini-tipo-viena-sin-piel-225-gr-6-u/p',
+    'https://www.disco.com.ar/pan-de-panchos-bimbo-artesano-6-u/p',
+    'https://www.disco.com.ar/jugo-en-polvo-tang-naranja-dulce-15-gr/p',
+    'https://www.disco.com.ar/queso-clasico-casancrem-290g/p',
+    'https://www.disco.com.ar/tomate-perita-salsati-la-campagnola-240-gr/p',
+    'https://www.disco.com.ar/pure-de-tomate-la-campagnola-520-gr/p',
+    'https://www.disco.com.ar/galletitas-frambuesa-sonrisas-324-gr/p',
+    'https://www.disco.com.ar/cerveza-quilmes-hinchada-473-ml-x-6-un/p',
+    'https://www.disco.com.ar/cerveza-imperial-extra-lager-uar-473-ml/p',
+    'https://www.disco.com.ar/cafe-dolca-suave-nescafe-170-gr-4/p',
+    'https://www.disco.com.ar/polenta-instantanea-cuisine-co-500-gr/p'
 ]
 
 
