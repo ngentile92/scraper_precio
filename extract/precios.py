@@ -23,37 +23,27 @@ def get_store_name_from_url(url):
     else:
         return 'unknown'
 
-def extract_product_name_disco(url):
+
+def extract_product_name(url, store_name):
     response = requests.get(url)
     if response.status_code == 200:
         soup = BeautifulSoup(response.content, 'html.parser')
-        product_span = soup.find('span', class_='vtex-store-components-3-x-productBrand')
-        return product_span.get_text().strip() if product_span else 'Nombre del producto no encontrado'
+        
+        # Define the search parameters based on store_name
+        if store_name == 'disco' or store_name == 'carrefour' or store_name == 'chango_mas':
+            product_tag = 'span'
+            product_class = 'vtex-store-components-3-x-productBrand'
+        elif store_name == 'MELI':
+            product_tag = 'h1'
+            product_class = 'ui-pdp-title'
+        else:
+            return 'Nombre del producto no encontrado'
+
+        # Find the product name using the specified tag and class
+        product_element = soup.find(product_tag, class_=product_class)
+        return product_element.get_text().strip() if product_element else 'Nombre del producto no encontrado'
     return 'Solicitud fallida'
 
-def extract_product_name_carrefour(url):
-    response = requests.get(url)
-    if response.status_code == 200:
-        soup = BeautifulSoup(response.content, 'html.parser')
-        product_h1 = soup.find('span', class_='vtex-store-components-3-x-productBrand')
-        return product_h1.get_text().strip() if product_h1 else 'Nombre del producto no encontrado'
-    return 'Solicitud fallida'
-
-def extract_product_name_chango_mas(url):
-    response = requests.get(url)
-    if response.status_code == 200:
-        soup = BeautifulSoup(response.content, 'html.parser')
-        product_h1 = soup.find('span', class_='vtex-store-components-3-x-productBrand')
-        return product_h1.get_text().strip() if product_h1 else 'Nombre del producto no encontrado'
-    return 'Solicitud fallida'
-
-def extract_product_name_meli(url):
-    response = requests.get(url)
-    if response.status_code == 200:
-        soup = BeautifulSoup(response.content, 'html.parser')
-        product_h1 = soup.find('h1', class_='ui-pdp-title')
-        return product_h1.get_text().strip() if product_h1 else 'Nombre del producto no encontrado'
-    return 'Solicitud fallida'
 
 def extract_price_selenium(url, store_name):
     options = Options()
