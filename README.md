@@ -7,7 +7,6 @@
 virtualenv venv
 source venv/bin/activate
 pip3 install -r requirements.txt
-pip3 install -r dev-requirements.txt
 ```
 
 - On Windows:
@@ -17,7 +16,6 @@ source venv/Scripts/activate
 ```
 ```bash install requirements
 pip install -r requirements.txt
-pip install -r dev-requirements.txt
 ```
 ``` bash install temis
 or 

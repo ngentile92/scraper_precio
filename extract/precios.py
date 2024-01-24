@@ -87,46 +87,6 @@ def process_urls(url_list):
 
     return {today: {store_name: products}}
 
-urls = [
-    'https://www.masonline.com.ar/aperitivo-fernet-branca-750-cc/p',
-    'https://www.carrefour.com.ar/fernet-branca-botella-750-cc/p',
-    'https://www.carrefour.com.ar/gaseosa-coca-cola-sabor-original-15-l-38376/p',
-    'https://www.carrefour.com.ar/yerba-mate-playadito-suave-con-palo-500-g/p',
-    'https://www.carrefour.com.ar/queso-fundido-light-finlandia-pote-180-g/p',
-    'https://www.carrefour.com.ar/pan-de-mesa-bimbo-tipo-artesano-500-g-715676/p',
-    'https://www.carrefour.com.ar/crema-la-serenisima-para-batir-520-cc-640336/p',
-    'https://www.carrefour.com.ar/manteca-la-serenisima-extra-para-untar-200-g/p',
-    'https://www.carrefour.com.ar/mayonesa-clasica-hellmann-s-sin-tacc-doypack-950-g-694756/p',
-    'https://www.carrefour.com.ar/ketchup-hellmanns-doy-pack-250-g-700206/p',
-    'https://www.carrefour.com.ar/salchichas-paladini-6-u/p',
-    'https://www.carrefour.com.ar/pan-para-pancho-bimbo-artesano-bolsa-6-uni-715679/p',
-    'https://www.carrefour.com.ar/jugo-en-polvo-tang-naranja-dulce-15-g-711451/p',
-    'https://www.carrefour.com.ar/queso-crema-clasico-casancrem-290-g-726373/p',
-    'https://www.carrefour.com.ar/cerveza-blanca-quilmes-hinchada-en-lata-6-uni-473-cc-721825/p',
-    'https://www.carrefour.com.ar/cafe-instantaneo-dolca-suave-origenes-170-g-729426/p',
-    'https://www.carrefour.com.ar/cerveza-rubia-imperial-extra-lager-en-lata-473-cc-722300/p',
-    'https://www.disco.com.ar/gaseosa-coca-cola-sabor-original-1-5-lt/p',
-    'https://www.disco.com.ar/yerba-mate-suave-playadito-500-gr/p',
-    'https://www.disco.com.ar/fernet-branca-750-ml-2/p',
-    'https://www.disco.com.ar/q-procesado-finlandia-light-180g/p',
-    'https://www.disco.com.ar/pan-blanco-artesano-bimbo-500-gr/p',
-    'https://www.disco.com.ar/crema-para-batir-uat-la-serenisima-tetratop-520ml/p',
-    'https://www.disco.com.ar/manteca-ls-bienestar-animal-200-g/p',
-    'https://www.disco.com.ar/mayonesa-clasica-hellmann-s-950-gr/p',
-    'https://www.disco.com.ar/ketchup-hellmanns-250-gr/p',
-    'https://www.disco.com.ar/salchichas-paladini-tipo-viena-sin-piel-225-gr-6-u/p',
-    'https://www.disco.com.ar/pan-de-panchos-bimbo-artesano-6-u/p',
-    'https://www.disco.com.ar/jugo-en-polvo-tang-naranja-dulce-15-gr/p',
-    'https://www.disco.com.ar/queso-clasico-casancrem-290g/p',
-    'https://www.disco.com.ar/tomate-perita-salsati-la-campagnola-240-gr/p',
-    'https://www.disco.com.ar/pure-de-tomate-la-campagnola-520-gr/p',
-    'https://www.disco.com.ar/galletitas-frambuesa-sonrisas-324-gr/p',
-    'https://www.disco.com.ar/cerveza-quilmes-hinchada-473-ml-x-6-un/p',
-    'https://www.disco.com.ar/cerveza-imperial-extra-lager-uar-473-ml/p',
-    'https://www.disco.com.ar/cafe-dolca-suave-nescafe-170-gr-4/p',
-    'https://www.disco.com.ar/polenta-instantanea-cuisine-co-500-gr/p'
-]
-
 
 def process_all(urls: list):
     all_data = {}
@@ -149,4 +109,3 @@ def process_all(urls: list):
     with open(os.path.join('../data', 'productos.json'), 'w', encoding='utf-8') as f:
         json.dump(all_data, f, ensure_ascii=False, indent=4)
 
-process_all(urls)
