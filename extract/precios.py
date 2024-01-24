@@ -74,17 +74,7 @@ def process_urls(url_list):
 
     for url in url_list:
         store_name = get_store_name_from_url(url)
-        if store_name == 'disco':
-            product_name = extract_product_name_disco(url)
-        elif store_name == 'MELI':
-            product_name = extract_product_name_meli(url)
-        elif store_name == 'carrefour':
-            product_name = extract_product_name_carrefour(url)
-        elif store_name == 'chango_mas':
-            product_name = extract_product_name_chango_mas(url)
-        else:
-            print(f"URL no reconocida: {url}")
-            continue
+        product_name = extract_product_name(url,store_name)
 
         price = extract_price_selenium(url, store_name)
         price_number = float(price.replace('$', '').replace('.', '').replace(',', '.')) if price != 'Precio no encontrado' else None
@@ -100,15 +90,27 @@ def process_urls(url_list):
 urls = [
     'https://www.masonline.com.ar/aperitivo-fernet-branca-750-cc/p',
     'https://www.carrefour.com.ar/fernet-branca-botella-750-cc/p',
+    'https://www.carrefour.com.ar/gaseosa-coca-cola-sabor-original-15-l-38376/p',
+    'https://www.carrefour.com.ar/yerba-mate-playadito-suave-con-palo-500-g/p',
+    'https://www.carrefour.com.ar/queso-fundido-light-finlandia-pote-180-g/p',
+    'https://www.carrefour.com.ar/pan-de-mesa-bimbo-tipo-artesano-500-g-715676/p',
+    'https://www.carrefour.com.ar/crema-la-serenisima-para-batir-520-cc-640336/p',
+    'https://www.carrefour.com.ar/manteca-la-serenisima-extra-para-untar-200-g/p',
+    'https://www.carrefour.com.ar/mayonesa-clasica-hellmann-s-sin-tacc-doypack-950-g-694756/p',
+    'https://www.carrefour.com.ar/ketchup-hellmanns-doy-pack-250-g-700206/p',
+    'https://www.carrefour.com.ar/salchichas-paladini-6-u/p',
+    'https://www.carrefour.com.ar/pan-para-pancho-bimbo-artesano-bolsa-6-uni-715679/p',
+    'https://www.carrefour.com.ar/jugo-en-polvo-tang-naranja-dulce-15-g-711451/p',
+    'https://www.carrefour.com.ar/queso-crema-clasico-casancrem-290-g-726373/p',
+    'https://www.carrefour.com.ar/cerveza-blanca-quilmes-hinchada-en-lata-6-uni-473-cc-721825/p',
+    'https://www.carrefour.com.ar/cafe-instantaneo-dolca-suave-origenes-170-g-729426/p',
+    'https://www.carrefour.com.ar/cerveza-rubia-imperial-extra-lager-en-lata-473-cc-722300/p',
     'https://www.disco.com.ar/gaseosa-coca-cola-sabor-original-1-5-lt/p',
     'https://www.disco.com.ar/yerba-mate-suave-playadito-500-gr/p',
     'https://www.disco.com.ar/fernet-branca-750-ml-2/p',
-    'https://www.mercadolibre.com.ar/yerba-mate-playadito-suave-500grs/p/MLA19991741#reco_item_pos=2&reco_backend=item_decorator&reco_backend_type=function&reco_client=home_items-decorator-legacy&reco_id=9d1675cb-71bb-4632-a70c-ecb878920ab6&c_id=/home/second-best-navigation-trend-recommendations/element&c_uid=d47963a0-c512-4d20-aeca-3d3ec910f11d&da_id=second_best_navigation_trend&da_position=2&id_origin=/home/dynamic_access&da_sort_algorithm=ranker',
-    'https://www.mercadolibre.com.ar/branca-fernet-750-ml/p/MLA20034085?pdp_filters=category:MLA403668#searchVariation=MLA20034085&position=2&search_layout=stack&type=product&tracking_id=32f2a960-6d7c-4000-9622-954513392276',
-    'https://articulo.mercadolibre.com.ar/MLA-1144240255-gaseosa-coca-cola-sabor-original-15-lt-_JM#position=13&search_layout=stack&type=item&tracking_id=6c69d958-94e8-43a8-bb15-582f02730e8d',
     'https://www.disco.com.ar/q-procesado-finlandia-light-180g/p',
     'https://www.disco.com.ar/pan-blanco-artesano-bimbo-500-gr/p',
-    'https://www.disco.com.ar/crema-de-leche-tonadita-pasteurizada-200-gr/p',
+    'https://www.disco.com.ar/crema-para-batir-uat-la-serenisima-tetratop-520ml/p',
     'https://www.disco.com.ar/manteca-ls-bienestar-animal-200-g/p',
     'https://www.disco.com.ar/mayonesa-clasica-hellmann-s-950-gr/p',
     'https://www.disco.com.ar/ketchup-hellmanns-250-gr/p',
