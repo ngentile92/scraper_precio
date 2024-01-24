@@ -16,6 +16,10 @@ def get_store_name_from_url(url):
         return 'disco'
     elif 'mercadolibre.com.ar' in url:
         return 'MELI'
+    elif 'carrefour.com.ar' in url:
+        return 'carrefour'
+    elif 'masonline.com.ar' in url:
+        return 'chango_mas'
     else:
         return 'unknown'
 
@@ -27,6 +31,22 @@ def extract_product_name_disco(url):
         return product_span.get_text().strip() if product_span else 'Nombre del producto no encontrado'
     return 'Solicitud fallida'
 
+def extract_product_name_carrefour(url):
+    response = requests.get(url)
+    if response.status_code == 200:
+        soup = BeautifulSoup(response.content, 'html.parser')
+        product_h1 = soup.find('span', class_='vtex-store-components-3-x-productBrand')
+        return product_h1.get_text().strip() if product_h1 else 'Nombre del producto no encontrado'
+    return 'Solicitud fallida'
+
+def extract_product_name_chango_mas(url):
+    response = requests.get(url)
+    if response.status_code == 200:
+        soup = BeautifulSoup(response.content, 'html.parser')
+        product_h1 = soup.find('span', class_='vtex-store-components-3-x-productBrand')
+        return product_h1.get_text().strip() if product_h1 else 'Nombre del producto no encontrado'
+    return 'Solicitud fallida'
+
 def extract_product_name_meli(url):
     response = requests.get(url)
     if response.status_code == 200:
@@ -35,7 +55,7 @@ def extract_product_name_meli(url):
         return product_h1.get_text().strip() if product_h1 else 'Nombre del producto no encontrado'
     return 'Solicitud fallida'
 
-def extract_price_selenium(url):
+def extract_price_selenium(url, store_name):
     options = Options()
     options.headless = True
     service = Service(ChromeDriverManager().install())
@@ -43,12 +63,17 @@ def extract_price_selenium(url):
     try:
         driver.get(url)
         time.sleep(1)
-        try:
-            # Intentar primero con la estructura de Disco
+        if store_name == 'disco':
             price_div = driver.find_element(By.CLASS_NAME, 'discoargentina-store-theme-1dCOMij_MzTzZOCohX1K7w')
-        except:
-            # Si falla, intentar con la estructura de MercadoLibre
+        elif store_name == 'carrefour':
+            price_div = driver.find_element(By.CLASS_NAME, 'valtech-carrefourar-product-price-0-x-sellingPriceValue')
+        elif store_name == 'chango_mas':
+            price_div = driver.find_element(By.CLASS_NAME, 'valtech-gdn-dynamic-product-0-x-dynamicProductPrice')
+        elif store_name == 'MELI':
             price_div = driver.find_element(By.CLASS_NAME, 'andes-money-amount__fraction')
+        else:
+            price_div = None
+
         return price_div.text.strip() if price_div else 'Precio no encontrado'
     finally:
         driver.quit()
@@ -63,11 +88,15 @@ def process_urls(url_list):
             product_name = extract_product_name_disco(url)
         elif store_name == 'MELI':
             product_name = extract_product_name_meli(url)
+        elif store_name == 'carrefour':
+            product_name = extract_product_name_carrefour(url)
+        elif store_name == 'chango_mas':
+            product_name = extract_product_name_chango_mas(url)
         else:
             print(f"URL no reconocida: {url}")
             continue
 
-        price = extract_price_selenium(url)
+        price = extract_price_selenium(url, store_name)
         price_number = float(price.replace('$', '').replace('.', '').replace(',', '.')) if price != 'Precio no encontrado' else None
         products[product_name] = price_number
 
@@ -79,6 +108,8 @@ def process_urls(url_list):
     return {today: {store_name: products}}
 
 urls = [
+    'https://www.masonline.com.ar/aperitivo-fernet-branca-750-cc/p',
+    'https://www.carrefour.com.ar/fernet-branca-botella-750-cc/p',
     'https://www.disco.com.ar/gaseosa-coca-cola-sabor-original-1-5-lt/p',
     'https://www.disco.com.ar/yerba-mate-suave-playadito-500-gr/p',
     'https://www.disco.com.ar/fernet-branca-750-ml-2/p',

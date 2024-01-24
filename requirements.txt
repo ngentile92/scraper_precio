@@ -1,7 +1,6 @@
 scrapy
 bs4
 openai
-os
 pandas
 google-auth
 google-auth-oauthlib
