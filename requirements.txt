@@ -9,3 +9,5 @@ google-api-python-client
 selenium
 webdriver_manager
 mysql-connector-python
+gspread
+oauth2client

@@ -5,6 +5,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
+import re
 import time
 import json
 import os
@@ -68,44 +69,42 @@ def extract_price_selenium(url, store_name):
     finally:
         driver.quit()
 
-def process_urls(url_list):
-    products = {}
-    today = datetime.datetime.now().strftime("%d/%m/%Y") 
 
-    for url in url_list:
+def process_all(urls: list, product_names: list):
+    all_data = {}
+    today = datetime.datetime.now().strftime("%d/%m/%Y")
+
+    for url, product_name_unified in zip(urls, product_names):
         store_name = get_store_name_from_url(url)
-        product_name = extract_product_name(url,store_name)
 
         price = extract_price_selenium(url, store_name)
-        price_number = float(price.replace('$', '').replace('.', '').replace(',', '.')) if price != 'Precio no encontrado' else None
-        products[product_name] = price_number
+        if price != 'Precio no encontrado':
+            # Limpia el string de precio de caracteres no numéricos, excepto el punto y la coma
+            cleaned_price = re.sub(r'[^\d.,]', '', price)
+            
+            # Reemplaza comas con puntos y elimina puntos adicionales que representan miles
+            cleaned_price = cleaned_price.replace('.', '').replace(',', '.')
+
+            # Busca números con o sin parte decimal
+            match = re.search(r'\d+(\.\d+)?', cleaned_price)
+            price_number = float(match.group(0)) if match else None
+        else:
+            price_number = None
+
+        if today not in all_data:
+            all_data[today] = {}
+        if store_name not in all_data[today]:
+            all_data[today][store_name] = {}
+
+        all_data[today][store_name][product_name_unified] = price_number
 
         print(f"URL: {url}")
-        print(f"Nombre del Producto: {product_name}")
-        print(f"Precio: {price}")
+        print(f"Nombre del Producto: {product_name_unified}")
+        print(f"Precio: {price_number if price_number is not None else price}")
         print("-" * 50)
 
-    return {today: {store_name: products}}
-
-
-def process_all(urls: list):
-    all_data = {}
-
-    # Procesar todas las URLs
-    for url in urls:
-        data = process_urls([url])
-        date, store_products = next(iter(data.items()))
-        store_name, products = next(iter(store_products.items()))
-
-        if date not in all_data:
-            all_data[date] = {}
-        if store_name not in all_data[date]:
-            all_data[date][store_name] = {}
-
-        all_data[date][store_name].update(products)
-
-    # Crear la carpeta 'data' si no existe y guardar el archivo JSON
-    os.makedirs('../data', exist_ok=True)
-    with open(os.path.join('../data', 'productos.json'), 'w', encoding='utf-8') as f:
+    os.makedirs('./data', exist_ok=True)
+    with open(os.path.join('./data', 'productos.json'), 'w', encoding='utf-8') as f:
         json.dump(all_data, f, ensure_ascii=False, indent=4)
+
 
