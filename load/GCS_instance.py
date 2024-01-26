@@ -1,5 +1,4 @@
 from googleapiclient import discovery
-from oauth2client.client import GoogleCredentials
 import time
 
 def get_sql_service():
