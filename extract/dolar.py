@@ -49,9 +49,18 @@ def limpiar_y_estructurar_datos(dolar_info):
             compra = re.findall(r'\$\s*\d+[\.,]?\d*', info['Compra'])[0]
             venta = re.findall(r'\$\s*\d+[\.,]?\d*', info['Venta'])[0]
 
-            # Quitar el signo $, reemplazar comas por nada y convertir a float
-            compra = float(compra.replace('$', '').replace(',', '').replace('.', ''))
-            venta = float(venta.replace('$', '').replace(',', '').replace('.', ''))
+            # Limpieza y conversión
+            compra = compra.replace('$', '').replace(',', '').replace('.', '')
+            venta = venta.replace('$', '').replace(',', '').replace('.', '')
+
+            # Tratamiento especial para los precios del Banco Nación
+            if nombre == 'Banco Nación':
+                compra = compra[:-2] if len(compra) > 2 else compra
+                venta = venta[:-2] if len(venta) > 2 else venta
+
+            # Conversión a float
+            compra = float(compra)
+            venta = float(venta)
 
             data_limpia[nombre] = {
                 'compra': compra,
@@ -59,6 +68,7 @@ def limpiar_y_estructurar_datos(dolar_info):
             }
 
     return {fecha_scrapeo: data_limpia}
+
 
 
 def scrapeo_dolar():
