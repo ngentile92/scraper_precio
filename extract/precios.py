@@ -25,25 +25,25 @@ def get_store_name_from_url(url):
         return 'unknown'
 
 
-def extract_product_name(url, store_name):
-    response = requests.get(url)
-    if response.status_code == 200:
-        soup = BeautifulSoup(response.content, 'html.parser')
+# def extract_product_name(url, store_name):
+#     response = requests.get(url)
+#     if response.status_code == 200:
+#         soup = BeautifulSoup(response.content, 'html.parser')
         
-        # Define the search parameters based on store_name
-        if store_name == 'disco' or store_name == 'carrefour' or store_name == 'chango_mas':
-            product_tag = 'span'
-            product_class = 'vtex-store-components-3-x-productBrand'
-        elif store_name == 'MELI':
-            product_tag = 'h1'
-            product_class = 'ui-pdp-title'
-        else:
-            return 'Nombre del producto no encontrado'
+#         # Define the search parameters based on store_name
+#         if store_name == 'disco' or store_name == 'carrefour' or store_name == 'chango_mas':
+#             product_tag = 'span'
+#             product_class = 'vtex-store-components-3-x-productBrand'
+#         elif store_name == 'MELI':
+#             product_tag = 'h1'
+#             product_class = 'ui-pdp-title'
+#         else:
+#             return 'Nombre del producto no encontrado'
 
-        # Find the product name using the specified tag and class
-        product_element = soup.find(product_tag, class_=product_class)
-        return product_element.get_text().strip() if product_element else 'Nombre del producto no encontrado'
-    return 'Solicitud fallida'
+#         # Find the product name using the specified tag and class
+#         product_element = soup.find(product_tag, class_=product_class)
+#         return product_element.get_text().strip() if product_element else 'Nombre del producto no encontrado'
+#     return 'Solicitud fallida'
 
 
 def extract_price_selenium(url, store_name):
@@ -65,7 +65,10 @@ def extract_price_selenium(url, store_name):
         else:
             price_div = None
 
-        return price_div.text.strip() if price_div else 'Precio no encontrado'
+        return price_div.text.strip() if price_div else None
+    except Exception as e:
+        print(e)
+        return None
     finally:
         driver.quit()
 
@@ -78,7 +81,7 @@ def process_all(urls: list, product_names: list):
         store_name = get_store_name_from_url(url)
 
         price = extract_price_selenium(url, store_name)
-        if price != 'Precio no encontrado':
+        if price != None:
             # Limpia el string de precio de caracteres no numéricos, excepto el punto y la coma
             cleaned_price = re.sub(r'[^\d.,]', '', price)
             
@@ -103,8 +106,6 @@ def process_all(urls: list, product_names: list):
         print(f"Precio: {price_number if price_number is not None else price}")
         print("-" * 50)
 
-    os.makedirs('./data', exist_ok=True)
-    with open(os.path.join('./data', 'productos.json'), 'w', encoding='utf-8') as f:
-        json.dump(all_data, f, ensure_ascii=False, indent=4)
+    return all_data
 
 

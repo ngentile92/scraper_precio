@@ -16,16 +16,15 @@ def main():
         datos = pd.read_csv(f)
     url_list = datos['URL'].tolist()
     product_names_unified = datos['producto_unificado'].tolist()
-    process_all(url_list, product_names_unified)
+    data_json = process_all(url_list, product_names_unified)
+    print(data_json)
     # Cargar los datos en la base de datos
-    with open('./data/productos.json', 'r') as f:
-        data_json = f.read()
+
     load_data_to_db(data_json)
 
-    #procesar dolar #TODO chequear estructura y que ande de manera esperada
     dolar_info = scrapeo_dolar()
     dolar_info_json = json.dumps(dolar_info)
     load_dolar_to_db(dolar_info_json)
-        
+
 if __name__ == "__main__":
     main()
