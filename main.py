@@ -4,14 +4,15 @@ Archivo principal de lógica del programa
 import json
 import argparse
 import pandas as pd
-#from prefect import flow, get_run_logger
+
+from prefect import flow
 
 
 from extract.precios import process_all
 from extract.dolar import scrapeo_dolar
 from load.gcs_load import load_data_to_db, load_dolar_to_db
  
-
+@flow
 def pipeline_supermercados():
     """
     Función que ejecuta el pipeline de supermercados
@@ -35,6 +36,7 @@ def pipeline_supermercados():
     # Cargar los datos en la base de datos
     load_data_to_db(data_json)
 
+@flow
 def pipeline_dolar():
     """
     Función que ejecuta el pipeline de dólar
@@ -78,9 +80,6 @@ def main() -> None:
     else:
         print("Debe especificar el pipeline a ejecutar")
         parser.print_help()
-
-    
-
 
 #################################################################################################################
 #################################################################################################################

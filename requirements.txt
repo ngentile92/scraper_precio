@@ -12,7 +12,4 @@ webdriver_manager
 mysql-connector-python
 gspread
 oauth2client
-prefect==2.11.4
-prefect-gcp==0.4.4
-prefect-gcp[cloud_storage]==0.4.4
-prefect-gcp[secret_manager]==0.4.4
+prefect
