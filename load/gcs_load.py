@@ -49,6 +49,36 @@ def load_data_to_db(json_data):
             cursor.close()
             conn.close()
 
+def load_dolar_to_db(json_data):
+    try:
+        conn = mysql.connector.connect(
+            user=GCS_USER_ROOT,
+            password=GCS_PASSWORD,
+            host=GCS_HOST,
+            database=GCS_DATABASE
+        )
+        cursor = conn.cursor()
 
-# Cerrar la conexión
+        data = json.loads(json_data)
+        for date, currencies in data.items():
+            formatted_date = datetime.strptime(date, "%d/%m/%Y").strftime("%Y-%m-%d %H:%M:%S")
+            
+            # Preparar los datos como JSON para cada tipo de dólar
+            dolar_blue = json.dumps(currencies.get('Dólar Blue', {}))
+            dolar_mep = json.dumps(currencies.get('Dólar MEP', {}))
+            dolar_ccl = json.dumps(currencies.get('Dólar CCL', {}))
+            dolar_oficial = json.dumps(currencies.get('Banco Nación', {}))
+
+            sql = """INSERT INTO dolar (date, dolar_blue, dolar_mep, dolar_ccl, dolar_oficial)
+                     VALUES (%s, %s, %s, %s, %s)"""
+            cursor.execute(sql, (formatted_date, dolar_blue, dolar_mep, dolar_ccl, dolar_oficial))
+
+        conn.commit()
+    except mysql.connector.Error as err:
+        print("Error in SQL operation: ", err)
+    finally:
+        if conn.is_connected():
+            cursor.close()
+            conn.close()
+
 
