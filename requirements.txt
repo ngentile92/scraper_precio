@@ -12,4 +12,6 @@ webdriver_manager
 mysql-connector-python
 gspread
 oauth2client
-prefect
+prefect==2.14.17
+prefect-gcp==0.4.4
+anyio==3.7.1

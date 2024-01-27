@@ -4,12 +4,12 @@ from datetime import datetime
 import os
 #import from .env variables
 from dotenv import load_dotenv
-load_dotenv()
+load_dotenv(".env")
 
 GCS_PASSWORD = os.getenv("GCS_PASSWORD")
 GCS_USER_ROOT=os.getenv("GCS_USER_ROOT")
-GCS_HOST=os.getenv("GCS_HOST")
 GCS_DATABASE=os.getenv("GCS_DATABASE")
+GCS_HOST=os.getenv("GCS_HOST")
 # Reemplaza 'your_username', 'your_password', 'your_host', 'your_database' con tus propios detalles de la base de datos.
 
 # Función para cargar los datos en la base de datos
@@ -52,6 +52,7 @@ def load_dolar_to_db(json_data):
             database=GCS_DATABASE
         )
         cursor = conn.cursor()
+        print("Connected to MySQL database")
 
         data = json.loads(json_data)
         for date, currencies in data.items():

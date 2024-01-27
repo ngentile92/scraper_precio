@@ -17,7 +17,7 @@ source venv/Scripts/activate
 ```bash install requirements
 pip install -r requirements.txt
 ```
-``` bash install temis
+``` bash install scraper precio
 or 
 pip install -e .
 ```
