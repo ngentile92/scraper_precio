@@ -22,7 +22,7 @@ def pipeline_supermercados():
     # Extraer los datos de las URLs
     # Open csv file
     with open('url_productos.csv', 'r') as f:
-        datos = pd.read_csv(f)
+        datos = datos = pd.read_csv(f, encoding='ISO-8859-1')
         # Convertir a listas
         url_list = datos['URL'].tolist()
 
@@ -63,7 +63,6 @@ def main() -> None:
         action="store_true",
         help="Ejecuta el pipeline de dólar"
     )
-
 
     args = parser.parse_args()
 
