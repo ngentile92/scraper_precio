@@ -19,3 +19,4 @@ FROM (
     GROUP BY date
 ) p
 ORDER BY p.date;
+

@@ -19,4 +19,4 @@ JOIN
 ON
     today.producto = yesterday.producto
 WHERE
-    today.avg_precio < yesterday.avg_precio;
+    today.avg_precio > yesterday.avg_precio;
