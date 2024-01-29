@@ -17,7 +17,7 @@ with pathlib.Path("dev-requirements.txt").open() as dev_requirements_txt:
     ]
 
 setup(
-    name="artemisa",
+    name="scraper_precios",
     use_scm_version=True,
     packages=find_packages(),
     include_package_data=True,

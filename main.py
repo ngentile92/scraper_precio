@@ -53,12 +53,6 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Ejecuta el pipeline de supermercados o de dólar")
 
     parser.add_argument(
-        "--pipeline",
-        type=str,
-        help="Ejecuta el pipeline de supermercados o de dólar",
-    )
-
-    parser.add_argument(
         "--supermercados",
         action="store_true",
         help="Ejecuta el pipeline de supermercados"
