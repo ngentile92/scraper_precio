@@ -1,7 +1,8 @@
 SELECT 
     today.producto,
-    today.avg_precio AS precio_promedio_hoy,
-    yesterday.avg_precio AS precio_promedio_ayer
+	ROUND(today.avg_precio,2) AS precio_promedio_hoy,
+	ROUND(yesterday.avg_precio,2) AS precio_promedio_ayer,
+    ROUND(((today.avg_precio - yesterday.avg_precio) / yesterday.avg_precio) * 100 ,2) AS cambio_porcentual
 FROM
     (SELECT 
         producto, 
