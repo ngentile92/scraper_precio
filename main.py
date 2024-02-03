@@ -79,6 +79,12 @@ def main() -> None:
         action="store_true",
         help="ejecuta pipeline de BCRA estadisticas diarias"
     )
+
+    parser.add_argument(
+        "--corre-todo",
+        action="store_true",
+        help="todos los flows empezando por dolar, bcra y luego supermercados"
+    )
     args = parser.parse_args()
 
     if args.supermercados:
@@ -87,6 +93,10 @@ def main() -> None:
         pipeline_dolar()
     elif args.bcra:
         pipeline_BCRA()
+    elif args.correr_todo:
+        pipeline_dolar()
+        pipeline_BCRA()
+        pipeline_supermercados()
     else:
         print("Debe especificar el pipeline a ejecutar")
         parser.print_help()
