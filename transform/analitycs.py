@@ -101,21 +101,25 @@ menores_que_1 = valores_aplanados[valores_aplanados < 1].nsmallest(5)
 
 # Combinar los valores para obtener los 5 más grandes de cada lado
 valores_destacados = pd.concat([mayores_que_1, menores_que_1])
-
-# Crear una matriz vacía para los valores destacados
-matriz_destacados = pd.DataFrame(index=matriz_comparacion.index, columns=matriz_comparacion.columns)
-# Convertir la matriz completa a NaN para empezar de cero
-matriz_destacados[:] = np.nan
+matriz_destacados = pd.DataFrame(np.nan, index=matriz_comparacion.index, columns=matriz_comparacion.columns)
 
 # Rellenar la matriz de destacados solo con los valores seleccionados (top 5 mayores que 1 y menores que 1)
-for (prod_i, prod_j), valor in valores_destacados.items():
-    matriz_destacados.at[prod_i, prod_j] = valor
-matriz_destacados = matriz_destacados.astype(float)
+for (prod_i, prod_j) in mayores_que_1.index:
+    matriz_destacados.at[prod_i, prod_j] = matriz_comparacion.at[prod_i, prod_j]
 
-# La matriz_destacados ahora solo tiene los valores significativos y NaN en todas partes
-
+for (prod_i, prod_j) in menores_que_1.index:
+    matriz_destacados.at[prod_i, prod_j] = matriz_comparacion.at[prod_i, prod_j]
 # Visualizar la matriz de comparación con un heatmap
 plt.figure(figsize=(10, 8))
-sns.heatmap(matriz_destacados, cmap='coolwarm', cbar=True, annot=True)
-plt.title('Top 5 Aumentos y Disminuciones en Relación de Precios')
+sns.heatmap(matriz_destacados, cmap='coolwarm', cbar=True, annot=True, fmt=".2f")
+
+# Agregar nombres a los ejes
+plt.xlabel('Productos hace 7 días')
+plt.ylabel('Productos hoy')
+
+# Configurar el título del heatmap
+plt.title('Top 5 Aumentos y Disminuciones en Relación de Precios (Hoy vs Hace 7 Días)')
+
+# Mostrar el heatmap
 plt.show()
+

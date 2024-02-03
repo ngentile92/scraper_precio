@@ -10,7 +10,8 @@ from prefect import flow
 
 from extract.precios import process_all
 from extract.dolar import scrapeo_dolar
-from load.gcs_load import load_data_to_db, load_dolar_to_db
+from extract.BCRA import process_BCRA
+from load.gcs_load import load_data_to_db, load_dolar_to_db, load_bcra_to_db
  
 @flow
 def pipeline_supermercados():
@@ -47,6 +48,16 @@ def pipeline_dolar():
     dolar_info_json = json.dumps(dolar_info)
     load_dolar_to_db(dolar_info_json)
 
+@flow
+def pipeline_BCRA():
+    """
+    Función que ejecuta el pipeline de dólar
+    - Scrapea los datos de dolar de la pagina bcra
+    - Carga los datos en la base de datos
+    """
+    BCRA_data = process_BCRA()
+    load_bcra_to_db(BCRA_data)
+
 def main() -> None:
 
 
@@ -63,13 +74,19 @@ def main() -> None:
         action="store_true",
         help="Ejecuta el pipeline de dólar"
     )
-
+    parser.add_argument(
+        "--bcra",
+        action="store_true",
+        help="ejecuta pipeline de BCRA estadisticas diarias"
+    )
     args = parser.parse_args()
 
     if args.supermercados:
         pipeline_supermercados()
     elif args.dolar:
         pipeline_dolar()
+    elif args.bcra:
+        pipeline_BCRA()
     else:
         print("Debe especificar el pipeline a ejecutar")
         parser.print_help()

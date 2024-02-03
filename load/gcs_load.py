@@ -78,3 +78,37 @@ def load_dolar_to_db(json_data):
             conn.close()
 
 
+# Function to load BCRA data into the MySQL database
+# Function to load or update BCRA data into the MySQL database
+def load_bcra_to_db(json_data):
+    try:
+        conn = mysql.connector.connect(
+            user=GCS_USER_ROOT,
+            password=GCS_PASSWORD,
+            host=GCS_HOST,
+            database=GCS_DATABASE
+        )
+        cursor = conn.cursor()
+        print("Connected to MySQL database")
+
+        # Make sure that the combination of `variable` and `fecha` is a unique index in your MySQL table
+        for variable, dates_values in json_data.items():
+            for date, value in dates_values.items():
+                formatted_date = datetime.strptime(date, "%d/%m/%Y").strftime("%Y-%m-%d %H:%M:%S")
+
+                # SQL query with ON DUPLICATE KEY UPDATE clause
+                sql = """INSERT INTO BCRA (variable, fecha, valor)
+                         VALUES (%s, %s, %s)
+                         ON DUPLICATE KEY UPDATE valor = VALUES(valor)"""
+                cursor.execute(sql, (variable, formatted_date, value))
+
+        conn.commit()
+        print("Data loaded successfully")
+        
+    except mysql.connector.Error as err:
+        print("Error in SQL operation: ", err)
+    finally:
+        if conn.is_connected():
+            cursor.close()
+            conn.close()
+            print("MySQL connection is closed")
