@@ -81,7 +81,7 @@ def main() -> None:
     )
 
     parser.add_argument(
-        "--corre-todo",
+        "--correr-todo",
         action="store_true",
         help="todos los flows empezando por dolar, bcra y luego supermercados"
     )
