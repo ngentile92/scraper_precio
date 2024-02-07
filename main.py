@@ -11,7 +11,7 @@ from prefect import flow
 from extract.precios import process_all
 from extract.dolar import scrapeo_dolar
 from extract.BCRA import process_BCRA
-from load.gcs_load import load_data_to_db, load_dolar_to_db, load_bcra_to_db
+from load.gcs_load import load_data_to_db, load_dolar_to_db, load_bcra_to_db, load_categorias_productos_to_db
  
 @flow
 def pipeline_supermercados():
@@ -79,7 +79,11 @@ def main() -> None:
         action="store_true",
         help="ejecuta pipeline de BCRA estadisticas diarias"
     )
-
+    parser.add_argument(
+        "--categorias-productos",
+        action="store_true",
+        help="ejecuta pipeline de categorias de productos"
+    )
     parser.add_argument(
         "--correr-todo",
         action="store_true",
@@ -93,6 +97,8 @@ def main() -> None:
         pipeline_dolar()
     elif args.bcra:
         pipeline_BCRA()
+    elif args.categorias_productos:
+        load_categorias_productos_to_db('producto_categorias.csv')
     elif args.correr_todo:
         pipeline_dolar()
         pipeline_BCRA()

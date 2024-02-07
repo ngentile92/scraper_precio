@@ -2,6 +2,8 @@ import mysql.connector
 import json
 from datetime import datetime
 import os
+import csv
+
 #import from .env variables
 from dotenv import load_dotenv
 load_dotenv(".env")
@@ -102,6 +104,45 @@ def load_bcra_to_db(json_data):
                          ON DUPLICATE KEY UPDATE valor = VALUES(valor)"""
                 cursor.execute(sql, (variable, formatted_date, value))
 
+        conn.commit()
+        print("Data loaded successfully")
+        
+    except mysql.connector.Error as err:
+        print("Error in SQL operation: ", err)
+    finally:
+        if conn.is_connected():
+            cursor.close()
+            conn.close()
+            print("MySQL connection is closed")
+
+
+def load_categorias_productos_to_db(csv_file_path):
+    try:
+        # Conexión a la base de datos
+        conn = mysql.connector.connect(
+            user=GCS_USER_ROOT,
+            password=GCS_PASSWORD,
+            host=GCS_HOST,
+            database=GCS_DATABASE
+        )
+        cursor = conn.cursor()
+        print("Connected to MySQL database")
+
+        # Abrir el archivo CSV
+        with open(csv_file_path, mode='r', encoding='utf-8') as file:
+            csv_reader = csv.DictReader(file)
+            
+            for row in csv_reader:
+                producto = row['producto_unificado']
+                categoria = row['categorias']
+                subcategoria = row['sub-categoria']
+                
+                # SQL para insertar datos
+                sql = """INSERT INTO categorias_productos (productos, categoria, subcategoria)
+                         VALUES (%s, %s, %s)"""
+                cursor.execute(sql, (producto, categoria, subcategoria))
+        
+        # Confirmar cambios
         conn.commit()
         print("Data loaded successfully")
         
