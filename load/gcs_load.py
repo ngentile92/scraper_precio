@@ -139,7 +139,9 @@ def load_categorias_productos_to_db(csv_file_path):
                 
                 # SQL para insertar datos
                 sql = """INSERT INTO categorias_productos (productos, categoria, subcategoria)
-                         VALUES (%s, %s, %s)"""
+                    VALUES (%s, %s, %s)
+                    ON DUPLICATE KEY UPDATE categoria = VALUES(categoria), subcategoria = VALUES(subcategoria);
+                    """
                 cursor.execute(sql, (producto, categoria, subcategoria))
         
         # Confirmar cambios
