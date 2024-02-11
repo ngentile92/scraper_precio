@@ -18,6 +18,8 @@ def get_store_name_from_url(url):
         return 'carrefour'
     elif 'masonline.com.ar' in url:
         return 'chango_mas'
+    elif 'dexter.com.ar' in url:
+        return 'dexter'
     else:
         return 'unknown'
 
@@ -39,6 +41,8 @@ def extract_price_selenium(url, store_name):
             price_div = driver.find_element(By.CLASS_NAME, 'valtech-gdn-dynamic-product-0-x-dynamicProductPrice')
         elif store_name == 'MELI':
             price_div = driver.find_element(By.CLASS_NAME, 'andes-money-amount__fraction')
+        elif store_name == 'dexter':
+            price_div = driver.find_element(By.CLASS_NAME, 'value')  # Asumiendo que 'value' es suficientemente único
         else:
             price_div = None
 

@@ -141,6 +141,106 @@ def plot_inflacion_acumulada(data_filtrado):
 
     # Mostrar el gráfico
     plt.show()
+def plot_inflacion_acumulada_total_excluyendo_libreria(data_filtrado):
+    # Excluir la categoría "librería" antes de cualquier cálculo
+    data_sin_libreria = data_filtrado[data_filtrado['categoria'] != 'librería']
+
+    # Asegurar que 'date' es de tipo datetime
+    data_sin_libreria['date'] = pd.to_datetime(data_sin_libreria['date'])
+    
+    # Asegurar que 'cambio_porcentual' es flotante y ajustar para cálculo de interés compuesto
+    data_sin_libreria['cambio_porcentual'] = data_sin_libreria['cambio_porcentual'].astype(float) / 100 + 1
+
+    # Calcular la inflación acumulada total como un producto acumulado de los cambios porcentuales
+    data_sin_libreria['inflacion_acumulada_total'] = data_sin_libreria['cambio_porcentual'].cumprod() * 100
+
+    # Asegúrate de reiniciar el índice de inflación a 100 para el primer punto de datos si es necesario
+    primer_indice = data_sin_libreria.index.min()
+    data_sin_libreria.loc[primer_indice, 'inflacion_acumulada_total'] = 100
+
+    # Configuración básica de Seaborn
+    sns.set(style="whitegrid")
+
+    # Crear el gráfico de la inflación acumulada total para todas las categorías, excluyendo librería
+    plt.figure(figsize=(12, 6))
+
+    # Dibujar el gráfico de líneas para la inflación acumulada total
+    ax = sns.lineplot(x='date', y='inflacion_acumulada_total', data=data_sin_libreria, marker="o", color='blue')
+
+    # Añadir título y etiquetas a los ejes
+    plt.title('Inflación Acumulada Total (Excluyendo Librería)')
+    plt.xlabel('Fecha')
+    plt.ylabel('Inflación Acumulada Total (%)')
+
+    # Mejorar la legibilidad de las fechas en el eje x
+    plt.xticks(rotation=45)
+
+    # Ajustar leyenda
+    plt.legend(title='Inflación Total', loc='upper left', labels=['Inflación Acumulada'])
+
+    # Remarcar el eje y=100 (punto de inicio para la inflación acumulada)
+    plt.axhline(100, color='red', linewidth=2, linestyle='--')
+
+    # Guardar el gráfico en un archivo
+    plt.tight_layout()
+    plt.savefig('inflacion_acumulada_total_excluyendo_libreria.png')  # Guarda el gráfico como un archivo PNG
+
+    # Mostrar el gráfico
+    plt.show()
+def calcular_inflacion_acumulada_total(data_filtrado):
+    # Excluir la categoría "librería"
+    data_sin_libreria = data_filtrado[data_filtrado['categoria'] != 'librería'].copy()
+
+    # Asegurar que 'date' es de tipo datetime y 'cambio_porcentual' es flotante
+    data_sin_libreria['date'] = pd.to_datetime(data_sin_libreria['date'])
+    data_sin_libreria['cambio_porcentual'] = data_sin_libreria['cambio_porcentual'].astype(float)
+
+    # Calcular la inflación acumulada total como un producto acumulado de los cambios porcentuales ajustados
+    data_sin_libreria['inflacion_acumulada_total'] = (data_sin_libreria['cambio_porcentual'] / 100 + 1).cumprod() * 100
+
+    return data_sin_libreria
+def plot_cambio_porcentual_diario(data_filtrado):
+    # Excluir la categoría "librería"
+    data_sin_libreria = data_filtrado[data_filtrado['categoria'] != 'librería']
+
+    # Asegurar que 'date' es de tipo datetime
+    data_sin_libreria['date'] = pd.to_datetime(data_sin_libreria['date'])
+    
+    # Asegurar que 'cambio_porcentual' es flotante
+    data_sin_libreria['cambio_porcentual'] = data_sin_libreria['cambio_porcentual'].astype(float)
+
+    # Calcular la inflación acumulada total como se describió previamente
+    # (Asegúrate de haber realizado este paso antes de continuar)
+
+    # Calcular el cambio porcentual diario de la inflación acumulada
+    data_sin_libreria['cambio_porcentual_inflacion'] = data_sin_libreria['inflacion_acumulada_total'].pct_change() * 100
+
+    # Configuración básica de Seaborn
+    sns.set(style="whitegrid")
+
+    # Crear el gráfico del cambio porcentual diario en la inflación
+    plt.figure(figsize=(12, 6))
+
+    # Dibujar el gráfico de líneas para el cambio porcentual diario
+    ax = sns.lineplot(x='date', y='cambio_porcentual_inflacion', data=data_sin_libreria, marker="o", color='blue')
+
+    # Añadir título y etiquetas a los ejes
+    plt.title('Cambio Porcentual Diario en la Inflación (Excluyendo Librería)')
+    plt.xlabel('Fecha')
+    plt.ylabel('Cambio Porcentual Diario en la Inflación (%)')
+
+    # Mejorar la legibilidad de las fechas en el eje x
+    plt.xticks(rotation=45)
+
+    # Remarcar el eje y=0 para destacar los aumentos y disminuciones
+    plt.axhline(0, color='red', linewidth=1, linestyle='--')
+
+    # Guardar el gráfico en un archivo
+    plt.tight_layout()
+    plt.savefig('cambio_porcentual_diario_inflacion.png')  # Guarda el gráfico como un archivo PNG
+
+    # Mostrar el gráfico
+    plt.show()
 
 if __name__ == '__main__':
     # Ejecuta las consultas y obtén los DataFrames
@@ -148,3 +248,7 @@ if __name__ == '__main__':
     data_filtrado = limpiar_data(data_hoy)
     plot_inflacion_diaria(data_filtrado)
     plot_inflacion_acumulada(data_filtrado)
+    plot_inflacion_acumulada_total_excluyendo_libreria(data_filtrado)
+    data_filtrado = calcular_inflacion_acumulada_total(data_filtrado)  # Calcula la inflación acumulada total
+
+    plot_cambio_porcentual_diario(data_filtrado)
