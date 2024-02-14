@@ -25,7 +25,9 @@ def get_store_name_from_url(url):
 
 def extract_price_selenium(url, store_name):
     options = Options()
-    options.headless = True 
+    options.add_argument('--headless')
+    options.add_argument('--disable-dev-shm-usage')
+    options.add_argument('--no-sandbox')
     service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=options)
 

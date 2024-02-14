@@ -5,15 +5,12 @@ import json
 import argparse
 import pandas as pd
 
-from prefect import flow
-
 
 from extract.precios import process_all
 from extract.dolar import scrapeo_dolar
 from extract.BCRA import process_BCRA
 from load.gcs_load import load_data_to_db, load_dolar_to_db, load_bcra_to_db, load_categorias_productos_to_db
  
-@flow
 def pipeline_supermercados():
     """
     Función que ejecuta el pipeline de supermercados
@@ -37,7 +34,6 @@ def pipeline_supermercados():
     # Cargar los datos en la base de datos
     load_data_to_db(data_json)
 
-@flow
 def pipeline_dolar():
     """
     Función que ejecuta el pipeline de dólar
@@ -48,7 +44,6 @@ def pipeline_dolar():
     dolar_info_json = json.dumps(dolar_info)
     load_dolar_to_db(dolar_info_json)
 
-@flow
 def pipeline_BCRA():
     """
     Función que ejecuta el pipeline de dólar
