@@ -13,6 +13,12 @@ jobs:
   run-scraper:
     runs-on: ubuntu-latest
 
+    env:
+      GCS_PASSWORD: ${{ secrets.GCS_PASSWORD }}
+      GCS_USER_ROOT: ${{ secrets.GCS_USER_ROOT }}
+      GCS_DATABASE: ${{ secrets.GCS_DATABASE }}
+      GCS_HOST: ${{ secrets.GCS_HOST }}
+
     steps:
     - uses: actions/checkout@v2
     
@@ -32,6 +38,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install selenium webdriver_manager
+
+    - name: Get Public IP
+      run: curl ifconfig.me
 
     - name: Run script
       run: python main.py --correr-todo
