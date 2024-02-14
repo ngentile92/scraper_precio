@@ -95,9 +95,9 @@ def main() -> None:
     elif args.categorias_productos:
         load_categorias_productos_to_db('producto_categorias.csv')
     elif args.correr_todo:
+        pipeline_supermercados()
         pipeline_dolar()
         pipeline_BCRA()
-        pipeline_supermercados()
     else:
         print("Debe especificar el pipeline a ejecutar")
         parser.print_help()
