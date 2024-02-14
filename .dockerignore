@@ -1,0 +1,25 @@
+# Directories
+**kubernetes/
+**tests/
+**.idea/
+**.session
+**__pycache__/
+**venv/
+
+# File types
+**.env*
+**.sqlite3
+**credentials.json
+**.mermaid
+**.md
+**.yaml
+
+# Local dev files
+.coverage
+.dockerignore
+.DS_Store
+.git*
+.pytest_cache
+
+# Tmp files
+**/tmp

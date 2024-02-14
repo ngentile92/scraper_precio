@@ -35,3 +35,9 @@ Export the environmental variables:
 ```bash
 export $(cat .env | xargs)
 ```
+
+
+Build docket image
+```bash
+docker build --platform linux/amd64 -t scraper_precios .
+```
