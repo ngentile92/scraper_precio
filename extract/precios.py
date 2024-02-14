@@ -5,8 +5,10 @@ import datetime
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
 
 
 def get_store_name_from_url(url):
@@ -33,18 +35,23 @@ def extract_price_selenium(url, store_name):
 
     try:
         driver.get(url)
-        time.sleep(1)  # wait for the page to load
+        # time.sleep(1)  # Removido ya que usaremos esperas explícitas
 
-        if store_name == 'disco':
-            price_div = driver.find_element(By.CLASS_NAME, 'discoargentina-store-theme-1dCOMij_MzTzZOCohX1K7w')
-        elif store_name == 'carrefour':
-            price_div = driver.find_element(By.CLASS_NAME, 'valtech-carrefourar-product-price-0-x-sellingPriceValue')
-        elif store_name == 'chango_mas':
-            price_div = driver.find_element(By.CLASS_NAME, 'valtech-gdn-dynamic-product-0-x-dynamicProductPrice')
-        elif store_name == 'MELI':
-            price_div = driver.find_element(By.CLASS_NAME, 'andes-money-amount__fraction')
-        elif store_name == 'dexter':
-            price_div = driver.find_element(By.CLASS_NAME, 'value')  # Asumiendo que 'value' es suficientemente único
+        # Diccionario para mapear nombres de tiendas a sus selectores CSS
+        store_selectors = {
+            'disco': 'discoargentina-store-theme-1dCOMij_MzTzZOCohX1K7w',
+            'carrefour': 'valtech-carrefourar-product-price-0-x-sellingPriceValue',
+            'chango_mas': 'valtech-gdn-dynamic-product-0-x-dynamicProductPrice',
+            'MELI': 'andes-money-amount__fraction',
+            'dexter': 'value'  # Asumiendo que 'value' es suficientemente único
+        }
+
+        if store_name in store_selectors:
+            # Espera explícita para el elemento específico de cada tienda
+            WebDriverWait(driver, 10).until(
+                EC.visibility_of_element_located((By.CLASS_NAME, store_selectors[store_name]))
+            )
+            price_div = driver.find_element(By.CLASS_NAME, store_selectors[store_name])
         else:
             price_div = None
 
