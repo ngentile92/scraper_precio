@@ -20,7 +20,7 @@ jobs:
       GCS_HOST: ${{ secrets.GCS_HOST }}
       GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }} # Asegúrate de haber agregado esto a tus secrets en GitHub
       INSTANCE_CONNECTION_NAME: ${{ secrets.INSTANCE_CONNECTION_NAME }} # Añade esto también a tus secrets
-      
+
     permissions:
       contents: 'read'
       id-token: 'write'
@@ -38,13 +38,9 @@ jobs:
       uses: 'google-github-actions/setup-gcloud@v2'
       with:
         version: '>= 363.0.0'
-    
-    - name: 'Install and start Cloud SQL Proxy'
-      run: |
-        wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy
-        chmod +x cloud_sql_proxy
-        ./cloud_sql_proxy --address 0.0.0.0 --port 3306 ${{ secrets.INSTANCE_CONNECTION_NAME }} &
-        sleep 10 # Espera a que el proxy inicie completamente
+
+    - name: 'Use gcloud CLI'
+      run: 'gcloud info'
 
     - name: 'Set up Python'
       uses: actions/setup-python@v2
