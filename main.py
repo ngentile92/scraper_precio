@@ -5,7 +5,6 @@ import json
 import argparse
 import pandas as pd
 
-
 from extract.precios import process_all
 from extract.dolar import scrapeo_dolar
 from extract.BCRA import process_BCRA

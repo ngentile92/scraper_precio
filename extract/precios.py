@@ -8,6 +8,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException, NoSuchElementException, StaleElementReferenceException
 from webdriver_manager.chrome import ChromeDriverManager
 
 
@@ -32,36 +33,44 @@ def extract_price_selenium(url, store_name):
     options.add_argument('--no-sandbox')
     service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=options)
-
+    
+    max_retries = 5  # Número máximo de intentos
+    retry_wait = 3  # Tiempo de espera inicial en segundos
+    
     try:
-        driver.get(url)
-        # time.sleep(1)  # Removido ya que usaremos esperas explícitas
+        for attempt in range(max_retries):
+            try:
+                driver.get(url)
 
-        # Diccionario para mapear nombres de tiendas a sus selectores CSS
-        store_selectors = {
-            'disco': 'discoargentina-store-theme-1dCOMij_MzTzZOCohX1K7w',
-            'carrefour': 'valtech-carrefourar-product-price-0-x-sellingPriceValue',
-            'chango_mas': 'valtech-gdn-dynamic-product-0-x-dynamicProductPrice',
-            'MELI': 'andes-money-amount__fraction',
-            'dexter': 'value'  # Asumiendo que 'value' es suficientemente único
-        }
+                store_selectors = {
+                    'disco': 'discoargentina-store-theme-1dCOMij_MzTzZOCohX1K7w',
+                    'carrefour': 'valtech-carrefourar-product-price-0-x-sellingPriceValue',
+                    'chango_mas': 'valtech-gdn-dynamic-product-0-x-dynamicProductPrice',
+                    'MELI': 'andes-money-amount__fraction',
+                    'dexter': 'value'
+                }
 
-        if store_name in store_selectors:
-            # Espera explícita para el elemento específico de cada tienda
-            WebDriverWait(driver, 10).until(
-                EC.visibility_of_element_located((By.CLASS_NAME, store_selectors[store_name]))
-            )
-            price_div = driver.find_element(By.CLASS_NAME, store_selectors[store_name])
-        else:
-            price_div = None
-
-        return price_div.text.strip() if price_div else None
-    except Exception as e:
-        print(e)
-        return None
+                if store_name in store_selectors:
+                    WebDriverWait(driver, retry_wait).until(
+                        EC.visibility_of_element_located((By.CLASS_NAME, store_selectors[store_name]))
+                    )
+                    price_div = driver.find_element(By.CLASS_NAME, store_selectors[store_name])
+                else:
+                    price_div = None
+                
+                return price_div.text.strip() if price_div else None
+            
+            except (TimeoutException, NoSuchElementException, StaleElementReferenceException) as e:
+                print(f"Error on attempt {attempt+1}: {e}")
+                time.sleep(retry_wait)
+                retry_wait *= 2  # Duplica el tiempo de espera para el próximo intento
+            except Exception as e:
+                print(f"Unhandled exception: {e}")
+                break  # Rompe el bucle en caso de una excepción no manejada
     finally:
         driver.quit()
-
+    
+    return None
 
 def process_all(urls: list, product_names: list):
     all_data = {}

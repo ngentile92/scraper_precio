@@ -37,7 +37,18 @@ export $(cat .env | xargs)
 ```
 
 
+## Docker
+
+Download and install Docker from [Docker's website](https://www.docker.com/products/docker-desktop).
+
 Build docket image
+
 ```bash
 docker build --platform linux/amd64 -t scraper_precios .
+```
+
+Run docker image
+
+```bash
+docker run scraper_precios
 ```
