@@ -1,13 +1,13 @@
 name: Daily Supermarket Scraper Run
 
 on:
-  push:
-    branches:
-      - main
+  # push:
+  #   branches:
+  #     - main
   # Descomenta la siguiente sección si deseas ejecutar este workflow en un horario programado,
-  # schedule:
-  #   # Ejecuta todos los días a las 12:00 UTC
-  #   - cron: '0 12 * * *'
+  schedule:
+    # Ejecuta todos los días a las 12:00 UTC
+    - cron: '0 12 * * *'
 
 jobs:
   run-scraper:
