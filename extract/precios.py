@@ -23,6 +23,8 @@ def get_store_name_from_url(url):
         return 'chango_mas'
     elif 'dexter.com.ar' in url:
         return 'dexter'
+    elif 'levi.com.ar' in url:
+        return 'levis'
     else:
         return 'unknown'
 
@@ -76,35 +78,81 @@ def process_all(urls: list, product_names: list):
     all_data = {}
     today = datetime.datetime.now().strftime("%d/%m/%Y")
 
-    for url, product_name_unified in zip(urls, product_names):
+    for url, base_product_name in zip(urls, product_names):
         store_name = get_store_name_from_url(url)
 
-        price = extract_price_selenium(url, store_name)
-        if price != None:
-            # Limpia el string de precio de caracteres no numéricos, excepto el punto y la coma
-            cleaned_price = re.sub(r'[^\d.,]', '', price)
-            
-            # Reemplaza comas con puntos y elimina puntos adicionales que representan miles
-            cleaned_price = cleaned_price.replace('.', '').replace(',', '.')
-
-            # Busca números con o sin parte decimal
-            match = re.search(r'\d+(\.\d+)?', cleaned_price)
-            price_number = float(match.group(0)) if match else None
+        if store_name == 'levis':
+            prices = extract_multiple_prices_selenium(url)  # Asume esta es tu función para múltiples precios
+            if prices:
+                for i, price in enumerate(prices, start=1):
+                    cleaned_price = re.sub(r'[^\d.,]', '', price).replace('.', '').replace(',', '.')
+                    price_number = float(re.search(r'\d+(\.\d+)?', cleaned_price).group(0)) if re.search(r'\d+(\.\d+)?', cleaned_price) else None
+                    
+                    # Construye el nombre del producto con un índice secuencial
+                    product_name = f"{base_product_name}_{i}"  # Ahora cada producto tendrá un identificador único
+                    
+                    if today not in all_data:
+                        all_data[today] = {}
+                    if store_name not in all_data[today]:
+                        all_data[today][store_name] = {}
+                    all_data[today][store_name][product_name] = price_number
         else:
-            price_number = None
+            price = extract_price_selenium(url, store_name)  # Tu función existente
+            if price is not None:
+                cleaned_price = re.sub(r'[^\d.,]', '', price).replace('.', '').replace(',', '.')
+                price_number = float(re.search(r'\d+(\.\d+)?', cleaned_price).group(0)) if re.search(r'\d+(\.\d+)?', cleaned_price) else None
 
-        if today not in all_data:
-            all_data[today] = {}
-        if store_name not in all_data[today]:
-            all_data[today][store_name] = {}
+                if today not in all_data:
+                    all_data[today] = {}
+                if store_name not in all_data[today]:
+                    all_data[today][store_name] = {}
 
-        all_data[today][store_name][product_name_unified] = price_number
-
-        print(f"URL: {url}")
-        print(f"Nombre del Producto: {product_name_unified}")
-        print(f"Precio: {price_number if price_number is not None else price}")
-        print("-" * 50)
+                all_data[today][store_name][base_product_name] = price_number
 
     return all_data
 
+def extract_multiple_prices_selenium(url, max_attempts=3):
+    options = Options()
+    options.add_argument('--headless')
+    options.add_argument('--disable-dev-shm-usage')
+    options.add_argument('--no-sandbox')
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service, options=options)
+    
+    attempt = 0
+    prices = None
+    
+    while attempt < max_attempts and prices is None:
+        try:
+            driver.get(url)
+            WebDriverWait(driver, 10 + attempt * 5).until(  # Incrementa el tiempo de espera en cada intento
+                EC.visibility_of_all_elements_located((By.CLASS_NAME, 'vtex-product-price-1-x-sellingPriceValue'))
+            )
+            price_elements = driver.find_elements(By.CLASS_NAME, 'vtex-product-price-1-x-sellingPriceValue')
+            prices = [element.text.strip() for element in price_elements if element.text.strip() != '']
+            if prices:  # Si encontramos precios, termina el bucle
+                break
+        except (TimeoutException, NoSuchElementException, StaleElementReferenceException) as e:
+            print(f"Error en el intento {attempt + 1}: {e}")
+        finally:
+            attempt += 1
+            if prices is None:
+                time.sleep(5)  # Espera antes de intentar nuevamente
+    
+    driver.quit()
+    return prices if prices else None
 
+
+if __name__ == "__main__":
+    import pandas as pd
+    with open('../url_productos.csv', 'r') as f:
+        datos = datos = pd.read_csv(f, encoding='ISO-8859-1')
+        # Convertir a listas
+        url_list = datos['URL'].tolist()
+
+    # Extraer los nombres de los productos
+    product_names_unified = datos['producto_unificado'].tolist()
+    print(product_names_unified)
+    # Extraer los precios de las URLs para cada producto
+    data_json = process_all(url_list, product_names_unified)
+    print(data_json)

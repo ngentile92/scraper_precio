@@ -1,6 +1,7 @@
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
+import numpy as np
 from extract.db import fetch_data
 query_today = """
 SELECT
@@ -242,13 +243,97 @@ def plot_cambio_porcentual_diario(data_filtrado):
     # Mostrar el gráfico
     plt.show()
 
+
+def calcular_promedio_ponderado(df):
+    # Asegurarse de que el DataFrame no está vacío
+    if df.empty:
+        return None
+
+    # Calcular el peso de cada categoría por su precio promedio
+    total_precio = df['avg_precio'].sum()
+    df['peso'] = df['avg_precio'] / total_precio
+
+    # Calcular el promedio ponderado del cambio porcentual
+    promedio_ponderado = (df['cambio_porcentual'] * df['peso']).sum()
+
+    # Calcular el promedio de cada categoría y su ponderador
+    promedios = {}
+    ponderadores = {}
+    for categoria in df['categoria'].unique():
+        categoria_df = df[df['categoria'] == categoria]
+        promedio_categoria = (categoria_df['cambio_porcentual'] * categoria_df['peso']).sum()
+        promedios[categoria] = promedio_categoria
+        ponderadores[categoria] = categoria_df['peso'].iloc[0]  # Se asume que el ponderador es el mismo para todas las filas de una categoría
+
+    # Agregar los promedios y ponderadores al DataFrame original
+    for categoria, promedio in promedios.items():
+        df['promedio_' + categoria] = promedio
+        df['ponderador_' + categoria] = ponderadores[categoria]
+
+    return df
+
+
+def plot_price_change(data):
+    # Extraer las fechas y los cambios porcentuales ponderados
+    dates = data['date']
+    price_changes = data['cambio_porcentual_ponderado']
+    
+    # Crear el gráfico
+    plt.figure(figsize=(10, 6))
+    plt.plot(dates, price_changes, marker='o', linestyle='-', label='Cambio Porcentual Ponderado')
+    
+    # Agregar línea horizontal en y=0 para marcar el punto sin cambio de precios
+    plt.axhline(y=0, color='r', linestyle='--', linewidth=1, label='Sin cambio de precios')
+    
+    # Configurar el título y las etiquetas de los ejes
+    plt.title('Evolución del Cambio de Precios')
+    plt.xlabel('Fecha')
+    plt.ylabel('Cambio Porcentual Ponderado')
+    
+    # Rotar las etiquetas del eje x para una mejor visualización
+    plt.xticks(rotation=45)
+    
+    # Añadir una leyenda
+    plt.legend()
+    
+    # Mostrar el gráfico
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()
+def plot_inflacion_diaria_ponderada(inflacion_por_fecha):
+    # Plotear la inflación por fecha
+    plt.figure(figsize=(10, 6))
+    plt.plot(inflacion_por_fecha.index, inflacion_por_fecha.values, marker='o', linestyle='-')
+
+    # Marcar el punto donde la inflación es 0
+    plt.axhline(y=0, color='r', linestyle='--')
+
+    # Configurar el título y las etiquetas de los ejes
+    plt.title('Inflación por Fecha ponderada')
+    plt.xlabel('Fecha')
+    plt.ylabel('Inflación')
+    plt.xticks(rotation=45)
+    plt.grid(True)
+    plt.tight_layout()
+
+    # Mostrar el gráfico
+    plt.show()
+
 if __name__ == '__main__':
     # Ejecuta las consultas y obtén los DataFrames
     data_hoy = fetch_data(query_today)
     data_filtrado = limpiar_data(data_hoy)
+    data_filtrado['impacto_porcentual'] = data_filtrado.groupby('date')['avg_precio'].transform(lambda x: x / x.sum())
+    data_filtrado['cambio_porcentual_relativo'] = data_filtrado['impacto_porcentual'] * data_filtrado['cambio_porcentual']
+    inflacion_por_fecha = data_filtrado.groupby('date')['cambio_porcentual_relativo'].sum()
+    plot_inflacion_diaria_ponderada(inflacion_por_fecha)
     plot_inflacion_diaria(data_filtrado)
     plot_inflacion_acumulada(data_filtrado)
     plot_inflacion_acumulada_total_excluyendo_libreria(data_filtrado)
-    data_filtrado = calcular_inflacion_acumulada_total(data_filtrado)  # Calcula la inflación acumulada total
-
-    plot_cambio_porcentual_diario(data_filtrado)
+    resultado = data_filtrado.groupby('date').apply(calcular_promedio_ponderado).reset_index().rename(columns={0: 'cambio_porcentual_ponderado'})
+    plot_price_change(resultado)
+    # Visualizar el resultado
+    print(resultado)
+    #data_filtrado = calcular_inflacion_acumulada_total(data_filtrado)  # Calcula la inflación acumulada total
+#
+    #plot_cambio_porcentual_diario(data_filtrado)

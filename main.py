@@ -31,7 +31,7 @@ def pipeline_supermercados():
     print(data_json)
 
     # Cargar los datos en la base de datos
-    load_data_to_db(data_json)
+    #load_data_to_db(data_json)
 
 def pipeline_dolar():
     """
