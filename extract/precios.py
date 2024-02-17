@@ -10,7 +10,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException, StaleElementReferenceException
 from webdriver_manager.chrome import ChromeDriverManager
-
+from unidecode import unidecode
 
 def get_store_name_from_url(url):
     if 'disco.com.ar' in url:
@@ -73,23 +73,28 @@ def extract_price_selenium(url, store_name):
         driver.quit()
     
     return None
-
+def get_type_store(url):
+    if 'order' in url:
+        return 'all'
+    elif 'Order' in url:
+        return 'all'
+    else:
+        return 'single'
+    
 def process_all(urls: list, product_names: list):
     all_data = {}
     today = datetime.datetime.now().strftime("%d/%m/%Y")
 
     for url, base_product_name in zip(urls, product_names):
         store_name = get_store_name_from_url(url)
-
-        if store_name == 'levis':
-            prices = extract_multiple_prices_selenium(url)  # Asume esta es tu función para múltiples precios
-            if prices:
-                for i, price in enumerate(prices, start=1):
-                    cleaned_price = re.sub(r'[^\d.,]', '', price).replace('.', '').replace(',', '.')
+        type_url = get_type_store(url)
+        if type_url == 'all':
+            products_data = extract_multiple_prices_and_names_selenium(url, store_name)  # Asegúrate de pasar store_name
+            if products_data:
+                for product in products_data:
+                    product_name = product['name']
+                    cleaned_price = re.sub(r'[^\d.,]', '', product['price']).replace('.', '').replace(',', '.')
                     price_number = float(re.search(r'\d+(\.\d+)?', cleaned_price).group(0)) if re.search(r'\d+(\.\d+)?', cleaned_price) else None
-                    
-                    # Construye el nombre del producto con un índice secuencial
-                    product_name = f"{base_product_name}_{i}"  # Ahora cada producto tendrá un identificador único
                     
                     if today not in all_data:
                         all_data[today] = {}
@@ -97,9 +102,9 @@ def process_all(urls: list, product_names: list):
                         all_data[today][store_name] = {}
                     all_data[today][store_name][product_name] = price_number
         else:
-            price = extract_price_selenium(url, store_name)  # Tu función existente
-            if price is not None:
-                cleaned_price = re.sub(r'[^\d.,]', '', price).replace('.', '').replace(',', '.')
+            price_data = extract_price_selenium(url, store_name)  # Devuelve una cadena o None
+            if price_data:
+                cleaned_price = re.sub(r'[^\d.,]', '', price_data).replace('.', '').replace(',', '.')
                 price_number = float(re.search(r'\d+(\.\d+)?', cleaned_price).group(0)) if re.search(r'\d+(\.\d+)?', cleaned_price) else None
 
                 if today not in all_data:
@@ -107,11 +112,21 @@ def process_all(urls: list, product_names: list):
                 if store_name not in all_data[today]:
                     all_data[today][store_name] = {}
 
+                # Utiliza base_product_name ya que no podemos extraer el nombre del producto de price_data directamente
                 all_data[today][store_name][base_product_name] = price_number
 
     return all_data
 
-def extract_multiple_prices_selenium(url, max_attempts=3):
+
+
+
+
+def clean_text(text):
+    # Translitera caracteres a sus equivalentes ASCII
+    clean_text = unidecode(text)
+    return clean_text
+
+def extract_multiple_prices_and_names_selenium(url, store_name, max_attempts=3):
     options = Options()
     options.add_argument('--headless')
     options.add_argument('--disable-dev-shm-usage')
@@ -120,39 +135,83 @@ def extract_multiple_prices_selenium(url, max_attempts=3):
     driver = webdriver.Chrome(service=service, options=options)
     
     attempt = 0
-    prices = None
+    data = []
+
+    store_selectors = {
+        # Actualiza los selectores según sea necesario
+        'levis': {
+            'price': 'vtex-product-price-1-x-sellingPriceValue',
+            'name': '.vtex-product-summary-2-x-productBrand.vtex-product-summary-2-x-brandName.t-body'
+        },
+        'carrefour': {
+            'price': 'valtech-carrefourar-product-price-0-x-sellingPriceValue',
+            'name': '.vtex-product-summary-2-x-productBrand.vtex-product-summary-2-x-brandName.t-body'
+        },
+        'disco': {
+            'price': 'discoargentina-store-theme-1dCOMij_MzTzZOCohX1K7w',
+            'name': '.vtex-product-summary-2-x-productBrand.vtex-product-summary-2-x-brandName.t-body'
+        },
+        # Agrega más tiendas aquí con sus respectivos selectores
+    }
+
+    if store_name not in store_selectors:
+        print(f"Store name '{store_name}' not found in store selectors.")
+        driver.quit()
+        return None
     
-    while attempt < max_attempts and prices is None:
+    price_selector = store_selectors[store_name]['price']
+    name_selector = store_selectors[store_name]['name']
+
+    while attempt < max_attempts and not data:
         try:
             driver.get(url)
-            WebDriverWait(driver, 10 + attempt * 5).until(  # Incrementa el tiempo de espera en cada intento
-                EC.visibility_of_all_elements_located((By.CLASS_NAME, 'vtex-product-price-1-x-sellingPriceValue'))
+            time.sleep(2)  # Espera inicial para que la página comience a cargar
+            
+            # Simula el desplazamiento hacia abajo para cargar más productos
+            for _ in range(5):  # Ajusta según la necesidad de la página
+                driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+                time.sleep(2)
+
+            # Espera explícita para los precios
+            WebDriverWait(driver, 10).until(
+                EC.visibility_of_all_elements_located((By.CLASS_NAME, price_selector))
             )
-            price_elements = driver.find_elements(By.CLASS_NAME, 'vtex-product-price-1-x-sellingPriceValue')
+            
+            # Espera explícita para los nombres
+            WebDriverWait(driver, 10).until(
+                EC.visibility_of_all_elements_located((By.CSS_SELECTOR, name_selector))
+            )
+            
+            price_elements = driver.find_elements(By.CLASS_NAME, price_selector)
+            name_elements = driver.find_elements(By.CSS_SELECTOR, name_selector)
+            
             prices = [element.text.strip() for element in price_elements if element.text.strip() != '']
-            if prices:  # Si encontramos precios, termina el bucle
-                break
+            names = [clean_text(element.text.strip()) for element in name_elements if element.text.strip() != '']
+            
+            data = [{'name': name, 'price': price} for name, price in zip(names, prices) if name and price]
+            
         except (TimeoutException, NoSuchElementException, StaleElementReferenceException) as e:
             print(f"Error en el intento {attempt + 1}: {e}")
         finally:
             attempt += 1
-            if prices is None:
-                time.sleep(5)  # Espera antes de intentar nuevamente
+            if not data:
+                time.sleep(5)
     
     driver.quit()
-    return prices if prices else None
+    return data if data else None
+
 
 
 if __name__ == "__main__":
     import pandas as pd
-    with open('../url_productos.csv', 'r') as f:
+    with open('../url_productos_pruebas.csv', 'r') as f:
         datos = datos = pd.read_csv(f, encoding='ISO-8859-1')
         # Convertir a listas
         url_list = datos['URL'].tolist()
 
     # Extraer los nombres de los productos
     product_names_unified = datos['producto_unificado'].tolist()
-    print(product_names_unified)
     # Extraer los precios de las URLs para cada producto
     data_json = process_all(url_list, product_names_unified)
+
     print(data_json)
