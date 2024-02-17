@@ -17,3 +17,4 @@ prefect==2.14.17
 prefect-gcp==0.4.4
 anyio==3.7.1
 seaborn
+unidecode

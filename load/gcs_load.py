@@ -129,7 +129,7 @@ def load_categorias_productos_to_db(csv_file_path):
         print("Connected to MySQL database")
 
         # Abrir el archivo CSV
-        with open(csv_file_path, mode='r', encoding='utf-8') as file:
+        with open(csv_file_path, mode='r', encoding='latin1') as file:
             csv_reader = csv.DictReader(file)
             
             for row in csv_reader:
