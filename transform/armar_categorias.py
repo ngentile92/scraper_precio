@@ -2,6 +2,7 @@ import datetime
 from extract.precios import get_store_name_from_url, extract_multiple_prices_and_names_selenium, get_type_store
 import pandas as pd
 
+https://www.zonaprop.com.ar/departamentos-alquiler-capital-federal-mas-de-1-bano-1-habitacion-2-ambientes-sin-garages-40-50-m2-cubiertos.html
 def extract_category(url):
     url_lower = url.lower()  # Convierte la URL a minúsculas
     if 'electro' in url_lower:
@@ -18,6 +19,12 @@ def extract_category(url):
         return 'desayuno'
     elif 'map=productclusterids' in url_lower and '163' in url_lower:
         return 'sin TACC'
+    elif 'quesos' in url_lower or 'fiambres' in url_lower:
+        return 'fiambres y quesos'
+    elif 'carnes' in url_lower:
+        return 'carnes'
+    elif 'depart' in url_lower:
+        return 'departamentos'
     else:
         return 'otro'
 
@@ -25,6 +32,14 @@ def extract_subcategory(url):
     url_lower = url.lower()  # Convierte la URL a minúsculas
     if 'electros' in url_lower:
         return 'pequenos electrodomesticos'
+    elif '/quesos' in url_lower:
+        return 'quesos'
+    elif '/fiambres' in url_lower:
+        return 'fiambres'
+    elif 'cerdo' in url_lower:
+        return 'cerdo'
+    elif 'vacuna' in url_lower:
+        return 'vaca'
     elif 'cuidado-oral' in url_lower:
         return 'cuidado oral'
     elif 'farmacia' in url_lower:
@@ -51,6 +66,8 @@ def extract_subcategory(url):
         return 'galletitas'
     elif 'map=productclusterids' in url_lower and '163' in url_lower:
         return 'sin TACC'
+    elif 'federal' in url_lower:
+        return 'capital federal'
     else:
         return 'otro'
 

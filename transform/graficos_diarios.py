@@ -28,7 +28,6 @@ ORDER BY p.categoria, p.date;
 
 
 def limpiar_data(data_hoy):
-    
     # Asegurar que 'date' es de tipo datetime y 'cambio_porcentual' es flotante
     data_hoy['date'] = pd.to_datetime(data_hoy['date'])
     data_hoy['cambio_porcentual'] = data_hoy['cambio_porcentual'].astype(float)
@@ -44,6 +43,33 @@ def limpiar_data(data_hoy):
 
     # Filtrar para excluir los registros marcados como 'primer_post_null'
     data_filtrado = data_hoy[~data_hoy['primer_post_null']].copy()
+
+    # Ajustar las categorías según las especificaciones
+    categorias_a_ajustar = data_filtrado['categoria'].unique().tolist()
+    # Remover las categorías que no necesitan ajuste
+    for categoria_no_ajustar in ['alimentos', 'bebidas', 'limpieza']:
+        if categoria_no_ajustar in categorias_a_ajustar:
+            categorias_a_ajustar.remove(categoria_no_ajustar)
+
+    # Fecha de ajuste
+    fecha_base = pd.Timestamp('2024-02-17')
+
+    # Ajustar categorías a base 100
+    for categoria in categorias_a_ajustar:
+        # Encontrar el índice del primer registro después de la fecha base para cada categoría
+        indice_base = data_filtrado[(data_filtrado['categoria'] == categoria) & (data_filtrado['date'] > fecha_base)].index.min()
+        
+        # Si no hay datos después de la fecha base, continuar con la siguiente categoría
+        if pd.isna(indice_base):
+            continue
+        
+        # Calcular el cambio porcentual como si el valor en 'indice_base' fuera 100
+        valor_base = data_filtrado.at[indice_base, 'avg_precio']
+        data_filtrado.loc[data_filtrado['categoria'] == categoria, 'avg_precio'] = data_filtrado.loc[data_filtrado['categoria'] == categoria, 'avg_precio'] / valor_base * 100
+
+        # Recalcular el cambio porcentual para esta categoría
+        data_filtrado.loc[data_filtrado['categoria'] == categoria, 'cambio_porcentual'] = data_filtrado.loc[data_filtrado['categoria'] == categoria, 'avg_precio'].pct_change() * 100
+
     return data_filtrado
 
 def plot_inflacion_diaria(data_hoy):
@@ -330,10 +356,7 @@ if __name__ == '__main__':
     plot_inflacion_diaria(data_filtrado)
     plot_inflacion_acumulada(data_filtrado)
     plot_inflacion_acumulada_total_excluyendo_libreria(data_filtrado)
-    resultado = data_filtrado.groupby('date').apply(calcular_promedio_ponderado).reset_index().rename(columns={0: 'cambio_porcentual_ponderado'})
-    plot_price_change(resultado)
     # Visualizar el resultado
-    print(resultado)
     #data_filtrado = calcular_inflacion_acumulada_total(data_filtrado)  # Calcula la inflación acumulada total
 #
     #plot_cambio_porcentual_diario(data_filtrado)

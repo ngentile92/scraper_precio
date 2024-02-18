@@ -25,6 +25,8 @@ def get_store_name_from_url(url):
         return 'dexter'
     elif 'levi.com.ar' in url:
         return 'levis'
+    elif 'zonaprop.com.ar' in url:
+        return 'zonaprop'
     else:
         return 'unknown'
 
@@ -73,10 +75,13 @@ def extract_price_selenium(url, store_name):
         driver.quit()
     
     return None
+
 def get_type_store(url):
     if 'order' in url:
         return 'all'
     elif 'Order' in url:
+        return 'all'
+    if 'depar' in url:
         return 'all'
     else:
         return 'single'
@@ -151,6 +156,10 @@ def extract_multiple_prices_and_names_selenium(url, store_name, max_attempts=3):
             'price': 'discoargentina-store-theme-1dCOMij_MzTzZOCohX1K7w',
             'name': '.vtex-product-summary-2-x-productBrand.vtex-product-summary-2-x-brandName.t-body'
         },
+        'zonaprop': {
+            'price': '[data-qa="POSTING_CARD_PRICE"]',  # Actualizado para uso de atributos
+            'name': '[data-qa="POSTING_CARD_LOCATION"]',  # Actualizado para uso de atributos
+    },
         # Agrega más tiendas aquí con sus respectivos selectores
     }
 
@@ -161,35 +170,45 @@ def extract_multiple_prices_and_names_selenium(url, store_name, max_attempts=3):
     
     price_selector = store_selectors[store_name]['price']
     name_selector = store_selectors[store_name]['name']
-
+    print(f"Using price selector '{price_selector}' and name selector '{name_selector}' for store '{store_name}'")
     while attempt < max_attempts and not data:
         try:
             driver.get(url)
             time.sleep(2)  # Espera inicial para que la página comience a cargar
             
             # Simula el desplazamiento hacia abajo para cargar más productos
-            for _ in range(5):  # Ajusta según la necesidad de la página
+            for _ in range(7):  # Ajusta según la necesidad de la página
                 driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-                time.sleep(2)
+                time.sleep(1)
+            if store_name == 'zonaprop':
+                # Uso de CSS_SELECTOR para zonaprop
+                WebDriverWait(driver, 10).until(
+                    EC.visibility_of_all_elements_located((By.CSS_SELECTOR, price_selector))
+                )
+                WebDriverWait(driver, 10).until(
+                    EC.visibility_of_all_elements_located((By.CSS_SELECTOR, name_selector))
+                )
+                price_elements = driver.find_elements(By.CSS_SELECTOR, price_selector)
+                name_elements = driver.find_elements(By.CSS_SELECTOR, name_selector)
+            else:
+                # Espera explícita para los precios
+                WebDriverWait(driver, 10).until(
+                    EC.visibility_of_all_elements_located((By.CLASS_NAME, price_selector))
+                )
+                
+                # Espera explícita para los nombres
+                WebDriverWait(driver, 10).until(
+                    EC.visibility_of_all_elements_located((By.CSS_SELECTOR, name_selector))
+                )
+                price_elements = driver.find_elements(By.CLASS_NAME, price_selector)
+                name_elements = driver.find_elements(By.CSS_SELECTOR, name_selector)
 
-            # Espera explícita para los precios
-            WebDriverWait(driver, 10).until(
-                EC.visibility_of_all_elements_located((By.CLASS_NAME, price_selector))
-            )
-            
-            # Espera explícita para los nombres
-            WebDriverWait(driver, 10).until(
-                EC.visibility_of_all_elements_located((By.CSS_SELECTOR, name_selector))
-            )
-            
-            price_elements = driver.find_elements(By.CLASS_NAME, price_selector)
-            name_elements = driver.find_elements(By.CSS_SELECTOR, name_selector)
-            
-            prices = [element.text.strip() for element in price_elements if element.text.strip() != '']
-            names = [clean_text(element.text.strip()) for element in name_elements if element.text.strip() != '']
-            
+                prices = [element.text.strip() for element in price_elements if element.text.strip() != '']
+                names = [clean_text(element.text.strip()) for element in name_elements if element.text.strip() != '']
+
+            print(price_elements)
+            print(name_elements)            
             data = [{'name': name, 'price': price} for name, price in zip(names, prices) if name and price]
-            
         except (TimeoutException, NoSuchElementException, StaleElementReferenceException) as e:
             print(f"Error en el intento {attempt + 1}: {e}")
         finally:
