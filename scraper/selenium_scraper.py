@@ -1,31 +1,40 @@
 import re
 import time
-from functools import reduce
-
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
 from bs4 import BeautifulSoup
 
+# Constants and dictionaries
 PAGE_URL_SUFFIX = '-pagina-'
 HTML_EXTENSION = '.html'
-
 FEATURE_UNIT_DICT = {
     'm²': 'square_meters_area',
     'amb': 'rooms',
     'dorm': 'bedrooms',
     'baño': 'bathrooms',
     'baños': 'bathrooms',
-    'coch' : 'parking',
-    }
-
+    'coch': 'parking',
+}
 LABEL_DICT = {
-    'POSTING_CARD_PRICE' : 'price',
-    'expensas' : 'expenses',
-    'POSTING_CARD_LOCATION' : 'location',
-    'POSTING_CARD_DESCRIPTION' : 'description',
+    'POSTING_CARD_PRICE': 'price',
+    'expensas': 'expenses',
+    'POSTING_CARD_LOCATION': 'location',
+    'POSTING_CARD_DESCRIPTION': 'description',
 }
 
 class Scraper:
-    def __init__(self, browser, base_url):
-        self.browser = browser
+    def __init__(self, base_url):
+        options = Options()
+        options.add_argument('--headless')
+        options.add_argument('--disable-dev-shm-usage')
+        options.add_argument('--no-sandbox')
+        service = Service(ChromeDriverManager().install())
+        self.driver = webdriver.Chrome(service=service, options=options)
         self.base_url = base_url
 
     def scrap_page(self, page_number):
@@ -35,49 +44,46 @@ class Scraper:
             page_url = f'{self.base_url}{PAGE_URL_SUFFIX}{page_number}{HTML_EXTENSION}'
 
         print(f'URL: {page_url}')
-
-        page = self.browser.get_text(page_url)
-
+        self.driver.get(page_url)
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, "//div[@data-posting-type]"))
+        )
+        page = self.driver.page_source
         soup = BeautifulSoup(page, 'lxml')
-        estate_posts = soup.find_all('div', attrs = {'data-posting-type' : True})
-        estates = []
-        for estate_post in estate_posts:
-            estate = self.parse_estate(estate_post)
-            estates.append(estate)
+        estate_posts = soup.find_all('div', attrs={'data-posting-type': True})
+        estates = [self.parse_estate(post) for post in estate_posts]
         return estates
 
     def scrap_website(self):
         page_number = 1
         estates = []
-        estates_scraped = 0
-        estates_quantity = self.get_estates_quantity()
-        while estates_quantity > estates_scraped:
-            print(f'Page: {page_number}')
-            estates += self.scrap_page(page_number)
+        while True:
+            print(f'Scraping page: {page_number}')
+            new_estates = self.scrap_page(page_number)
+            if not new_estates:
+                break  # Stop if no more estates are found
+            estates += new_estates
             page_number += 1
-            estates_scraped = len(estates)
-            time.sleep(3)
-            #Break on page 4
-            if page_number == 2:
-                break
-
+            time.sleep(2)  # Be polite and don't hammer the server
         return estates
 
-
     def get_estates_quantity(self):
-        page_url = f'{self.base_url}{HTML_EXTENSION}'
-        page = self.browser.get_text(page_url)
+        self.driver.get(f'{self.base_url}{HTML_EXTENSION}')
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.TAG_NAME, "h1"))
+        )
+        page = self.driver.page_source
         soup = BeautifulSoup(page, 'lxml')
-        print(soup)
-        soup.find_all('h1')[0].text
-
-        estates_quantity = re.findall(r'\d+\.?\d+', soup.find_all('h1')[0].text)[0]
-
-        estates_quantity = estates_quantity.replace('.', '')
-
-        estates_quantity = int(estates_quantity)
-        return estates_quantity
-
+        h1_tag = soup.find('h1')
+        if h1_tag:
+            estates_quantity_text = h1_tag.text
+            estates_quantity = re.findall(r'\d+\.?\d*', estates_quantity_text.replace('.', ''))[0]
+            estates_quantity = int(estates_quantity)
+            return estates_quantity
+        else:
+            print('No h1 tags found')
+            return 0
+    
     def parse_estate(self, estate_post):
         # find div with anything data-qa atributte
         data_qa = estate_post.find_all('div', attrs={'data-qa': True})
