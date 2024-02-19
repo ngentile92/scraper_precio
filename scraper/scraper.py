@@ -67,6 +67,7 @@ class Scraper:
     def get_estates_quantity(self):
         page_url = f'{self.base_url}{HTML_EXTENSION}'
         page = self.browser.get_text(page_url)
+        print(page)
         soup = BeautifulSoup(page, 'lxml')
         soup.find_all('h1')[0].text
 
