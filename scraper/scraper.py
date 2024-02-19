@@ -68,12 +68,16 @@ class Scraper:
         page_url = f'{self.base_url}{HTML_EXTENSION}'
         page = self.browser.get_text(page_url)
         soup = BeautifulSoup(page, 'lxml')
-        soup.find_all('h1')[0].text
+        h1_tags = soup.find_all('h1')
+        
+        if not h1_tags:
+            # Handle the case where no h1 tags are found
+            # Maybe log an error, return a default value, or raise a more informative exception
+            return 0
 
-        estates_quantity = re.findall(r'\d+\.?\d+', soup.find_all('h1')[0].text)[0]
-
+        estates_quantity_text = h1_tags[0].text
+        estates_quantity = re.findall(r'\d+\.?\d*', estates_quantity_text)[0]
         estates_quantity = estates_quantity.replace('.', '')
-
         estates_quantity = int(estates_quantity)
         return estates_quantity
 
@@ -88,6 +92,7 @@ class Scraper:
         url = estate_post.get_attribute_list('data-to-posting')[0]
         estate = {}
         estate['url'] = url
+        print(url)
         for data in data_qa:
             label = data['data-qa']
             text = None
