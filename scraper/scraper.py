@@ -73,6 +73,7 @@ class Scraper:
         if not h1_tags:
             # Handle the case where no h1 tags are found
             # Maybe log an error, return a default value, or raise a more informative exception
+            print('No h1 tags found')
             return 0
 
         estates_quantity_text = h1_tags[0].text
