@@ -180,14 +180,16 @@ def extract_multiple_prices_and_names_selenium(url, store_name, max_attempts=3):
             for _ in range(7):  # Ajusta según la necesidad de la página
                 driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
                 time.sleep(1)
+            # Cambio para 'zonaprop'
             if store_name == 'zonaprop':
-                # Uso de CSS_SELECTOR para zonaprop
-                WebDriverWait(driver, 10).until(
-                    EC.visibility_of_all_elements_located((By.CSS_SELECTOR, price_selector))
+                # Uso de presence_of_all_elements_located para zonaprop
+                price_elements = WebDriverWait(driver, 20).until(
+                    EC.presence_of_all_elements_located((By.CSS_SELECTOR, price_selector))
                 )
-                WebDriverWait(driver, 10).until(
-                    EC.visibility_of_all_elements_located((By.CSS_SELECTOR, name_selector))
+                name_elements = WebDriverWait(driver, 20).until(
+                    EC.presence_of_all_elements_located((By.CSS_SELECTOR, name_selector))
                 )
+
                 price_elements = driver.find_elements(By.CSS_SELECTOR, price_selector)
                 name_elements = driver.find_elements(By.CSS_SELECTOR, name_selector)
             else:

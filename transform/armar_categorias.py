@@ -2,7 +2,6 @@ import datetime
 from extract.precios import get_store_name_from_url, extract_multiple_prices_and_names_selenium, get_type_store
 import pandas as pd
 
-https://www.zonaprop.com.ar/departamentos-alquiler-capital-federal-mas-de-1-bano-1-habitacion-2-ambientes-sin-garages-40-50-m2-cubiertos.html
 def extract_category(url):
     url_lower = url.lower()  # Convierte la URL a minúsculas
     if 'electro' in url_lower:
@@ -114,4 +113,4 @@ if __name__ == "__main__":
     # drop duplicates
     datos = datos.drop_duplicates(subset='producto_unificado', keep='last')
     #save datos
-    datos.to_csv('../producto_categoriass.csv', index=False, encoding='ISO-8859-1')
+    datos.to_csv('../producto_categorias.csv', index=False, encoding='ISO-8859-1')
