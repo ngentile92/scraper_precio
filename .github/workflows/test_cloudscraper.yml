@@ -3,8 +3,6 @@ on:
   push:
     branches:
       - main
-  Descomenta la siguiente sección si deseas ejecutar este workflow en un horario programado,
-
 
 jobs:
   run-scraper:
