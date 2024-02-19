@@ -18,3 +18,12 @@ prefect-gcp==0.4.4
 anyio==3.7.1
 seaborn
 unidecode
+beautifulsoup4==4.11.1
+cloudscraper==1.2.64
+matplotlib==3.6.0
+numpy==1.23.3
+pandas==1.5.0
+pytest==7.1.3
+pytest_mock==3.9.0
+scikit_learn==1.1.2
+lxml==4.9.1

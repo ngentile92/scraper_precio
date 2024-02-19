@@ -4,12 +4,12 @@ Archivo principal de lógica del programa
 import json
 import argparse
 import pandas as pd
-
 from extract.precios import process_all
 from extract.dolar import scrapeo_dolar
 from extract.BCRA import process_BCRA
 from load.gcs_load import load_data_to_db, load_dolar_to_db, load_bcra_to_db, load_categorias_productos_to_db
- 
+
+
 def pipeline_supermercados():
     """
     Función que ejecuta el pipeline de supermercados
@@ -19,6 +19,29 @@ def pipeline_supermercados():
     # Extraer los datos de las URLs
     # Open csv file
     with open('url_productos.csv', 'r') as f:
+        datos = datos = pd.read_csv(f, encoding='ISO-8859-1')
+        # Convertir a listas
+        url_list = datos['URL'].tolist()
+
+    # Extraer los nombres de los productos
+    product_names_unified = datos['producto_unificado'].tolist()
+    # Extraer los precios de las URLs para cada producto
+    data_json = process_all(url_list, product_names_unified)
+
+    print(data_json)
+
+    # Cargar los datos en la base de datos
+    load_data_to_db(data_json)
+
+def pipeline_alquileres():
+    """
+    Función que ejecuta el pipeline de supermercados
+    - Scrapea los datos de las URLs provistas en el .csv
+    - Carga los datos en la base de datos
+    """
+    # Extraer los datos de las URLs
+    # Open csv file
+    with open('url_alquileres.csv', 'r') as f:
         datos = datos = pd.read_csv(f, encoding='ISO-8859-1')
         # Convertir a listas
         url_list = datos['URL'].tolist()
