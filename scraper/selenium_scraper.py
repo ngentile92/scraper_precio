@@ -46,11 +46,12 @@ class Scraper:
         print(f'URL: {page_url}')
         self.driver.get(page_url)
         WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, "//div[@data-posting-type]"))
+            EC.presence_of_element_located((By.TAG_NAME, "h1"))
         )
         page = self.driver.page_source
         soup = BeautifulSoup(page, 'lxml')
         estate_posts = soup.find_all('div', attrs={'data-posting-type': True})
+        print(estate_posts)
         estates = [self.parse_estate(post) for post in estate_posts]
         return estates
 

@@ -3,25 +3,21 @@ import sys
 import pandas as pd
 
 from scraper import utils
-from scraper.browser import Browser
-from scraper.scraper import Scraper
+from scraper.selenium_scraper import Scraper
 
 
 def main(url):
     base_url = utils.parse_zonaprop_url(url)
     print(f'Running scraper for {base_url}')
     print(f'This may take a while...')
-    browser = Browser()
-    scraper = Scraper(browser, base_url)
+    scraper = Scraper(base_url)
     estates = scraper.scrap_website()
+    print(f'Found {len(estates)} estates')
     df = pd.DataFrame(estates)
-    print('Scraping finished !!!')
-    print('Saving data to csv file')
-    filename = utils.get_filename_from_datetime(base_url, 'csv')
-    utils.save_df_to_csv(df, filename)
-    print(f'Data saved to {filename}')
-    print('Scrap finished !!!')
-
+    df.to_csv('estates.csv', index=False)
+    print('Data saved to estates.csv')
+    
+    
 if __name__ == '__main__':
     # Check if at least one command-line argument is provided
     if len(sys.argv) > 1:
