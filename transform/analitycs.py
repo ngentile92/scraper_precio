@@ -11,7 +11,6 @@ GROUP BY producto;
 """
 
 query_7_dias = """
-
 -- Precios promedio para hace 7 días
 SELECT producto, AVG(precio) AS promedio_7_dias
 FROM `slowpoke-v1`.precios
