@@ -170,7 +170,7 @@ def plot_inflacion_acumulada(data_filtrado):
     plt.show()
 def plot_inflacion_acumulada_total_excluyendo_libreria(data_filtrado):
     # Excluir la categoría "librería" antes de cualquier cálculo
-    data_sin_libreria = data_filtrado[data_filtrado['categoria'] != 'librería']
+    data_sin_libreria = data_filtrado
 
     # Asegurar que 'date' es de tipo datetime
     data_sin_libreria['date'] = pd.to_datetime(data_sin_libreria['date'])
@@ -184,7 +184,7 @@ def plot_inflacion_acumulada_total_excluyendo_libreria(data_filtrado):
     # Asegúrate de reiniciar el índice de inflación a 100 para el primer punto de datos si es necesario
     primer_indice = data_sin_libreria.index.min()
     data_sin_libreria.loc[primer_indice, 'inflacion_acumulada_total'] = 100
-
+    
     # Configuración básica de Seaborn
     sns.set(style="whitegrid")
 
@@ -195,7 +195,7 @@ def plot_inflacion_acumulada_total_excluyendo_libreria(data_filtrado):
     ax = sns.lineplot(x='date', y='inflacion_acumulada_total', data=data_sin_libreria, marker="o", color='blue')
 
     # Añadir título y etiquetas a los ejes
-    plt.title('Inflación Acumulada Total (Excluyendo Librería)')
+    plt.title('Inflación Acumulada Total')
     plt.xlabel('Fecha')
     plt.ylabel('Inflación Acumulada Total (%)')
 

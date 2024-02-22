@@ -2,6 +2,7 @@ import datetime
 from extract.precios import get_store_name_from_url, extract_multiple_prices_and_names_selenium, get_type_store
 import pandas as pd
 
+
 def extract_category(url):
     url_lower = url.lower()  # Convierte la URL a minúsculas
     if 'electro' in url_lower:
@@ -10,7 +11,7 @@ def extract_category(url):
         return 'perfumeria'
     elif 'sweaters' in url_lower or 'jeans' in url_lower or 'camisas' in url_lower:
         return 'prendas y calzado'
-    elif 'bazar' in url_lower:
+    elif '/Bazar-y-textil/Libreria' in url_lower:
         return 'libreria'
     elif 'lacteos' in url_lower:
         return 'lacteos'
@@ -24,6 +25,14 @@ def extract_category(url):
         return 'carnes'
     elif 'depart' in url_lower:
         return 'departamentos'
+    elif 'frutas' in url_lower or 'verduras' in url_lower:
+        return 'frutas y verduras'
+    elif 'almacen' in url_lower:
+        return 'almacen'
+    elif 'congelados' in url_lower:
+        return 'congelados'
+    elif 'bazar' in url_lower or 'textil' in url_lower:
+        return 'bazar y textil'
     else:
         return 'otro'
 
@@ -31,6 +40,16 @@ def extract_subcategory(url):
     url_lower = url.lower()  # Convierte la URL a minúsculas
     if 'electros' in url_lower:
         return 'pequenos electrodomesticos'
+    elif '/frutas-y-verduras/frutas' in url_lower:
+        return 'frutas'
+    elif '/frutas-y-verduras/verduras' in url_lower:
+        return 'verduras'
+    elif '/indumentaria' in url_lower:
+        return 'indumentaria'
+    elif '/aceites' in url_lower:
+        return 'aceites'
+    elif '/congelados' in url_lower:
+        return 'congelados'
     elif '/quesos' in url_lower:
         return 'quesos'
     elif '/fiambres' in url_lower:
@@ -100,11 +119,10 @@ def get_category(urls: list):
     return df
 
 if __name__ == "__main__":
-    with open('../url_productos.csv', 'r') as f:
+    with open('../url_productos_pruebas.csv', 'r') as f:
         datos = datos = pd.read_csv(f, encoding='ISO-8859-1')
         # Convertir a listas
         url_list = datos['URL'].tolist()
-
     df = get_category(url_list)
     with open('../producto_categorias.csv', 'r') as f:
         datos = pd.read_csv(f, encoding='ISO-8859-1')
