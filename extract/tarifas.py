@@ -11,7 +11,7 @@ import json
 from bs4 import BeautifulSoup
 import re
 import certifi
-
+from load.gcs_load import load_tarifas_to_db
 
 def extraer_enlaces_cuadros_tarifarios(url):
     chrome_options = Options()
@@ -144,12 +144,34 @@ def limpiar_titulos(resultado):
 if __name__ == '__main__':
     URL = "https://www.argentina.gob.ar/enre/cuadros_tarifarios"
     enlace_cuadro_tarifario = extraer_enlaces_cuadros_tarifarios(URL)
+    resultados_globales = []
+    #enlace_cuadro_tarifario = [
+    #    "https://www.enre.gov.ar/web/tarifasd.nsf/todoscuadros/EE287D6D2EC07DE70325894B00640A20?opendocument",
+    #    "https://www.enre.gov.ar/web/TARIFASD.nsf/todoscuadros/6AF98FD8169DDCB403258966004CE1ED?opendocument",
+    #    "https://www.enre.gov.ar/web/TARIFASD.nsf/todoscuadros/02F87103D2A44EFA03258967004C56EB?opendocument",
+    #    "https://www.enre.gov.ar/web/tarifasd.nsf/todoscuadros/2C70F98CD96070C2032589A6003EB4F1?opendocument",
+    #    "https://www.enre.gov.ar/web/tarifasd.nsf/todoscuadros/C39BA4874DCA1FEF03258854004FBE7D?opendocument",
+    #    "https://www.enre.gov.ar/web/tarifasd.nsf/todoscuadros/498ACB3ED0593512032588780042D316?opendocument",
+    #    "https://www.enre.gov.ar/web/tarifasd.nsf/todoscuadros/DA9ACE2067B6D9F70325889100482B86?opendocument",
+    #    "https://www.enre.gov.ar/web/tarifasd.nsf/todoscuadros/6831EEB39C0A5E2F032586CB006834CA?opendocument",
+    #    "https://www.enre.gov.ar/web/tarifasd.nsf/todoscuadros/EB3643E64C0963C7032588D8004CB1D9?opendocument",
+    #    "https://www.enre.gov.ar/web/tarifasd.nsf/todoscuadros/9BDA7860C6E30AFB032588EF00448161?opendocument",
+    #    "https://www.enre.gov.ar/web/tarifasd.nsf/todoscuadros/C6449DE85BF30A030325890F006B5510?opendocument",
+    #    "https://www.enre.gov.ar/web/tarifasd.nsf/todoscuadros/949C99A58F4C79EA0325892D00662E40?opendocument",
+    #    "https://www.enre.gov.ar/web/tarifasd.nsf/todoscuadros/70443DAC0651153D032589B4004218B8?opendocument",
+    #    "https://www.enre.gov.ar/web/tarifasd.nsf/todoscuadros/0C4CDDE197FF7409032589E4005EF7CB?opendocument",
+    #    "https://www.enre.gov.ar/web/tarifasd.nsf/todoscuadros/D0A25F2999EC0CC1032589F900667B84?opendocument",
+    #    "https://www.enre.gov.ar/web/TARIFASD.nsf/todoscuadros/77005EF0D0961ED403258A21004793BF?opendocument",
+    #    "https://www.enre.gov.ar/web/tarifasd.nsf/todoscuadros/C120B41EBDDE16CD03258A3C003BD252?opendocument",
+    #    "https://www.enre.gov.ar/web/tarifasd.nsf/todoscuadros/7F88055965CC017903258A5F00459959?opendocument",
+    #    "https://www.enre.gov.ar/web/tarifasd.nsf/todoscuadros/BAF634BB93647DEA03258A7C00432386?opendocument",
+    #    "https://www.enre.gov.ar/web/tarifasd.nsf/todoscuadros/A0CE9C40FB1AF8F203258AA20051EC60?opendocument"
+    #]
     print(f"Enlace encontrado: {enlace_cuadro_tarifario}")
-    datos_tarifas = procesar_html_para_usuarios_generales(enlace_cuadro_tarifario)
-    print(datos_tarifas) 
-    datos_tarifas_limpio = limpiar_titulos(datos_tarifas)
 
-    # Convertir los datos a JSON
-    with open('datos_tarifas.json', 'w') as fp:
-        json.dump(datos_tarifas_limpio, fp, ensure_ascii=False)
-   
+    datos_tarifas = procesar_html_para_usuarios_generales(enlace_cuadro_tarifario)
+    datos_tarifas_limpio = limpiar_titulos(datos_tarifas)
+    resultados_globales.append(datos_tarifas_limpio)
+
+    # Cargar los datos a la base de datos
+    load_tarifas_to_db(resultados_globales)

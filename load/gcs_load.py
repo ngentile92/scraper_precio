@@ -155,3 +155,53 @@ def load_categorias_productos_to_db(csv_file_path):
             cursor.close()
             conn.close()
             print("MySQL connection is closed")
+
+
+def convertir_fecha(fecha_str):
+    # Asumiendo que `fecha_str` está en el formato 'MM/AA'
+    # y que se refiere al primer día del mes.
+    mes, año = fecha_str.split('/')
+    if len(año) == 2:
+        año = '20' + año  # Asumiendo que '23' se refiere a '2023'
+    fecha_formato_correcto = f"{año}-{mes}-01"  # Formato 'YYYY-MM-DD'
+    return fecha_formato_correcto
+
+def load_tarifas_to_db(json_data):
+    try:
+        # Conexión a la base de datos
+        conn = mysql.connector.connect(
+            user=GCS_USER_ROOT,
+            password=GCS_PASSWORD,
+            host=GCS_HOST,
+            database=GCS_DATABASE
+        )
+        cursor = conn.cursor()
+        print("Connected to MySQL database")
+
+        # Parsear el JSON y cargar los datos
+        for item in json_data:
+            fecha_str = item["Usuarios Generales"]["Fecha del Cuadro Tarifario"]
+            fecha = convertir_fecha(fecha_str)
+            for proveedor in ["EDENOR", "EDESUR"]:
+                fijo = item["Usuarios Generales"][proveedor]["Fijo"].replace(',', '')
+                variable = item["Usuarios Generales"][proveedor]["Variable"].replace(',', '')
+                categoria = "Usuarios Generales"
+                
+                # SQL para insertar datos
+                sql = """INSERT INTO tarifas_electricidad (Date, Proveedor, Categoria, Costo_fijo, Costo_variable)
+                         VALUES (%s, %s, %s, %s, %s)
+                         ON DUPLICATE KEY UPDATE Costo_fijo = VALUES(Costo_fijo), Costo_variable = VALUES(Costo_variable);
+                      """
+                cursor.execute(sql, (fecha, proveedor, categoria, fijo, variable))
+        
+        # Confirmar cambios
+        conn.commit()
+        print("Data loaded successfully")
+        
+    except mysql.connector.Error as err:
+        print("Error in SQL operation: ", err)
+    finally:
+        if conn.is_connected():
+            cursor.close()
+            conn.close()
+            print("MySQL connection is closed")

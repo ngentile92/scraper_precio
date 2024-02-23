@@ -1,1 +1,262 @@
-{"Usuarios Generales": {"EDENOR": {"Fijo": "1,980.59", "Variable": "21.350"}, "EDESUR": {"Fijo": "1,938.89", "Variable": "19.610"}, "Fecha del Cuadro Tarifario": "01/2024"}}
+[
+    {
+        "Usuarios Generales": {
+            "EDENOR": {
+                "Fijo": "548.81",
+                "Variable": "11.872"
+            },
+            "EDESUR": {
+                "Fijo": "537.25",
+                "Variable": "11.478"
+            },
+            "Fecha del Cuadro Tarifario": "01/23"
+        }
+    },
+    {
+        "Usuarios Generales": {
+            "EDENOR": {
+                "Fijo": "548.81",
+                "Variable": "11.872"
+            },
+            "EDESUR": {
+                "Fijo": "537.25",
+                "Variable": "11.478"
+            },
+            "Fecha del Cuadro Tarifario": "02/2023"
+        }
+    },
+    {
+        "Usuarios Generales": {
+            "EDENOR": {
+                "Fijo": "548.81",
+                "Variable": "11.872"
+            },
+            "EDESUR": {
+                "Fijo": "537.25",
+                "Variable": "11.478"
+            },
+            "Fecha del Cuadro Tarifario": "03/2023"
+        }
+    },
+    {
+        "Usuarios Generales": {
+            "EDENOR": {
+                "Fijo": "1,140.48",
+                "Variable": "15.229"
+            },
+            "EDESUR": {
+                "Fijo": "1,116.47",
+                "Variable": "14.279"
+            },
+            "Fecha del Cuadro Tarifario": "04/2023"
+        }
+    },
+    {
+        "Usuarios Generales": {
+            "EDENOR": {
+                "Fijo": "548.81",
+                "Variable": "6.727"
+            },
+            "EDESUR": {
+                "Fijo": "537.25",
+                "Variable": "6.333"
+            },
+            "Fecha del Cuadro Tarifario": "05/22"
+        }
+    },
+    {
+        "Usuarios Generales": {
+            "EDENOR": {
+                "Fijo": "548.81",
+                "Variable": "7.986"
+            },
+            "EDESUR": {
+                "Fijo": "537.25",
+                "Variable": "7.592"
+            },
+            "Fecha del Cuadro Tarifario": "06/22"
+        }
+    },
+    {
+        "Usuarios Generales": {
+            "EDENOR": {
+                "Fijo": "548.81",
+                "Variable": "7.986"
+            },
+            "EDESUR": {
+                "Fijo": "537.25",
+                "Variable": "7.592"
+            },
+            "Fecha del Cuadro Tarifario": "07/22"
+        }
+    },
+    {
+        "Usuarios Generales": {
+            "EDENOR": {
+                "Fijo": "548.81",
+                "Variable": "7.986"
+            },
+            "EDESUR": {
+                "Fijo": "537.25",
+                "Variable": "7.592"
+            },
+            "Fecha del Cuadro Tarifario": "08/22"
+        }
+    },
+    {
+        "Usuarios Generales": {
+            "EDENOR": {
+                "Fijo": "548.81",
+                "Variable": "10.076"
+            },
+            "EDESUR": {
+                "Fijo": "537.25",
+                "Variable": "9.682"
+            },
+            "Fecha del Cuadro Tarifario": "09/22"
+        }
+    },
+    {
+        "Usuarios Generales": {
+            "EDENOR": {
+                "Fijo": "548.81",
+                "Variable": "10.076"
+            },
+            "EDESUR": {
+                "Fijo": "537.25",
+                "Variable": "9.682"
+            },
+            "Fecha del Cuadro Tarifario": "10/22"
+        }
+    },
+    {
+        "Usuarios Generales": {
+            "EDENOR": {
+                "Fijo": "548.81",
+                "Variable": "11.872"
+            },
+            "EDESUR": {
+                "Fijo": "537.25",
+                "Variable": "11.478"
+            },
+            "Fecha del Cuadro Tarifario": "11/22"
+        }
+    },
+    {
+        "Usuarios Generales": {
+            "EDENOR": {
+                "Fijo": "548.81",
+                "Variable": "11.872"
+            },
+            "EDESUR": {
+                "Fijo": "537.25",
+                "Variable": "11.478"
+            },
+            "Fecha del Cuadro Tarifario": "12/22"
+        }
+    },
+    {
+        "Usuarios Generales": {
+            "EDENOR": {
+                "Fijo": "1,140.48",
+                "Variable": "15.229"
+            },
+            "EDESUR": {
+                "Fijo": "1,116.47",
+                "Variable": "14.279"
+            },
+            "Fecha del Cuadro Tarifario": "05/2023"
+        }
+    },
+    {
+        "Usuarios Generales": {
+            "EDENOR": {
+                "Fijo": "1,980.59",
+                "Variable": "19.689"
+            },
+            "EDESUR": {
+                "Fijo": "1,938.89",
+                "Variable": "17.949"
+            },
+            "Fecha del Cuadro Tarifario": "06/2023"
+        }
+    },
+    {
+        "Usuarios Generales": {
+            "EDENOR": {
+                "Fijo": "1,980.59",
+                "Variable": "19.689"
+            },
+            "EDESUR": {
+                "Fijo": "1,938.89",
+                "Variable": "17.949"
+            },
+            "Fecha del Cuadro Tarifario": "07/2023"
+        }
+    },
+    {
+        "Usuarios Generales": {
+            "EDENOR": {
+                "Fijo": "1,980.59",
+                "Variable": "21.350"
+            },
+            "EDESUR": {
+                "Fijo": "1,938.89",
+                "Variable": "19.610"
+            },
+            "Fecha del Cuadro Tarifario": "08/2023"
+        }
+    },
+    {
+        "Usuarios Generales": {
+            "EDENOR": {
+                "Fijo": "1,980.59",
+                "Variable": "21.350"
+            },
+            "EDESUR": {
+                "Fijo": "1,938.89",
+                "Variable": "19.610"
+            },
+            "Fecha del Cuadro Tarifario": "09/2023"
+        }
+    },
+    {
+        "Usuarios Generales": {
+            "EDENOR": {
+                "Fijo": "1,980.59",
+                "Variable": "21.350"
+            },
+            "EDESUR": {
+                "Fijo": "1,938.89",
+                "Variable": "19.610"
+            },
+            "Fecha del Cuadro Tarifario": "10/2023"
+        }
+    },
+    {
+        "Usuarios Generales": {
+            "EDENOR": {
+                "Fijo": "1,980.59",
+                "Variable": "21.350"
+            },
+            "EDESUR": {
+                "Fijo": "1,938.89",
+                "Variable": "19.610"
+            },
+            "Fecha del Cuadro Tarifario": "11/2023"
+        }
+    },
+    {
+        "Usuarios Generales": {
+            "EDENOR": {
+                "Fijo": "1,980.59",
+                "Variable": "21.350"
+            },
+            "EDESUR": {
+                "Fijo": "1,938.89",
+                "Variable": "19.610"
+            },
+            "Fecha del Cuadro Tarifario": "12/2023"
+        }
+    }
+]
