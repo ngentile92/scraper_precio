@@ -39,25 +39,40 @@ def extraer_enlaces_cuadros_tarifarios(url):
 def obtener_html_con_selenium(enlace):
     chrome_options = Options()
     chrome_options.add_argument("--headless")
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
-
+    print("Inicializando WebDriver de Chrome en modo headless...")
+    
     try:
+        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
+        print(f"Accediendo a {enlace}...")
+        
         driver.get(enlace)
         # Espera a que la página se cargue completamente. Ajusta el tiempo según sea necesario.
+        print("Esperando a que la página se cargue...")
         WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, "body")))
+        
+        print("Página cargada. Obteniendo el código fuente...")
         html = driver.page_source
+        print("Código fuente obtenido con éxito.")
+        
         return [html]
     except Exception as e:
         print(f"Error al obtener el HTML con Selenium: {e}")
     finally:
+        print("Cerrando el WebDriver...")
         driver.quit()
+    
+    print("No se pudo obtener el HTML. Retornando lista vacía.")
     return []
+
+
 
 
 def procesar_html_para_usuarios_generales(enlace):
     resultado = {"Usuarios Generales": {"EDENOR": {"Fijo": "", "Variable": ""}, "EDESUR": {"Fijo": "", "Variable": ""}, "Fecha del Cuadro Tarifario": ""}}
     
     htmls = obtener_html_con_selenium(enlace)
+    print(f"HTMLs obtenidos: {len(htmls)}")
+    print(htmls)
     for html in htmls:
         soup = BeautifulSoup(html, 'html.parser')
 
@@ -130,8 +145,8 @@ if __name__ == '__main__':
     URL = "https://www.argentina.gob.ar/enre/cuadros_tarifarios"
     enlace_cuadro_tarifario = extraer_enlaces_cuadros_tarifarios(URL)
     print(f"Enlace encontrado: {enlace_cuadro_tarifario}")
-    datos_tarifas = procesar_html_para_usuarios_generales([enlace_cuadro_tarifario])
-
+    datos_tarifas = procesar_html_para_usuarios_generales(enlace_cuadro_tarifario)
+    print(datos_tarifas) 
     datos_tarifas_limpio = limpiar_titulos(datos_tarifas)
 
     # Convertir los datos a JSON
