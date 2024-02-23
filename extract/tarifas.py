@@ -36,25 +36,30 @@ def extraer_enlaces_cuadros_tarifarios(url):
     driver.quit()
     return enlace_cuadro
 
-def obtener_html_de_enlaces(enlace):
-    htmls = []
-    try:
-        respuesta = requests.get(enlace)
-        if respuesta.status_code == 200:
-            htmls.append(respuesta.text)
-        else:
-            print(f"Error al obtener {enlace}: Estado {respuesta.status_code}")
-    except requests.exceptions.MissingSchema as e:
-        print(f"Error en la URL {enlace}: {e}")
-    return htmls
+def obtener_html_con_selenium(enlace):
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
 
-def procesar_html_para_usuarios_generales(urls):
+    try:
+        driver.get(enlace)
+        # Espera a que la página se cargue completamente. Ajusta el tiempo según sea necesario.
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, "body")))
+        html = driver.page_source
+        return [html]
+    except Exception as e:
+        print(f"Error al obtener el HTML con Selenium: {e}")
+    finally:
+        driver.quit()
+    return []
+
+
+def procesar_html_para_usuarios_generales(enlace):
     resultado = {"Usuarios Generales": {"EDENOR": {"Fijo": "", "Variable": ""}, "EDESUR": {"Fijo": "", "Variable": ""}, "Fecha del Cuadro Tarifario": ""}}
     
-    htmls = obtener_html_de_enlaces(urls)
+    htmls = obtener_html_con_selenium(enlace)
     for html in htmls:
         soup = BeautifulSoup(html, 'html.parser')
-
 
         # Buscar la fecha del cuadro tarifario
         cuadro_tarifario = soup.find('div', class_="bg-primary col-md-12 text-center")
