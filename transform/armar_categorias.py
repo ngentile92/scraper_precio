@@ -86,6 +86,10 @@ def extract_subcategory(url):
         return 'sin TACC'
     elif 'federal' in url_lower:
         return 'capital federal'
+    elif '/conservas' in url_lower:
+        return 'conservas'
+    elif 'pastas' in url_lower:
+        return 'pastas'
     else:
         return 'otro'
 

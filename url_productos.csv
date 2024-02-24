@@ -1,8 +1,11 @@
 URL,producto_unificado
-https://www.carrefour.com.ar/Frutas-y-verduras/Frutas,Frutas
-https://www.carrefour.com.ar/Frutas-y-verduras/Verduras,Verduras
+https://www.carrefour.com.ar/Almacen/Pastas-secas?order=,almacen pastas
+https://www.disco.com.ar/Almacen/Conservas?order=,almacen conservas
+https://www.disco.com.ar/Almacen/Pastas-Secas-y-Salsas?order=,almacen pastas
+https://www.carrefour.com.ar/Frutas-y-verduras/Frutas?order=,Frutas
+https://www.carrefour.com.ar/Frutas-y-verduras/Verduras?order=,Verduras
 https://www.carrefour.com.ar/bazar-y-textil/indumentaria/adultos?order=OrderByNameASC,indumentaria adultos
-https://www.disco.com.ar/almacen/aceites-y-vinagres,aceites y vinagres
+https://www.disco.com.ar/almacen/aceites-y-vinagres?order=,aceites y vinagres
 https://www.disco.com.ar/congelados?order=,congelados
 https://www.levi.com.ar/Mujer/Sweaters-y-buzos?order=OrderByTopSaleDESC,levis sweater mujer
 https://www.levi.com.ar/hombre/jeans?order=OrderByTopSaleDESC,levis jeans hombre

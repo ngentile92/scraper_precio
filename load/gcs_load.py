@@ -3,7 +3,7 @@ import json
 from datetime import datetime
 import os
 import csv
-
+import pandas as pd
 #import from .env variables
 from dotenv import load_dotenv
 load_dotenv(".env")
@@ -198,6 +198,56 @@ def load_tarifas_to_db(json_data):
         conn.commit()
         print("Data loaded successfully")
         
+    except mysql.connector.Error as err:
+        print("Error in SQL operation: ", err)
+    finally:
+        if conn.is_connected():
+            cursor.close()
+            conn.close()
+            print("MySQL connection is closed")
+
+
+def load_alquileres_to_db(df):
+    try:
+        # Conexión a la base de datos
+        conn = mysql.connector.connect(
+            user=GCS_USER_ROOT,
+            password=GCS_PASSWORD,
+            host=GCS_HOST,
+            database=GCS_DATABASE
+        )
+        cursor = conn.cursor()
+        print("Connected to MySQL database")
+        # Iterar sobre el DataFrame
+        for index, row in df.iterrows():
+            date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            url = row['url']
+            # Convertir price_value a cadena para manejar el caso de los enteros
+            price_value_str = str(row['price_value'])
+            try:
+                # Intentar convertir price_value a float y luego a int, si es posible
+                alquiler = int(float(price_value_str)) if pd.notnull(row['price_value']) else None
+            except ValueError:
+                alquiler = None  # Si no se puede convertir, establecer alquiler a None
+            expensas_str = str(row['expenses_value'])
+            try:
+                # Intentar convertir expensas a float y luego a int, si es posible
+                expensas = int(float(expensas_str)) if pd.notnull(row['expenses_value']) else None
+            except ValueError:
+                expensas = None  # Si no se puede convertir, establecer alquiler a None
+            moneda_alquiler = row['price_type']
+            moneda_expensas = row['expenses_type'] if pd.notnull(row['expenses_type']) else None
+
+            # SQL para insertar datos
+            sql = """INSERT INTO alquileres (url, date, alquiler, moneda_alquiler, expensas, moneda_expensas)
+                     VALUES (%s, %s, %s, %s, %s, %s);
+                  """
+            cursor.execute(sql, (url, date, alquiler, moneda_alquiler, expensas, moneda_expensas))
+
+        # Confirmar cambios
+        conn.commit()
+        print("Data loaded successfully")
+
     except mysql.connector.Error as err:
         print("Error in SQL operation: ", err)
     finally:

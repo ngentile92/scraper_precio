@@ -8,9 +8,11 @@ import pandas as pd
 from extract.precios import process_all
 from extract.dolar import scrapeo_dolar
 from extract.BCRA import process_BCRA
-from load.gcs_load import load_data_to_db, load_dolar_to_db, load_bcra_to_db, load_categorias_productos_to_db, load_tarifas_to_db
+from load.gcs_load import load_data_to_db, load_dolar_to_db, load_bcra_to_db, load_categorias_productos_to_db, load_tarifas_to_db, load_alquileres_to_db
 from extract.tarifas import extraer_enlaces_cuadros_tarifarios, procesar_html_para_usuarios_generales, limpiar_titulos
- 
+from zonaprop_scraping import procesar_zonaprop
+
+# add filepath C:\Users\nagge\Desktop\Nico\scraper_precio\zona-prop-scraper to sys.path
 def pipeline_supermercados():
     """
     Función que ejecuta el pipeline de supermercados
@@ -88,6 +90,25 @@ def pipeline_tarifas_electricas():
     # Cargar los datos a la base de datos
     load_tarifas_to_db(resultados_globales)
 
+def pipeline_zonaprop(should_save: bool = True) -> None:
+
+    urls = ['https://www.zonaprop.com.ar/inmuebles-alquiler-ciudad-de-mendoza-mz-1-habitacion.html',
+            'https://www.zonaprop.com.ar/inmuebles-alquiler-rosario-1-habitacion.html',
+            'https://www.zonaprop.com.ar/inmuebles-alquiler-capital-federal-1-habitacion.html',
+            'https://www.zonaprop.com.ar/inmuebles-alquiler-cordoba-1-habitacion.html'
+            ]
+    dfs = []
+    for url in urls:
+        df = procesar_zonaprop(url)
+        dfs.append(df)
+    
+    # Concatenamos todos los DataFrames en uno solo
+    final_df = pd.concat(dfs, ignore_index=True)
+    #save un a csv
+    if should_save:
+        load_alquileres_to_db(final_df)
+    else:
+        final_df.to_csv('final_df.csv', index=False)
 def main() -> None:
 
 
@@ -124,6 +145,11 @@ def main() -> None:
         action="store_true",
         help="ejecuta pipeline de tarifas electricas"
     )
+    parser.add_argument(
+        "--zonaprop",
+        action="store_true",
+        help="ejecuta pipeline de zonaprop"
+    )
     args = parser.parse_args()
 
     if args.supermercados:
@@ -136,6 +162,8 @@ def main() -> None:
         load_categorias_productos_to_db('producto_categorias.csv')
     elif args.tarifas_electricas:
         pipeline_tarifas_electricas()
+    elif args.zonaprop:
+        pipeline_zonaprop()
     elif args.correr_todo:
         pipeline_dolar()
         pipeline_BCRA()
