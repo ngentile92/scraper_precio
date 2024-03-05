@@ -19,9 +19,11 @@ FROM (
         AVG(precios.precio) AS avg_precio
     FROM `slowpoke-v1`.precios
     INNER JOIN `slowpoke-v1`.categorias_productos ON precios.producto = categorias_productos.productos
+    WHERE precios.date >= CURRENT_DATE - INTERVAL 7 DAY
     GROUP BY precios.date, categorias_productos.categoria
 ) p
 ORDER BY p.categoria, p.date;
+
 """
 # Suponiendo que 'fetch_data' ya ha sido definido y que 'query_today' y 'query_7_dias' son tus consultas SQL
 
@@ -52,7 +54,7 @@ def limpiar_data(data_hoy):
             categorias_a_ajustar.remove(categoria_no_ajustar)
 
     # Fecha de ajuste
-    fecha_base = pd.Timestamp('2024-02-17')
+    fecha_base = pd.Timestamp('2024-03-01')
 
     # Ajustar categorías a base 100
     for categoria in categorias_a_ajustar:
@@ -344,7 +346,31 @@ def plot_inflacion_diaria_ponderada(inflacion_por_fecha):
 
     # Mostrar el gráfico
     plt.show()
-
+def calcular_y_graficar_inflacion(df, fecha_referencia):
+    # Asegurar que 'date' es un tipo de fecha
+    df['date'] = pd.to_datetime(df['date'])
+    
+    # Filtrar los datos para la fecha de referencia y establecer el índice base 100
+    df_base = df[df['date'] == pd.to_datetime(fecha_referencia)]
+    df_base = df_base[['categoria', 'avg_precio']].set_index('categoria')
+    
+    # Calcular el índice de inflación
+    df = df.join(df_base, on='categoria', rsuffix='_base')
+    df['indice_inflacion'] = df['avg_precio'] / df['avg_precio_base'] * 100
+    
+    # Agrupar por fecha y calcular el promedio del índice de inflación para todas las categorías
+    df_inflacion = df.groupby('date')['indice_inflacion'].mean().reset_index()
+    
+    # Graficar
+    plt.figure(figsize=(12, 6))
+    plt.plot(df_inflacion['date'], df_inflacion['indice_inflacion'], marker='', color='tab:red', linewidth=2.5)
+    plt.title('Índice de Inflación Diaria (Base 100 en ' + pd.to_datetime(fecha_referencia).strftime('%Y-%m-%d') + ')')
+    plt.xlabel('Fecha')
+    plt.ylabel('Índice de Inflación')
+    plt.grid(True)
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    plt.show()
 if __name__ == '__main__':
     # Ejecuta las consultas y obtén los DataFrames
     data_hoy = fetch_data(query_today)

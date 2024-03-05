@@ -223,16 +223,14 @@ def extract_multiple_prices_and_names_selenium(url, store_name, max_attempts=3):
 
 
 
-if __name__ == "__main__":
-    import pandas as pd
-    with open('../url_productos_pruebas.csv', 'r') as f:
-        datos = datos = pd.read_csv(f, encoding='ISO-8859-1')
-        # Convertir a listas
-        url_list = datos['URL'].tolist()
-
-    # Extraer los nombres de los productos
-    product_names_unified = datos['producto_unificado'].tolist()
-    # Extraer los precios de las URLs para cada producto
-    data_json = process_all(url_list, product_names_unified)
-
-    print(data_json)
+#if __name__ == "__main__":
+#import pandas as pd
+#with open('../url_productos_pruebas.csv', 'r') as f:
+#    datos = datos = pd.read_csv(f, encoding='ISO-8859-1')
+#    # Convertir a listas
+#    url_list = datos['URL'].tolist()
+## Extraer los nombres de los productos
+#product_names_unified = datos['producto_unificado'].tolist()
+## Extraer los precios de las URLs para cada producto
+#data_json = process_all(url_list, product_names_unified)
+#print(data_json)

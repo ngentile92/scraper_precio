@@ -2,7 +2,79 @@ import datetime
 from extract.precios import get_store_name_from_url, extract_multiple_prices_and_names_selenium, get_type_store
 import pandas as pd
 
-
+indice_mapping = {
+    'electrodomesticos y tecnologia': {
+        'celulares': 'celulares',
+        'pequenos electrodomesticos': 'pequenos electrodomesticos',
+        'informatica': 'informatica'
+    },
+    'fiambres y quesos': {
+        'quesos': 'Leche, productos lacteos, huevos y alimentos vegetales'
+    },
+    'perfumeria': {
+        'farmacia': 'farmacia'
+    },
+    'lacteos': {
+        'yogures': 'Leche, productos lacteos, huevos y alimentos vegetales',
+        'leches': 'Leche, productos lacteos, huevos y alimentos vegetales'
+    },
+    'desayuno': {
+        'infusiones': 'infusiones'
+    },
+    'prendas y calzado': {
+        'camisas': 'Prendas de vestir y calzado',
+        'jeans': 'Prendas de vestir y calzado',
+        'sweaters y buzos': 'Prendas de vestir y calzado',
+        'remeras': 'Prendas de vestir y calzado',
+        'calzado': 'Calzado',
+        'pantalon': 'Prendas de vestir y calzado',
+        'medias': 'Prendas de vestir y calzado'
+    },
+    'sin TACC': {
+        'sin TACC': 'sin TACC'
+    },
+    'carnes': {
+        'cerdo': 'Carnes y derivados',
+        'vaca': 'Carnes y derivados'
+    },
+    'almacen': {
+        'pastas': 'Alimentos',
+        'aceites': 'Aceites, grasas y manteca',
+        'conservas': 'Otros alimentos'
+    },
+    'frutas y verduras': {
+        'frutas': 'Frutas',
+        'verduras': 'Verduras, tuberculos y legumbres'
+    },
+    'libreria': {
+        'cuadernos': 'cuadernos',
+        'lapiceras': 'libreria',
+        'lapices': 'libreria',
+        'marcadores': 'libreria',
+        'gomas': 'libreria',
+        'mochilas': 'libreria'
+    },
+    'bazar y textil': {
+        'indumentaria': 'Prendas de vestir y calzado'
+    },
+    'congelados': {
+        'congelados': 'Otros alimentos'
+    },
+    'bebidas': {
+        'alcoholica': 'Bebidas alcoholicas y tabaco',
+        'no alcoholica': 'Bebidas no alcoholicas'
+    },
+    'alimentos': {
+        'pan y lacteos': 'Pan y cereales',
+        'aderezos': 'Otros alimentos',
+        'carnes y huevo': 'Carnes y derivados',
+        'otros': 'Otros alimentos'
+    },
+    'limpieza': {
+        'casa': 'limpieza',
+        'personal': 'limpieza'
+    }
+}
 def extract_category(url):
     url_lower = url.lower()  # Convierte la URL a minúsculas
     if 'electro' in url_lower:
@@ -121,6 +193,19 @@ def get_category(urls: list):
     # Convertimos all_data a un DataFrame
     df = pd.DataFrame(all_data)
     return df
+def get_index(category, subcategory):
+    """
+    Función que busca la tercera categoría 'Índice' basado en la categoría y subcategoría.
+    """
+    return indice_mapping.get(category, {}).get(subcategory, 'otro')
+
+def add_index_column(df):
+    """
+    Función que agrega la columna 'Índice' al DataFrame existente.
+    """
+    # Asumiendo que 'categorias' y 'sub-categoria' son las columnas de tu DataFrame existente
+    df['Indice'] = df.apply(lambda row: get_index(row['categorias'], row['sub-categoria']), axis=1)
+    return df
 
 if __name__ == "__main__":
     with open('../url_productos_pruebas.csv', 'r') as f:
@@ -128,8 +213,11 @@ if __name__ == "__main__":
         # Convertir a listas
         url_list = datos['URL'].tolist()
     df = get_category(url_list)
+    df = add_index_column(df)
+
     with open('../producto_categorias.csv', 'r') as f:
         datos = pd.read_csv(f, encoding='ISO-8859-1')
+
     # update datos with the new columns
     datos = pd.concat([datos, df], axis=0)
     # drop duplicates
