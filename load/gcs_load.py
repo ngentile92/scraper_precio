@@ -127,7 +127,6 @@ def load_categorias_productos_to_db(csv_file_path):
         )
         cursor = conn.cursor()
         print("Connected to MySQL database")
-
         # Abrir el archivo CSV
         with open(csv_file_path, mode='r', encoding='latin1') as file:
             csv_reader = csv.DictReader(file)
@@ -136,13 +135,23 @@ def load_categorias_productos_to_db(csv_file_path):
                 producto = row['producto_unificado']
                 categoria = row['categorias']
                 subcategoria = row['sub-categoria']
-                
+                categoria_indice = row['Indice']
+
                 # SQL para insertar datos
-                sql = """INSERT INTO categorias_productos (productos, categoria, subcategoria)
-                    VALUES (%s, %s, %s)
-                    ON DUPLICATE KEY UPDATE categoria = VALUES(categoria), subcategoria = VALUES(subcategoria);
-                    """
-                cursor.execute(sql, (producto, categoria, subcategoria))
+                sql = """
+                INSERT INTO categorias_productos (productos, categoria, subcategoria, categoria_indice)
+                VALUES (%s, %s, %s, %s)
+                ON DUPLICATE KEY UPDATE
+                categoria = VALUES(categoria),
+                subcategoria = VALUES(subcategoria),
+                categoria_indice = VALUES(categoria_indice);
+                """
+                # Ejecutar SQL
+                cursor.execute(sql, (producto, categoria, subcategoria, categoria_indice))
+                # Imprimir advertencias si las hay
+                warnings = cursor.fetchwarnings()
+                if warnings:
+                    print(warnings)
         
         # Confirmar cambios
         conn.commit()

@@ -9,14 +9,14 @@ indice_mapping = {
         'informatica': 'informatica'
     },
     'fiambres y quesos': {
-        'quesos': 'Leche, productos lacteos, huevos y alimentos vegetales'
+        'quesos': 'Leche/ productos lacteos/ huevos y alimentos vegetales'
     },
     'perfumeria': {
         'farmacia': 'farmacia'
     },
     'lacteos': {
-        'yogures': 'Leche, productos lacteos, huevos y alimentos vegetales',
-        'leches': 'Leche, productos lacteos, huevos y alimentos vegetales'
+        'yogures': 'Leche/ productos lacteos/ huevos y alimentos vegetales',
+        'leches': 'Leche/ productos lacteos/ huevos y alimentos vegetales'
     },
     'desayuno': {
         'infusiones': 'infusiones'
@@ -39,12 +39,12 @@ indice_mapping = {
     },
     'almacen': {
         'pastas': 'Alimentos',
-        'aceites': 'Aceites, grasas y manteca',
+        'aceites': 'Aceites/ grasas y manteca',
         'conservas': 'Otros alimentos'
     },
     'frutas y verduras': {
         'frutas': 'Frutas',
-        'verduras': 'Verduras, tuberculos y legumbres'
+        'verduras': 'Verduras/ tuberculos y legumbres'
     },
     'libreria': {
         'cuadernos': 'cuadernos',
@@ -75,6 +75,7 @@ indice_mapping = {
         'personal': 'limpieza'
     }
 }
+
 def extract_category(url):
     url_lower = url.lower()  # Convierte la URL a minúsculas
     if 'electro' in url_lower:
