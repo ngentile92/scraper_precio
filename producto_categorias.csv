@@ -7,17 +7,17 @@ finlandia light 180g,alimentos,pan y lacteos,Pan y cereales
 pan de mesa bimbo artesano 500g,alimentos,pan y lacteos,Pan y cereales
 crema para batir LS 520cc,alimentos,pan y lacteos,Pan y cereales
 manteca LS 200g,alimentos,pan y lacteos,Pan y cereales
-mayonesa hellmann 950g,alimentos,aderezos,Otros alimentos
-ketchup hellmans 250g,alimentos,aderezos,Otros alimentos
+mayonesa hellmann 950g,alimentos,aderezos,Aceites/ aderezos/ grasas y manteca
+ketchup hellmans 250g,alimentos,aderezos,Aceites/ aderezos/ grasas y manteca
 salchicas paladini 6u,alimentos,carnes y huevo,Carnes y derivados
 pan de pancho bimbo artesano 6u,alimentos,pan y lacteos,Pan y cereales
 tang polvo 15g,bebidas,no alcoholica,Bebidas no alcoholicas
-casancrem clasico 290g,alimentos,aderezos,Otros alimentos
-dolca suave origenes 170g,alimentos,otros,Otros alimentos
+casancrem clasico 290g,alimentos,aderezos,Aceites/ aderezos/ grasas y manteca
+dolca suave origenes 170g,alimentos,otros,Bebidas no alcoholicas
 rubia imperial extra laguer 473cc,bebidas,alcoholica,Bebidas alcoholicas y tabaco
-tomate perita salsati LC 240g,alimentos,otros,Otros alimentos
-pure de tomate la campagnola 520g,alimentos,otros,Otros alimentos
-sonrisas x3 324g,alimentos,otros,Otros alimentos
+tomate perita salsati LC 240g,alimentos,otros,Verduras/ tuberculos y legumbres
+pure de tomate la campagnola 520g,alimentos,otros,Verduras/ tuberculos y legumbres
+sonrisas x3 324g,alimentos,otros,Azucar/ dulces/ chocolate/golosinas/ etc.
 imperial lager 473ml,bebidas,alcoholica,Bebidas alcoholicas y tabaco
 huevo color 12u la piara,alimentos,carnes y huevo,Carnes y derivados
 huevo color 12u avicoper,alimentos,carnes y huevo,Carnes y derivados
@@ -36,14 +36,14 @@ ddl clasico ls 400g,alimentos,pan y lacteos,Pan y cereales
 acondicionador dove rec. Total 400 ml,limpieza,personal,limpieza
 shampoo dove rec. Total 400 ml,limpieza,personal,limpieza
 babysec ultrasoft 52 un.,limpieza,personal,limpieza
-vinagre alcohol menoyo 500ml,alimentos,aderezos,Otros alimentos
-minerva 250ml,alimentos,aderezos,Otros alimentos
-arroz molinos 1kg,alimentos,otros,Otros alimentos
-arroz gallor oro 500g,alimentos,otros,Otros alimentos
-sal dos anclas parrillera 500g,alimentos,aderezos,Otros alimentos
-zucaritas 490g,alimentos,otros,Otros alimentos
-copos de maiz granix 400g,alimentos,otros,Otros alimentos
-alfajor triple milka ddl 70g,alimentos,otros,Otros alimentos
+vinagre alcohol menoyo 500ml,alimentos,aderezos,Aceites/ aderezos/ grasas y manteca
+minerva 250ml,alimentos,aderezos,Aceites/ aderezos/ grasas y manteca
+arroz molinos 1kg,alimentos,otros,Pan y cereales
+arroz gallor oro 500g,alimentos,otros,Pan y cereales
+sal dos anclas parrillera 500g,alimentos,aderezos,Aceites/ aderezos/ grasas y manteca
+zucaritas 490g,alimentos,otros,Pan y cereales
+copos de maiz granix 400g,alimentos,otros,Pan y cereales
+alfajor triple milka ddl 70g,alimentos,otros,Azucar/ dulces/ chocolate/golosinas/ etc.
 cuaderno 42 hojas america,libreria,cuadernos,cuadernos
 lapicera bic 3u,libreria,lapiceras,libreria
 lapiz grafito paper mate con goma 3u,libreria,lapices,libreria
@@ -53,33 +53,33 @@ marcador permanente maped 12u,libreria,marcadores,libreria
 goma de borrar maped 2u,libreria,gomas,libreria
 cuaderno rayado america 80 hojas,libreria,cuadernos,cuadernos
 mochila m70 classic,libreria,mochilas,libreria
-remera fila,prendas y calzado,remeras,Prendas de vestir y calzado
+remera fila,prendas y calzado,remeras,Prendas de vestir
 zapatilla nike court vision alta,prendas y calzado,calzado,Calzado
 zapatilla nike air max sc,prendas y calzado,calzado,Calzado
-remera UA entrenamiento,prendas y calzado,remeras,Prendas de vestir y calzado
-pantalalon puma lemlem,prendas y calzado,pantalon,Prendas de vestir y calzado
-pantalon adidas outdoor,prendas y calzado,pantalon,Prendas de vestir y calzado
-pantalon nike drifit,prendas y calzado,pantalon,Prendas de vestir y calzado
-medidas adidas light low,prendas y calzado,medias,Prendas de vestir y calzado
-medidas nike everyday x3,prendas y calzado,medias,Prendas de vestir y calzado
-levis jeans hombre_1,prendas y calzado,jeans,Prendas de vestir y calzado
-levis jeans hombre_2,prendas y calzado,jeans,Prendas de vestir y calzado
-levis jeans hombre_3,prendas y calzado,jeans,Prendas de vestir y calzado
-levis jeans hombre_4,prendas y calzado,jeans,Prendas de vestir y calzado
-levis jeans hombre_5,prendas y calzado,jeans,Prendas de vestir y calzado
-levis jeans hombre_6,prendas y calzado,jeans,Prendas de vestir y calzado
-levis camisa hombre_1,prendas y calzado,camisas,Prendas de vestir y calzado
-levis camisa hombre_2,prendas y calzado,camisas,Prendas de vestir y calzado
-levis camisa hombre_3,prendas y calzado,camisas,Prendas de vestir y calzado
-levis camisa hombre_4,prendas y calzado,camisas,Prendas de vestir y calzado
-levis camisa hombre_5,prendas y calzado,camisas,Prendas de vestir y calzado
-levis camisa hombre_6,prendas y calzado,camisas,Prendas de vestir y calzado
-levis jeans mujer_1,prendas y calzado,jeans,Prendas de vestir y calzado
-levis jeans mujer_2,prendas y calzado,jeans,Prendas de vestir y calzado
-levis jeans mujer_3,prendas y calzado,jeans,Prendas de vestir y calzado
-levis jeans mujer_4,prendas y calzado,jeans,Prendas de vestir y calzado
-levis jeans mujer_5,prendas y calzado,jeans,Prendas de vestir y calzado
-levis jeans mujer_6,prendas y calzado,jeans,Prendas de vestir y calzado
+remera UA entrenamiento,prendas y calzado,remeras,Prendas de vestir
+pantalalon puma lemlem,prendas y calzado,pantalon,Prendas de vestir
+pantalon adidas outdoor,prendas y calzado,pantalon,Prendas de vestir
+pantalon nike drifit,prendas y calzado,pantalon,Prendas de vestir
+medidas adidas light low,prendas y calzado,medias,Calzado
+medidas nike everyday x3,prendas y calzado,medias,Calzado
+levis jeans hombre_1,prendas y calzado,jeans,Prendas de vestir
+levis jeans hombre_2,prendas y calzado,jeans,Prendas de vestir
+levis jeans hombre_3,prendas y calzado,jeans,Prendas de vestir
+levis jeans hombre_4,prendas y calzado,jeans,Prendas de vestir
+levis jeans hombre_5,prendas y calzado,jeans,Prendas de vestir
+levis jeans hombre_6,prendas y calzado,jeans,Prendas de vestir
+levis camisa hombre_1,prendas y calzado,camisas,Prendas de vestir
+levis camisa hombre_2,prendas y calzado,camisas,Prendas de vestir
+levis camisa hombre_3,prendas y calzado,camisas,Prendas de vestir
+levis camisa hombre_4,prendas y calzado,camisas,Prendas de vestir
+levis camisa hombre_5,prendas y calzado,camisas,Prendas de vestir
+levis camisa hombre_6,prendas y calzado,camisas,Prendas de vestir
+levis jeans mujer_1,prendas y calzado,jeans,Prendas de vestir
+levis jeans mujer_2,prendas y calzado,jeans,Prendas de vestir
+levis jeans mujer_3,prendas y calzado,jeans,Prendas de vestir
+levis jeans mujer_4,prendas y calzado,jeans,Prendas de vestir
+levis jeans mujer_5,prendas y calzado,jeans,Prendas de vestir
+levis jeans mujer_6,prendas y calzado,jeans,Prendas de vestir
 levis sweater mujer_1,prendas y calzado,sweaters,otro
 levis sweater mujer_2,prendas y calzado,sweaters,otro
 levis sweater mujer_3,prendas y calzado,sweaters,otro
@@ -91,9 +91,9 @@ Alcohol Alcoprotect 96deg Alimenticio,perfumeria,farmacia,farmacia
 Curitas Transpiel X 10,perfumeria,farmacia,farmacia
 Alcohol En Gel Con Aloe Vera Jumbo Family Care 250 Cc,perfumeria,farmacia,farmacia
 Apositos Adhesivos Curitas Frozen Ii Para Ninos X 20 Ud,perfumeria,farmacia,farmacia
-Vintage Raglan Crew,prendas y calzado,sweaters y buzos,Prendas de vestir y calzado
-512 Slim Taper,prendas y calzado,jeans,Prendas de vestir y calzado
-SS Richmond Shirt,prendas y calzado,camisas,Prendas de vestir y calzado
+Vintage Raglan Crew,prendas y calzado,sweaters y buzos,Prendas de vestir
+512 Slim Taper,prendas y calzado,jeans,Prendas de vestir
+SS Richmond Shirt,prendas y calzado,camisas,Prendas de vestir
 Freidora De Aire Airfryer Philips Hd9200/90,electrodomesticos y tecnologia,pequenos electrodomesticos,pequenos electrodomesticos
 "Pava Electrica Plastico 1,7 Lts Kp2720 Nex",electrodomesticos y tecnologia,pequenos electrodomesticos,pequenos electrodomesticos
 Secador De Pelo Remington D27a,electrodomesticos y tecnologia,pequenos electrodomesticos,pequenos electrodomesticos
@@ -103,7 +103,7 @@ Batidora De Mano Philips Hr3700,electrodomesticos y tecnologia,pequenos electrod
 Cortapelo Philco Hc7901pp,electrodomesticos y tecnologia,pequenos electrodomesticos,pequenos electrodomesticos
 Sandwichera Liliana As990,electrodomesticos y tecnologia,pequenos electrodomesticos,pequenos electrodomesticos
 Licuadora Black & Decker 2 Vel Jarra 1.5l,electrodomesticos y tecnologia,pequenos electrodomesticos,pequenos electrodomesticos
-Pasta Dental Sensodyne Blanqueador Extra Fresh 90gr,perfumeria,cuidado oral,otro
+Pasta Dental Sensodyne Blanqueador Extra Fresh 90gr,perfumeria,cuidado oral,cuidado oral
 Alcohol Alcoprotect 96deg Alimenticio 500,perfumeria,farmacia,farmacia
 Alcohol Etilico Jumbo Family Care 500 Cc,perfumeria,farmacia,farmacia
 Jamon Cocido Bocatti 1 Kg,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
@@ -138,8 +138,8 @@ Yogur batido con cereales La Serenisima clasico 159 g.,lacteos,yogures,Leche/ pr
 Leche multivitaminas 3% La Serenisima sachet 1 l.,lacteos,leches,Leche/ productos lacteos/ huevos y alimentos vegetales
 Leche descremada La Serenisima UAT proteinas 1 l.,lacteos,leches,Leche/ productos lacteos/ huevos y alimentos vegetales
 Leche descremada larga vida La Serenisima cero lactosa 1 l.,lacteos,leches,Leche/ productos lacteos/ huevos y alimentos vegetales
-Mate cocido saquitos diamantados Taragui x 50 uni,desayuno,infusiones,infusiones
-Te de boldo en saquitos Taragui 25 u.,desayuno,infusiones,infusiones
+Mate cocido saquitos diamantados Taragui x 50 uni,desayuno,infusiones,Bebidas no alcoholicas
+Te de boldo en saquitos Taragui 25 u.,desayuno,infusiones,Bebidas no alcoholicas
 Tostadas de arroz Carrefour classic aireadas sin TACC,sin TACC,sin TACC,sin TACC
 Tostadas de arroz Carrefour clasicas 150 g. sin TACC,sin TACC,sin TACC,sin TACC
 Polvo para hornear Pergola 50 g. sin TACC,sin TACC,sin TACC,sin TACC
@@ -147,16 +147,16 @@ Te en saquitos Carrefour sin TACC x 50 un.,sin TACC,sin TACC,sin TACC
 Jamon cocido 200 g. BAJO PRECIO GARANTIZADO,sin TACC,sin TACC,sin TACC
 Mate cocido en saquitos Carrefour sin TACC x 100 un.,sin TACC,sin TACC,sin TACC
 Maiz inflado Grandiet azucarado sin TACC 200 g.,sin TACC,sin TACC,sin TACC
-Hamburguesa Swift De Carne 4 U - 320 Gr,congelados,congelados,Otros alimentos
-Milanesa De Soja Granja Del Sol C/espinaca 330g,congelados,congelados,Otros alimentos
-Hamburguesas Cuisine And Co. De Carne 996 Gr,congelados,congelados,Otros alimentos
-Medallones Good Mark De Carne Tradicional 320 Gr,congelados,congelados,Otros alimentos
-Hamburguesa Swift Tipo Casera 2 U - 240 Gr,congelados,congelados,Otros alimentos
-Papas Horneables Mc Cain Estilo Artesanal 700 Gr,congelados,congelados,Otros alimentos
-Hamburguesas Paty De Carne 20 U - 1600 Gr,congelados,congelados,Otros alimentos
-Vinagre De Alcohol Menoyo 1 L,almacen,aceites,Aceites/ grasas y manteca
-Aceite De Girasol Lira X 1.5 Lt,almacen,aceites,Aceites/ grasas y manteca
-Aceite De Oliva Clasico Oliovita 500 Ml,almacen,aceites,Aceites/ grasas y manteca
+Hamburguesa Swift De Carne 4 U - 320 Gr,congelados,congelados,Carnes y derivados
+Milanesa De Soja Granja Del Sol C/espinaca 330g,congelados,congelados,Leche/ productos lacteos/ huevos y alimentos vegetales
+Hamburguesas Cuisine And Co. De Carne 996 Gr,congelados,congelados,Carnes y derivados
+Medallones Good Mark De Carne Tradicional 320 Gr,congelados,congelados,Carnes y derivados
+Hamburguesa Swift Tipo Casera 2 U - 240 Gr,congelados,congelados,Carnes y derivados
+Papas Horneables Mc Cain Estilo Artesanal 700 Gr,congelados,congelados,Verduras/ tuberculos y legumbres
+Hamburguesas Paty De Carne 20 U - 1600 Gr,congelados,congelados,Carnes y derivados
+Vinagre De Alcohol Menoyo 1 L,almacen,aceites,Aceites/ aderezos/ grasas y manteca
+Aceite De Girasol Lira X 1.5 Lt,almacen,aceites,Aceites/ aderezos/ grasas y manteca
+Aceite De Oliva Clasico Oliovita 500 Ml,almacen,aceites,Aceites/ aderezos/ grasas y manteca
 Limon x kg.,frutas y verduras,frutas,Frutas
 Cebolla x kg,frutas y verduras,verduras,Verduras/ tuberculos y legumbres
 Papa cepillada x kg.,frutas y verduras,verduras,Verduras/ tuberculos y legumbres
@@ -167,37 +167,37 @@ Ajo x kg.,frutas y verduras,verduras,Verduras/ tuberculos y legumbres
 Fideos tallarines N5 Matarazzo 500 g.,almacen,pastas,Alimentos
 Fideos tallarines N7 Terrabusi 500 g.,almacen,pastas,Alimentos
 Fideos tallarin La Providencia 500 g.,almacen,pastas,Alimentos
-Lomo De Atun Agua Y Aceite Cuisine & Co 120gr Escurrido 170 Gr Neto,almacen,conservas,Otros alimentos
-Atun Desmenuzado En Agua Y En Aceite Maxima 120 Gr,almacen,conservas,Otros alimentos
-Arvejas Cuisine-co 300 Gr,almacen,conservas,Otros alimentos
-Picadillo De Carne Swift 90 Gr,almacen,conservas,Otros alimentos
-Lentejas Cuisine-co 300 Gr,almacen,conservas,Otros alimentos
+Lomo De Atun Agua Y Aceite Cuisine & Co 120gr Escurrido 170 Gr Neto,almacen,conservas,Pescados y mariscos
+Atun Desmenuzado En Agua Y En Aceite Maxima 120 Gr,almacen,conservas,Pescados y mariscos
+Arvejas Cuisine-co 300 Gr,almacen,conservas,Verduras/ tuberculos y legumbres
+Picadillo De Carne Swift 90 Gr,almacen,conservas,Carnes y derivados
+Lentejas Cuisine-co 300 Gr,almacen,conservas,Verduras/ tuberculos y legumbres
 Pate De Foie Swift 90 Gr,almacen,conservas,Otros alimentos
-Jardinera Cuisine-co 300 Gr,almacen,conservas,Otros alimentos
-Garbanzos Cuisine-co 300 Gr,almacen,conservas,Otros alimentos
+Jardinera Cuisine-co 300 Gr,almacen,conservas,Verduras/ tuberculos y legumbres
+Garbanzos Cuisine-co 300 Gr,almacen,conservas,Verduras/ tuberculos y legumbres
 Banana Nacional x kg.,frutas y verduras,frutas,Frutas
 Uva roja x kg.,frutas y verduras,frutas,Frutas
 Kiwi Huella Natural x kg.,frutas y verduras,frutas,Frutas
 Lechuga francesa x kg.,frutas y verduras,verduras,Verduras/ tuberculos y legumbres
 Rucula x 1 atado,frutas y verduras,verduras,Verduras/ tuberculos y legumbres
-Aceite Canuelas De Girasol - 1.5 L,almacen,aceites,Aceites/ grasas y manteca
-Aceite De Girasol Cocinero 900 Ml,almacen,aceites,Aceites/ grasas y manteca
-Aceite De Oliva Virgen Nucete Lata 500 Ml,almacen,aceites,Aceites/ grasas y manteca
-Vinagre De Alcohol Favinco 1300 Ml,almacen,aceites,Aceites/ grasas y manteca
-Aceite De Oliva Virgen Cuisine And Co 500 Ml,almacen,aceites,Aceites/ grasas y manteca
-Aceite De Oliva Extra Virgen Cuisine And Co 500 Ml,almacen,aceites,Aceites/ grasas y manteca
-Aceite De Girasol Lira X 900 Ml,almacen,aceites,Aceites/ grasas y manteca
-Aceite De Oliva Azait 500 Ml,almacen,aceites,Aceites/ grasas y manteca
+Aceite Canuelas De Girasol - 1.5 L,almacen,aceites,Aceites/ aderezos/ grasas y manteca
+Aceite De Girasol Cocinero 900 Ml,almacen,aceites,Aceites/ aderezos/ grasas y manteca
+Aceite De Oliva Virgen Nucete Lata 500 Ml,almacen,aceites,Aceites/ aderezos/ grasas y manteca
+Vinagre De Alcohol Favinco 1300 Ml,almacen,aceites,Aceites/ aderezos/ grasas y manteca
+Aceite De Oliva Virgen Cuisine And Co 500 Ml,almacen,aceites,Aceites/ aderezos/ grasas y manteca
+Aceite De Oliva Extra Virgen Cuisine And Co 500 Ml,almacen,aceites,Aceites/ aderezos/ grasas y manteca
+Aceite De Girasol Lira X 900 Ml,almacen,aceites,Aceites/ aderezos/ grasas y manteca
+Aceite De Oliva Azait 500 Ml,almacen,aceites,Aceites/ aderezos/ grasas y manteca
 Ciruela x kg.,frutas y verduras,frutas,Frutas
 Arandanos 125 g.,frutas y verduras,frutas,Frutas
 Lechuga Capuchina x kg.,frutas y verduras,verduras,Verduras/ tuberculos y legumbres
 Pepino x kg.,frutas y verduras,verduras,Verduras/ tuberculos y legumbres
 Pimiento rojo x kg,frutas y verduras,verduras,Verduras/ tuberculos y legumbres
-"Bermuda Rip curl wa je rlx big size 22"" hombre",bazar y textil,indumentaria,Prendas de vestir y calzado
-Bombon De Frambuesa Franui Leche 150 Gr,congelados,congelados,Otros alimentos
-Frutillas Heladas Bites Banadas En Chocolate 120 Gr,congelados,congelados,Otros alimentos
-Bombon Helado Bites Cereza Y Chocolate 120 Gr,congelados,congelados,Otros alimentos
-Slouchy 90's Striped Sweat,prendas y calzado,sweaters y buzos,Prendas de vestir y calzado
+"Bermuda Rip curl wa je rlx big size 22"" hombre",bazar y textil,indumentaria,Prendas de vestir
+Bombon De Frambuesa Franui Leche 150 Gr,congelados,congelados,Azucar/ dulces/ chocolate/golosinas/ etc.
+Frutillas Heladas Bites Banadas En Chocolate 120 Gr,congelados,congelados,Azucar/ dulces/ chocolate/golosinas/ etc.
+Bombon Helado Bites Cereza Y Chocolate 120 Gr,congelados,congelados,Azucar/ dulces/ chocolate/golosinas/ etc.
+Slouchy 90's Striped Sweat,prendas y calzado,sweaters y buzos,Prendas de vestir
 Megapack Sodastream Terra Black,electrodomesticos y tecnologia,pequenos electrodomesticos,pequenos electrodomesticos
 Preservativo Prime Texturado Gel Hot X6,perfumeria,farmacia,farmacia
 Preservativo Prime Retardante Gel Natural X6,perfumeria,farmacia,farmacia
@@ -214,7 +214,7 @@ Jamon Cocido Campo Austral,fiambres y quesos,quesos,Leche/ productos lacteos/ hu
 Salamin Lario Picado Fino Tipo Tandilero Kg,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
 Solomillo De Cerdo - Magret,carnes,cerdo,Carnes y derivados
 Solomillo De Cerdo - Cabana Argentina,carnes,cerdo,Carnes y derivados
-Lapicera retractil Paper Mate KM 100 azul 3 u.,bazar y textil,libreria,otro
+Lapicera retractil Paper Mate KM 100 azul 3 u.,bazar y textil,libreria,libreria
 Celular Libre Samsung GALAXY A04E 3GB 64GB negro,electrodomesticos y tecnologia,celulares,celulares
 Celular Kodak Seren d55 lx 2GB 32GB negro,electrodomesticos y tecnologia,celulares,celulares
 Smartwatch Xinji N2 negro,electrodomesticos y tecnologia,celulares,celulares
@@ -222,7 +222,7 @@ Reproductor streaming Roku Express 3930mx 512MB,electrodomesticos y tecnologia,i
 Yogur griego Yogurisimo sabor frutilla en pote 125 g.,lacteos,yogures,Leche/ productos lacteos/ huevos y alimentos vegetales
 Leche UAT entera Carrefour classic brik 1 lt.,lacteos,leches,Leche/ productos lacteos/ huevos y alimentos vegetales
 Leche UAT parcialmente descremada Carrefour classic brik 1 lt.,lacteos,leches,Leche/ productos lacteos/ huevos y alimentos vegetales
-Mate cocido en saquitos Carrefour sin TACC x 50 un.,desayuno,infusiones,infusiones
+Mate cocido en saquitos Carrefour sin TACC x 50 un.,desayuno,infusiones,Bebidas no alcoholicas
 Fideos monos Matarazzo 500 g.,almacen,pastas,Alimentos
 Fideos tallarin N5 Lucchetti 500 g.,almacen,pastas,Alimentos
 Fideos tirabuzones Carrefour classic 500 g.,almacen,pastas,Alimentos
@@ -230,11 +230,11 @@ Fideos de semola cinta spaghetti Carrefour classic 500 g.,almacen,pastas,Aliment
 Fideos guiseros codo Carrefour classic 500 g.,almacen,pastas,Alimentos
 Fideos penne rigante Matarazzo 500 g.,almacen,pastas,Alimentos
 Fideos mostachol rayado Carrefour classic 500 g.,almacen,pastas,Alimentos
-Atun Al Natural La Campagnola 170 Gr,almacen,conservas,Otros alimentos
-Atun En Aceite La Campagnola 170 Gr,almacen,conservas,Otros alimentos
-Lomo De Atun En Aceite Vegetal Cuisine-co 120 Gr,almacen,conservas,Otros alimentos
-Duraznos En Mitades Cuisine-co 820 Gr,almacen,conservas,Otros alimentos
-Lomo De Atun Al Natural Cuisine & Co 120gr Escurrido 170 Gr Neto,almacen,conservas,Otros alimentos
+Atun Al Natural La Campagnola 170 Gr,almacen,conservas,Pescados y mariscos
+Atun En Aceite La Campagnola 170 Gr,almacen,conservas,Pescados y mariscos
+Lomo De Atun En Aceite Vegetal Cuisine-co 120 Gr,almacen,conservas,Pescados y mariscos
+Duraznos En Mitades Cuisine-co 820 Gr,almacen,conservas,Frutas
+Lomo De Atun Al Natural Cuisine & Co 120gr Escurrido 170 Gr Neto,almacen,conservas,Pescados y mariscos
 Palmitos Trozos Cuisine & Co 400 Gr,almacen,conservas,Otros alimentos
 Fideos Spaguetti C&c 500gr,almacen,pastas,Alimentos
 Fideos Lucchetti Tallarin N5 X500g,almacen,pastas,Alimentos
@@ -264,58 +264,58 @@ Tomate perita x kg.,frutas y verduras,verduras,Verduras/ tuberculos y legumbres
 Zapallo japones x kg.,frutas y verduras,verduras,Verduras/ tuberculos y legumbres
 Choclo x uni,frutas y verduras,verduras,Verduras/ tuberculos y legumbres
 Berenjena negra x kg.,frutas y verduras,verduras,Verduras/ tuberculos y legumbres
-Alpargata Tex lona,bazar y textil,indumentaria,Prendas de vestir y calzado
-Bermuda Rusty shaped box ws hombre,bazar y textil,indumentaria,Prendas de vestir y calzado
-Bermuda Rusty z-charge hombre,bazar y textil,indumentaria,Prendas de vestir y calzado
-Bermuda Spy go surfing hs botagofo hombre,bazar y textil,indumentaria,Prendas de vestir y calzado
-Bermuda Tex 5 bolsillos,bazar y textil,indumentaria,Prendas de vestir y calzado
-Aceite De Girasol Natura 1.5 L,almacen,aceites,Aceites/ grasas y manteca
-Aceite Girasol Pureza 1.5 L,almacen,aceites,Aceites/ grasas y manteca
-Aceite Girasol Legitimo 900 Ml,almacen,aceites,Aceites/ grasas y manteca
-Aceite De Girasol Natura 900 Ml,almacen,aceites,Aceites/ grasas y manteca
-"Aceite Girasol Pureza 0,9 L",almacen,aceites,Aceites/ grasas y manteca
-Aceite Girasol Legitimo 1.5 L,almacen,aceites,Aceites/ grasas y manteca
-Papas Clasicas Mc Cain Corte Tradicional 1400 Gr,congelados,congelados,Otros alimentos
-Hamburguesas Paty De Carne 12 U - 960 Gr,congelados,congelados,Otros alimentos
-Bombon Franui De Frambuesa Black 150 Gr,congelados,congelados,Otros alimentos
-Hamburguesa Swift De Carne 12 U - 960 Gr,congelados,congelados,Otros alimentos
-Papas Clasicas Mc Cain Corte Tradicional 700 Gr,congelados,congelados,Otros alimentos
-Medallon De Carne Paty De Casa 240 Gr,congelados,congelados,Otros alimentos
-Palitos De Pollo Swift 260 Gr,congelados,congelados,Otros alimentos
-Medallones De Salmon Rosado Superbe 400 Gr,congelados,congelados,Otros alimentos
-Slouchy 90's Block Sweat,prendas y calzado,sweaters y buzos,Prendas de vestir y calzado
-Graphic Standard Crew Batwing,prendas y calzado,sweaters y buzos,Prendas de vestir y calzado
-Graphic Standard Hoodie Batwing,prendas y calzado,sweaters y buzos,Prendas de vestir y calzado
-Yesterday 90's Block Sweat,prendas y calzado,sweaters y buzos,Prendas de vestir y calzado
-Every Day Hoodie Small Batwing,prendas y calzado,sweaters y buzos,Prendas de vestir y calzado
-510 Skinny,prendas y calzado,jeans,Prendas de vestir y calzado
-511 Slim Fit,prendas y calzado,jeans,Prendas de vestir y calzado
-505 Regular Fit,prendas y calzado,jeans,Prendas de vestir y calzado
-512 Slim Taper ADV,prendas y calzado,jeans,Prendas de vestir y calzado
-Classic Western,prendas y calzado,camisas,Prendas de vestir y calzado
-LS Classic One Pocket Check,prendas y calzado,camisas,Prendas de vestir y calzado
-Classic One Pocket Check,prendas y calzado,camisas,Prendas de vestir y calzado
-"SS One Shirt ""Flowers""",prendas y calzado,camisas,Prendas de vestir y calzado
-xMonsters Slouch Shirt,prendas y calzado,camisas,Prendas de vestir y calzado
-"SS One Shirt ""Palms""",prendas y calzado,camisas,Prendas de vestir y calzado
-725 Hi Rise Bootcut,prendas y calzado,jeans,Prendas de vestir y calzado
-721 Hi Rise Skinny,prendas y calzado,jeans,Prendas de vestir y calzado
-711 Skinny,prendas y calzado,jeans,Prendas de vestir y calzado
-Mile High Super Skinny,prendas y calzado,jeans,Prendas de vestir y calzado
-724 Hi Rise Straight,prendas y calzado,jeans,Prendas de vestir y calzado
-Mom Levi's(r)Jeans Stone Wash,prendas y calzado,jeans,Prendas de vestir y calzado
+Alpargata Tex lona,bazar y textil,indumentaria,Prendas de vestir
+Bermuda Rusty shaped box ws hombre,bazar y textil,indumentaria,Prendas de vestir
+Bermuda Rusty z-charge hombre,bazar y textil,indumentaria,Prendas de vestir
+Bermuda Spy go surfing hs botagofo hombre,bazar y textil,indumentaria,Prendas de vestir
+Bermuda Tex 5 bolsillos,bazar y textil,indumentaria,Prendas de vestir
+Aceite De Girasol Natura 1.5 L,almacen,aceites,Aceites/ aderezos/ grasas y manteca
+Aceite Girasol Pureza 1.5 L,almacen,aceites,Aceites/ aderezos/ grasas y manteca
+Aceite Girasol Legitimo 900 Ml,almacen,aceites,Aceites/ aderezos/ grasas y manteca
+Aceite De Girasol Natura 900 Ml,almacen,aceites,Aceites/ aderezos/ grasas y manteca
+"Aceite Girasol Pureza 0,9 L",almacen,aceites,Aceites/ aderezos/ grasas y manteca
+Aceite Girasol Legitimo 1.5 L,almacen,aceites,Aceites/ aderezos/ grasas y manteca
+Papas Clasicas Mc Cain Corte Tradicional 1400 Gr,congelados,congelados,Verduras/ tuberculos y legumbres
+Hamburguesas Paty De Carne 12 U - 960 Gr,congelados,congelados,Carnes y derivados
+Bombon Franui De Frambuesa Black 150 Gr,congelados,congelados,Azucar/ dulces/ chocolate/golosinas/ etc.
+Hamburguesa Swift De Carne 12 U - 960 Gr,congelados,congelados,Carnes y derivados
+Papas Clasicas Mc Cain Corte Tradicional 700 Gr,congelados,congelados,Verduras/ tuberculos y legumbres
+Medallon De Carne Paty De Casa 240 Gr,congelados,congelados,Carnes y derivados
+Palitos De Pollo Swift 260 Gr,congelados,congelados,Carnes y derivados
+Medallones De Salmon Rosado Superbe 400 Gr,congelados,congelados,Pescados y mariscos
+Slouchy 90's Block Sweat,prendas y calzado,sweaters y buzos,Prendas de vestir
+Graphic Standard Crew Batwing,prendas y calzado,sweaters y buzos,Prendas de vestir
+Graphic Standard Hoodie Batwing,prendas y calzado,sweaters y buzos,Prendas de vestir
+Yesterday 90's Block Sweat,prendas y calzado,sweaters y buzos,Prendas de vestir
+Every Day Hoodie Small Batwing,prendas y calzado,sweaters y buzos,Prendas de vestir
+510 Skinny,prendas y calzado,jeans,Prendas de vestir
+511 Slim Fit,prendas y calzado,jeans,Prendas de vestir
+505 Regular Fit,prendas y calzado,jeans,Prendas de vestir
+512 Slim Taper ADV,prendas y calzado,jeans,Prendas de vestir
+Classic Western,prendas y calzado,camisas,Prendas de vestir
+LS Classic One Pocket Check,prendas y calzado,camisas,Prendas de vestir
+Classic One Pocket Check,prendas y calzado,camisas,Prendas de vestir
+"SS One Shirt ""Flowers""",prendas y calzado,camisas,Prendas de vestir
+xMonsters Slouch Shirt,prendas y calzado,camisas,Prendas de vestir
+"SS One Shirt ""Palms""",prendas y calzado,camisas,Prendas de vestir
+725 Hi Rise Bootcut,prendas y calzado,jeans,Prendas de vestir
+721 Hi Rise Skinny,prendas y calzado,jeans,Prendas de vestir
+711 Skinny,prendas y calzado,jeans,Prendas de vestir
+Mile High Super Skinny,prendas y calzado,jeans,Prendas de vestir
+724 Hi Rise Straight,prendas y calzado,jeans,Prendas de vestir
+Mom Levi's(r)Jeans Stone Wash,prendas y calzado,jeans,Prendas de vestir
 Mixer C/vaso Varilla Metalica Liliana Ah102 R,electrodomesticos y tecnologia,pequenos electrodomesticos,pequenos electrodomesticos
 Tostador De Pan Nex Tmb8052,electrodomesticos y tecnologia,pequenos electrodomesticos,pequenos electrodomesticos
 Sodastream Megapack Terra White,electrodomesticos y tecnologia,pequenos electrodomesticos,pequenos electrodomesticos
 Jarra Electrica Nex Inoxidable Ka010oi20,electrodomesticos y tecnologia,pequenos electrodomesticos,pequenos electrodomesticos
 Sodastream Cilindro De Co2 Cqc Rosa,electrodomesticos y tecnologia,pequenos electrodomesticos,pequenos electrodomesticos
 Sodastream Gasificadora De Agua Terra Black,electrodomesticos y tecnologia,pequenos electrodomesticos,pequenos electrodomesticos
-Pasta Dental Colgate Original 180 G,perfumeria,cuidado oral,otro
-Pasta Dental Sensitive Pro-alivio Real White 110 G,perfumeria,cuidado oral,otro
-Pasta Dental Colgate Original 90 G,perfumeria,cuidado oral,otro
-Pasta Dental Odol 90 G,perfumeria,cuidado oral,otro
-Pasta Dental Colgate Sensitive Pro Alivio Inmediato Original 140 G,perfumeria,cuidado oral,otro
-Pasta Dental Colgate Herbal 90 G,perfumeria,cuidado oral,otro
+Pasta Dental Colgate Original 180 G,perfumeria,cuidado oral,cuidado oral
+Pasta Dental Sensitive Pro-alivio Real White 110 G,perfumeria,cuidado oral,cuidado oral
+Pasta Dental Colgate Original 90 G,perfumeria,cuidado oral,cuidado oral
+Pasta Dental Odol 90 G,perfumeria,cuidado oral,cuidado oral
+Pasta Dental Colgate Sensitive Pro Alivio Inmediato Original 140 G,perfumeria,cuidado oral,cuidado oral
+Pasta Dental Colgate Herbal 90 G,perfumeria,cuidado oral,cuidado oral
 Algodon Estrella Clasico 75 Gr,perfumeria,farmacia,farmacia
 Algodon Doncella Super 100g,perfumeria,farmacia,farmacia
 Algodon Estrella Familiar Super 100 Gr,perfumeria,farmacia,farmacia
@@ -350,13 +350,13 @@ Peceto,carnes,vaca,Carnes y derivados
 Tapa De Asado,carnes,vaca,Carnes y derivados
 Asado Del Centro,carnes,vaca,Carnes y derivados
 Carne Vacuna Picada Enfriada C,carnes,vaca,Carnes y derivados
-Adhesivo sintetico Voligoma 2 u x 30 cc.,bazar y textil,libreria,otro
-Repuesto escolar n3 America rayado 400 hojas,bazar y textil,libreria,otro
-Adhesivo en barra Carrefour 2 u. x 10 g.,bazar y textil,libreria,otro
-Repuesto Exito n5 dibujo blanco 8 hojas,bazar y textil,libreria,otro
-Adhesivo sintetico Voligoma 30 cc.,bazar y textil,libreria,otro
-Goma de borrar PP 1 u.,bazar y textil,libreria,otro
-Lapiz grafito hb 4 u.,bazar y textil,libreria,otro
+Adhesivo sintetico Voligoma 2 u x 30 cc.,bazar y textil,libreria,libreria
+Repuesto escolar n3 America rayado 400 hojas,bazar y textil,libreria,libreria
+Adhesivo en barra Carrefour 2 u. x 10 g.,bazar y textil,libreria,libreria
+Repuesto Exito n5 dibujo blanco 8 hojas,bazar y textil,libreria,libreria
+Adhesivo sintetico Voligoma 30 cc.,bazar y textil,libreria,libreria
+Goma de borrar PP 1 u.,bazar y textil,libreria,libreria
+Lapiz grafito hb 4 u.,bazar y textil,libreria,libreria
 Celular libre Xiaomi REDMI NOTE 11 4gb 128gb negro,electrodomesticos y tecnologia,celulares,celulares
 Celular libre Motorola g23 4gb 128 gb azul,electrodomesticos y tecnologia,celulares,celulares
 Celular libre Xiaomi REDMI10C 4gb 128gb verde,electrodomesticos y tecnologia,celulares,celulares
@@ -385,10 +385,10 @@ Leche en polvo entera Purisima avant 800 g.,lacteos,leches,Leche/ productos lact
 Leche La serenisima liviana 1% 1L,lacteos,leches,Leche/ productos lacteos/ huevos y alimentos vegetales
 Leche ulta parcial descremada Carrefour classic sachet 1 lt.,lacteos,leches,Leche/ productos lacteos/ huevos y alimentos vegetales
 Leche La serenisima clasica 3% 1L.,lacteos,leches,Leche/ productos lacteos/ huevos y alimentos vegetales
-Te en saquitos diamantado Taragui x 50 uni,desayuno,infusiones,infusiones
-Cacao en polvo Nesquik 150 g.,desayuno,infusiones,infusiones
-Te de manzanilla en saquitos Carrefour 25 u.,desayuno,infusiones,infusiones
-Mate cocido Amanda 25 uni,desayuno,infusiones,infusiones
-Te en saquitos Green Hills 50 u.,desayuno,infusiones,infusiones
-Te en saquitos Carrefour sin TACC x 25 un.,desayuno,infusiones,infusiones
-Mate cocido saquitos diamantados Union x 50 uni,desayuno,infusiones,infusiones
+Te en saquitos diamantado Taragui x 50 uni,desayuno,infusiones,Bebidas no alcoholicas
+Cacao en polvo Nesquik 150 g.,desayuno,infusiones,Bebidas no alcoholicas
+Te de manzanilla en saquitos Carrefour 25 u.,desayuno,infusiones,Bebidas no alcoholicas
+Mate cocido Amanda 25 uni,desayuno,infusiones,Bebidas no alcoholicas
+Te en saquitos Green Hills 50 u.,desayuno,infusiones,Bebidas no alcoholicas
+Te en saquitos Carrefour sin TACC x 25 un.,desayuno,infusiones,Bebidas no alcoholicas
+Mate cocido saquitos diamantados Union x 50 uni,desayuno,infusiones,Bebidas no alcoholicas

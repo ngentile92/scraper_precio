@@ -1,6 +1,7 @@
 import datetime
 from extract.precios import get_store_name_from_url, extract_multiple_prices_and_names_selenium, get_type_store
 import pandas as pd
+from extract.db import fetch_data
 
 indice_mapping = {
     'electrodomesticos y tecnologia': {
@@ -12,23 +13,24 @@ indice_mapping = {
         'quesos': 'Leche/ productos lacteos/ huevos y alimentos vegetales'
     },
     'perfumeria': {
-        'farmacia': 'farmacia'
+        'farmacia': 'farmacia',
+        'cuidado oral': 'cuidado oral'
     },
     'lacteos': {
         'yogures': 'Leche/ productos lacteos/ huevos y alimentos vegetales',
         'leches': 'Leche/ productos lacteos/ huevos y alimentos vegetales'
     },
     'desayuno': {
-        'infusiones': 'infusiones'
+        'infusiones': 'Bebidas no alcoholicas'
     },
     'prendas y calzado': {
-        'camisas': 'Prendas de vestir y calzado',
-        'jeans': 'Prendas de vestir y calzado',
-        'sweaters y buzos': 'Prendas de vestir y calzado',
-        'remeras': 'Prendas de vestir y calzado',
+        'camisas': 'Prendas de vestir',
+        'jeans': 'Prendas de vestir',
+        'sweaters y buzos': 'Prendas de vestir',
+        'remeras': 'Prendas de vestir',
         'calzado': 'Calzado',
-        'pantalon': 'Prendas de vestir y calzado',
-        'medias': 'Prendas de vestir y calzado'
+        'pantalon': 'Prendas de vestir',
+        'medias': 'Calzado'
     },
     'sin TACC': {
         'sin TACC': 'sin TACC'
@@ -39,7 +41,7 @@ indice_mapping = {
     },
     'almacen': {
         'pastas': 'Alimentos',
-        'aceites': 'Aceites/ grasas y manteca',
+        'aceites': 'Aceites/ aderezos/ grasas y manteca',
         'conservas': 'Otros alimentos'
     },
     'frutas y verduras': {
@@ -52,10 +54,12 @@ indice_mapping = {
         'lapices': 'libreria',
         'marcadores': 'libreria',
         'gomas': 'libreria',
-        'mochilas': 'libreria'
+        'mochilas': 'libreria',
+        'otro': 'libreria'
     },
     'bazar y textil': {
-        'indumentaria': 'Prendas de vestir y calzado'
+        'indumentaria': 'Prendas de vestir',
+        'libreria': 'libreria'
     },
     'congelados': {
         'congelados': 'Otros alimentos'
@@ -66,7 +70,7 @@ indice_mapping = {
     },
     'alimentos': {
         'pan y lacteos': 'Pan y cereales',
-        'aderezos': 'Otros alimentos',
+        'aderezos': 'Aceites/ aderezos/ grasas y manteca',
         'carnes y huevo': 'Carnes y derivados',
         'otros': 'Otros alimentos'
     },
@@ -74,6 +78,31 @@ indice_mapping = {
         'casa': 'limpieza',
         'personal': 'limpieza'
     }
+}
+
+
+producto_a_categoria = {
+    'tomate': 'Verduras/ tuberculos y legumbres',
+    'papas': 'Verduras/ tuberculos y legumbres',
+    'arvejas': 'Verduras/ tuberculos y legumbres',
+    'lentejas': 'Verduras/ tuberculos y legumbres',
+    'jardinera': 'Verduras/ tuberculos y legumbres',
+    'garbanzos': 'Verduras/ tuberculos y legumbres',
+    'atun': 'Pescados y mariscos',
+    'arroz': 'Pan y cereales',
+    'zucaritas': 'Pan y cereales',
+    'maiz': 'Pan y cereales',
+    'soja': 'Leche/ productos lacteos/ huevos y alimentos vegetales',
+    'duraznos': 'Frutas',
+    'hamburguesa': 'Carnes y derivados',
+    'carne': 'Carnes y derivados',
+    'pollo': 'Carnes y derivados',
+    'salmon': 'Pescados y mariscos',
+    'dolca': 'Bebidas no alcoholicas',
+    'sonrisas': 'Azucar/ dulces/ chocolate/golosinas/ etc.',
+    'bombon': 'Azucar/ dulces/ chocolate/golosinas/ etc.',
+    'alfajor': 'Azucar/ dulces/ chocolate/golosinas/ etc.',
+    'chocolate': 'Azucar/ dulces/ chocolate/golosinas/ etc.',
 }
 
 def extract_category(url):
@@ -208,20 +237,44 @@ def add_index_column(df):
     df['Indice'] = df.apply(lambda row: get_index(row['categorias'], row['sub-categoria']), axis=1)
     return df
 
+
+def mapear_categoria_por_palabra(nombre_producto, categoria_actual):
+    nombre_producto = nombre_producto.lower()
+    # Solo actualizamos si la categoría actual contiene la palabra "otro"
+    if 'otro' in categoria_actual.lower() or 'otros alimentos' in categoria_actual.lower() or 'congelados' in categoria_actual.lower() or 'conservas' in categoria_actual.lower():
+        for palabra_clave, nueva_categoria in producto_a_categoria.items():
+            if palabra_clave in nombre_producto:
+                return nueva_categoria
+    return categoria_actual  # Devuelve la categoría actual si no hay coincidencia
+
+# Función para actualizar la categoría basada en palabras clave dentro del nombre del producto
+def actualizar_categoria_con_palabra(df, columna_nombre_producto, columna_categoria):
+    # Usar `apply` para mapear la nueva categoría usando la función `mapear_categoria_por_palabra`
+    # Se consideran las filas donde columna_categoria contiene 'otro', 'congelados' o 'conservas'
+    condicion = df[columna_categoria].str.lower().str.contains('otro|congelados|conservas', na=False)
+    df.loc[condicion, columna_categoria] = df.loc[condicion].apply(
+        lambda row: mapear_categoria_por_palabra(row[columna_nombre_producto], row[columna_categoria]), axis=1
+    )
+    return df
+
+
+
 if __name__ == "__main__":
-    with open('../url_productos_pruebas.csv', 'r') as f:
-        datos = datos = pd.read_csv(f, encoding='ISO-8859-1')
-        # Convertir a listas
-        url_list = datos['URL'].tolist()
-    df = get_category(url_list)
-    df = add_index_column(df)
+    #with open('../url_productos_pruebas.csv', 'r') as f:
+    #    datos = datos = pd.read_csv(f, encoding='ISO-8859-1')
+    #    # Convertir a listas
+    #    url_list = datos['URL'].tolist()
+    #df = get_category(url_list)
+    #df = add_index_column(df)
 
     with open('../producto_categorias.csv', 'r') as f:
         datos = pd.read_csv(f, encoding='ISO-8859-1')
-
+    datos = add_index_column(datos)
     # update datos with the new columns
-    datos = pd.concat([datos, df], axis=0)
+    #datos = pd.concat([datos, df], axis=0)
     # drop duplicates
     datos = datos.drop_duplicates(subset='producto_unificado', keep='last')
+    datos_actualizados = actualizar_categoria_con_palabra(datos, 'producto_unificado', 'Indice')
+
     #save datos
-    datos.to_csv('../producto_categorias.csv', index=False, encoding='ISO-8859-1')
+    datos_actualizados.to_csv('../producto_categorias.csv', index=False, encoding='ISO-8859-1')
