@@ -3,14 +3,14 @@ fernet branca 750cc,bebidas,alcoholica,Bebidas alcoholicas y tabaco
 quilmes 6u 473cc,bebidas,alcoholica,Bebidas alcoholicas y tabaco
 coca cola 1.5L,bebidas,no alcoholica,Bebidas no alcoholicas
 yerba mate playadito 500g,bebidas,no alcoholica,Bebidas no alcoholicas
-finlandia light 180g,alimentos,pan y lacteos,Pan y cereales
-pan de mesa bimbo artesano 500g,alimentos,pan y lacteos,Pan y cereales
-crema para batir LS 520cc,alimentos,pan y lacteos,Pan y cereales
-manteca LS 200g,alimentos,pan y lacteos,Pan y cereales
+finlandia light 180g,alimentos,pan y lacteos,Pan / pastas y cereales
+pan de mesa bimbo artesano 500g,alimentos,pan y lacteos,Pan / pastas y cereales
+crema para batir LS 520cc,alimentos,pan y lacteos,Pan / pastas y cereales
+manteca LS 200g,alimentos,pan y lacteos,Pan / pastas y cereales
 mayonesa hellmann 950g,alimentos,aderezos,Aceites/ aderezos/ grasas y manteca
 ketchup hellmans 250g,alimentos,aderezos,Aceites/ aderezos/ grasas y manteca
 salchicas paladini 6u,alimentos,carnes y huevo,Carnes y derivados
-pan de pancho bimbo artesano 6u,alimentos,pan y lacteos,Pan y cereales
+pan de pancho bimbo artesano 6u,alimentos,pan y lacteos,Pan / pastas y cereales
 tang polvo 15g,bebidas,no alcoholica,Bebidas no alcoholicas
 casancrem clasico 290g,alimentos,aderezos,Aceites/ aderezos/ grasas y manteca
 dolca suave origenes 170g,alimentos,otros,Bebidas no alcoholicas
@@ -21,10 +21,10 @@ sonrisas x3 324g,alimentos,otros,Azucar/ dulces/ chocolate/golosinas/ etc.
 imperial lager 473ml,bebidas,alcoholica,Bebidas alcoholicas y tabaco
 huevo color 12u la piara,alimentos,carnes y huevo,Carnes y derivados
 huevo color 12u avicoper,alimentos,carnes y huevo,Carnes y derivados
-queso cremon cremoso 1kg,alimentos,pan y lacteos,Pan y cereales
+queso cremon cremoso 1kg,alimentos,pan y lacteos,Pan / pastas y cereales
 leche 1% LS 1L,bebidas,no alcoholica,Bebidas no alcoholicas
 atun lc 170g,alimentos,carnes y huevo,Carnes y derivados
-yogur ls 900g,alimentos,pan y lacteos,Pan y cereales
+yogur ls 900g,alimentos,pan y lacteos,Pan / pastas y cereales
 tapa de asado 1kg,alimentos,carnes y huevo,Carnes y derivados
 milanesa nalga 1kg,alimentos,carnes y huevo,Carnes y derivados
 tapa de nalga 1kg,alimentos,carnes y huevo,Carnes y derivados
@@ -32,17 +32,17 @@ pollo entero cong. 1kg,alimentos,carnes y huevo,Carnes y derivados
 lavandina ayudin 1l,limpieza,casa,limpieza
 detergente cif bioactive 500cc,limpieza,casa,limpieza
 procenex 1.8l,limpieza,casa,limpieza
-ddl clasico ls 400g,alimentos,pan y lacteos,Pan y cereales
+ddl clasico ls 400g,alimentos,pan y lacteos,Pan / pastas y cereales
 acondicionador dove rec. Total 400 ml,limpieza,personal,limpieza
 shampoo dove rec. Total 400 ml,limpieza,personal,limpieza
 babysec ultrasoft 52 un.,limpieza,personal,limpieza
 vinagre alcohol menoyo 500ml,alimentos,aderezos,Aceites/ aderezos/ grasas y manteca
 minerva 250ml,alimentos,aderezos,Aceites/ aderezos/ grasas y manteca
-arroz molinos 1kg,alimentos,otros,Pan y cereales
-arroz gallor oro 500g,alimentos,otros,Pan y cereales
+arroz molinos 1kg,alimentos,otros,Pan / pastas y cereales
+arroz gallor oro 500g,alimentos,otros,Pan / pastas y cereales
 sal dos anclas parrillera 500g,alimentos,aderezos,Aceites/ aderezos/ grasas y manteca
-zucaritas 490g,alimentos,otros,Pan y cereales
-copos de maiz granix 400g,alimentos,otros,Pan y cereales
+zucaritas 490g,alimentos,otros,Pan / pastas y cereales
+copos de maiz granix 400g,alimentos,otros,Pan / pastas y cereales
 alfajor triple milka ddl 70g,alimentos,otros,Azucar/ dulces/ chocolate/golosinas/ etc.
 cuaderno 42 hojas america,libreria,cuadernos,cuadernos
 lapicera bic 3u,libreria,lapiceras,libreria
@@ -102,25 +102,17 @@ Batidora De Mano Philips Hr3700,electrodomesticos y tecnologia,pequenos electrod
 "Pava Electrica Liliana Ap165 1,7l",electrodomesticos y tecnologia,pequenos electrodomesticos,pequenos electrodomesticos
 Cortapelo Philco Hc7901pp,electrodomesticos y tecnologia,pequenos electrodomesticos,pequenos electrodomesticos
 Sandwichera Liliana As990,electrodomesticos y tecnologia,pequenos electrodomesticos,pequenos electrodomesticos
-Licuadora Black & Decker 2 Vel Jarra 1.5l,electrodomesticos y tecnologia,pequenos electrodomesticos,pequenos electrodomesticos
 Pasta Dental Sensodyne Blanqueador Extra Fresh 90gr,perfumeria,cuidado oral,cuidado oral
 Alcohol Alcoprotect 96deg Alimenticio 500,perfumeria,farmacia,farmacia
 Alcohol Etilico Jumbo Family Care 500 Cc,perfumeria,farmacia,farmacia
-Jamon Cocido Bocatti 1 Kg,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
 Lomo Bocatti Feteado X 70 Gr,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
 Jamon Cocido Natural Feteado L'abratto,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
 Queso Reggianito Rallado La Serenisima 175gr,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
-Queso Rallado La Paulina,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
-Queso Clasico Casancrem 290g,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
 Queso Reggianito Rallado La Serenisima 130 Gr,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
-Queso Cremoso Punta Del Agua Horma X Kg,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
 Queso Crema La Paulina Tradicional 290 Gr,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
 Queso Pategras La Serenisima Horma - Minimo 1 Kg Mayorista,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
-Matambrito De Cerdo - Magret,carnes,cerdo,Carnes y derivados
 Pechito De Cerdo En Tiras,carnes,cerdo,Carnes y derivados
 Osobuco,carnes,vaca,Carnes y derivados
-Palomita,carnes,vaca,Carnes y derivados
-PALETA CHURRASCO,carnes,vaca,Carnes y derivados
 Bife De Chorizo Churrasco,carnes,vaca,Carnes y derivados
 Matambre,carnes,vaca,Carnes y derivados
 Celular libre ZTE a33 plus 2gb 32gb,electrodomesticos y tecnologia,celulares,celulares
@@ -128,16 +120,11 @@ Smartwatch Noga ng sw04ng,electrodomesticos y tecnologia,celulares,celulares
 Celular libre TCL 403 2gb 32 gb black,electrodomesticos y tecnologia,celulares,celulares
 Consola PS5 HW 1215 God of War STANDARD ARG,electrodomesticos y tecnologia,informatica,informatica
 Memoria 128GB Maxell MICRO SD CL10,electrodomesticos y tecnologia,informatica,informatica
-Botella tinta Epson T544520-4P pack x 4 uni CMYK,electrodomesticos y tecnologia,informatica,informatica
 Notebook Exo 2 en 1 10 cel n4020 4gb ram 128gb ssd w,electrodomesticos y tecnologia,informatica,informatica
 Botella tinta Epson T544120-2P pack x 2 uni negro,electrodomesticos y tecnologia,informatica,informatica
-Tablet 7 Exo 2GB 16GB WAVE I726 A10,electrodomesticos y tecnologia,informatica,informatica
 Yogur firme vainilla La Serenisima clasico 190 g.,lacteos,yogures,Leche/ productos lacteos/ huevos y alimentos vegetales
 Yogur entero La serenisima cremoso de durazno en pote 120 g.,lacteos,yogures,Leche/ productos lacteos/ huevos y alimentos vegetales
 Yogur batido con cereales La Serenisima clasico 159 g.,lacteos,yogures,Leche/ productos lacteos/ huevos y alimentos vegetales
-Leche multivitaminas 3% La Serenisima sachet 1 l.,lacteos,leches,Leche/ productos lacteos/ huevos y alimentos vegetales
-Leche descremada La Serenisima UAT proteinas 1 l.,lacteos,leches,Leche/ productos lacteos/ huevos y alimentos vegetales
-Leche descremada larga vida La Serenisima cero lactosa 1 l.,lacteos,leches,Leche/ productos lacteos/ huevos y alimentos vegetales
 Mate cocido saquitos diamantados Taragui x 50 uni,desayuno,infusiones,Bebidas no alcoholicas
 Te de boldo en saquitos Taragui 25 u.,desayuno,infusiones,Bebidas no alcoholicas
 Tostadas de arroz Carrefour classic aireadas sin TACC,sin TACC,sin TACC,sin TACC
@@ -147,10 +134,7 @@ Te en saquitos Carrefour sin TACC x 50 un.,sin TACC,sin TACC,sin TACC
 Jamon cocido 200 g. BAJO PRECIO GARANTIZADO,sin TACC,sin TACC,sin TACC
 Mate cocido en saquitos Carrefour sin TACC x 100 un.,sin TACC,sin TACC,sin TACC
 Maiz inflado Grandiet azucarado sin TACC 200 g.,sin TACC,sin TACC,sin TACC
-Hamburguesa Swift De Carne 4 U - 320 Gr,congelados,congelados,Carnes y derivados
 Milanesa De Soja Granja Del Sol C/espinaca 330g,congelados,congelados,Leche/ productos lacteos/ huevos y alimentos vegetales
-Hamburguesas Cuisine And Co. De Carne 996 Gr,congelados,congelados,Carnes y derivados
-Medallones Good Mark De Carne Tradicional 320 Gr,congelados,congelados,Carnes y derivados
 Hamburguesa Swift Tipo Casera 2 U - 240 Gr,congelados,congelados,Carnes y derivados
 Papas Horneables Mc Cain Estilo Artesanal 700 Gr,congelados,congelados,Verduras/ tuberculos y legumbres
 Hamburguesas Paty De Carne 20 U - 1600 Gr,congelados,congelados,Carnes y derivados
@@ -164,35 +148,23 @@ Limon Huella Natural x kg.,frutas y verduras,verduras,Verduras/ tuberculos y leg
 Tomate cherry rojo Huella Natural x kg.,frutas y verduras,verduras,Verduras/ tuberculos y legumbres
 Champignones blanco 200 g.,frutas y verduras,verduras,Verduras/ tuberculos y legumbres
 Ajo x kg.,frutas y verduras,verduras,Verduras/ tuberculos y legumbres
-Fideos tallarines N5 Matarazzo 500 g.,almacen,pastas,Alimentos
-Fideos tallarines N7 Terrabusi 500 g.,almacen,pastas,Alimentos
-Fideos tallarin La Providencia 500 g.,almacen,pastas,Alimentos
+Fideos tallarines N7 Terrabusi 500 g.,almacen,pastas,Pan / pastas y cereales
+Fideos tallarin La Providencia 500 g.,almacen,pastas,Pan / pastas y cereales
 Lomo De Atun Agua Y Aceite Cuisine & Co 120gr Escurrido 170 Gr Neto,almacen,conservas,Pescados y mariscos
-Atun Desmenuzado En Agua Y En Aceite Maxima 120 Gr,almacen,conservas,Pescados y mariscos
 Arvejas Cuisine-co 300 Gr,almacen,conservas,Verduras/ tuberculos y legumbres
 Picadillo De Carne Swift 90 Gr,almacen,conservas,Carnes y derivados
 Lentejas Cuisine-co 300 Gr,almacen,conservas,Verduras/ tuberculos y legumbres
-Pate De Foie Swift 90 Gr,almacen,conservas,Otros alimentos
-Jardinera Cuisine-co 300 Gr,almacen,conservas,Verduras/ tuberculos y legumbres
-Garbanzos Cuisine-co 300 Gr,almacen,conservas,Verduras/ tuberculos y legumbres
 Banana Nacional x kg.,frutas y verduras,frutas,Frutas
 Uva roja x kg.,frutas y verduras,frutas,Frutas
 Kiwi Huella Natural x kg.,frutas y verduras,frutas,Frutas
 Lechuga francesa x kg.,frutas y verduras,verduras,Verduras/ tuberculos y legumbres
 Rucula x 1 atado,frutas y verduras,verduras,Verduras/ tuberculos y legumbres
-Aceite Canuelas De Girasol - 1.5 L,almacen,aceites,Aceites/ aderezos/ grasas y manteca
-Aceite De Girasol Cocinero 900 Ml,almacen,aceites,Aceites/ aderezos/ grasas y manteca
-Aceite De Oliva Virgen Nucete Lata 500 Ml,almacen,aceites,Aceites/ aderezos/ grasas y manteca
 Vinagre De Alcohol Favinco 1300 Ml,almacen,aceites,Aceites/ aderezos/ grasas y manteca
 Aceite De Oliva Virgen Cuisine And Co 500 Ml,almacen,aceites,Aceites/ aderezos/ grasas y manteca
 Aceite De Oliva Extra Virgen Cuisine And Co 500 Ml,almacen,aceites,Aceites/ aderezos/ grasas y manteca
-Aceite De Girasol Lira X 900 Ml,almacen,aceites,Aceites/ aderezos/ grasas y manteca
 Aceite De Oliva Azait 500 Ml,almacen,aceites,Aceites/ aderezos/ grasas y manteca
-Ciruela x kg.,frutas y verduras,frutas,Frutas
-Arandanos 125 g.,frutas y verduras,frutas,Frutas
 Lechuga Capuchina x kg.,frutas y verduras,verduras,Verduras/ tuberculos y legumbres
 Pepino x kg.,frutas y verduras,verduras,Verduras/ tuberculos y legumbres
-Pimiento rojo x kg,frutas y verduras,verduras,Verduras/ tuberculos y legumbres
 "Bermuda Rip curl wa je rlx big size 22"" hombre",bazar y textil,indumentaria,Prendas de vestir
 Bombon De Frambuesa Franui Leche 150 Gr,congelados,congelados,Azucar/ dulces/ chocolate/golosinas/ etc.
 Frutillas Heladas Bites Banadas En Chocolate 120 Gr,congelados,congelados,Azucar/ dulces/ chocolate/golosinas/ etc.
@@ -200,70 +172,83 @@ Bombon Helado Bites Cereza Y Chocolate 120 Gr,congelados,congelados,Azucar/ dulc
 Slouchy 90's Striped Sweat,prendas y calzado,sweaters y buzos,Prendas de vestir
 Megapack Sodastream Terra Black,electrodomesticos y tecnologia,pequenos electrodomesticos,pequenos electrodomesticos
 Preservativo Prime Texturado Gel Hot X6,perfumeria,farmacia,farmacia
-Preservativo Prime Retardante Gel Natural X6,perfumeria,farmacia,farmacia
 Apositos Surtidos Curitas Transpiel Resistentes Al Agua X 40 Ud,perfumeria,farmacia,farmacia
-Preservativo Prime Ultra Fino Gel Natural X6,perfumeria,farmacia,farmacia
-Apositos Adhesivos Curitas Marvel Para Ninos X 20 Ud,perfumeria,farmacia,farmacia
-Jamon Cocido Linea Permi Paladini X 150 Gr,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
-Salame Fuet Bocatti 130 Gr,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
-Jamon Cocido Lario Sobre 1 Kg,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
 Jamon Cocido Lario Feteado,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
 Jamon Crudo Lario Feteado,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
-Salame Bocatti Feteado X 70 Gr,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
-Jamon Cocido Campo Austral,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
 Salamin Lario Picado Fino Tipo Tandilero Kg,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
-Solomillo De Cerdo - Magret,carnes,cerdo,Carnes y derivados
-Solomillo De Cerdo - Cabana Argentina,carnes,cerdo,Carnes y derivados
 Lapicera retractil Paper Mate KM 100 azul 3 u.,bazar y textil,libreria,libreria
 Celular Libre Samsung GALAXY A04E 3GB 64GB negro,electrodomesticos y tecnologia,celulares,celulares
 Celular Kodak Seren d55 lx 2GB 32GB negro,electrodomesticos y tecnologia,celulares,celulares
 Smartwatch Xinji N2 negro,electrodomesticos y tecnologia,celulares,celulares
 Reproductor streaming Roku Express 3930mx 512MB,electrodomesticos y tecnologia,informatica,informatica
-Yogur griego Yogurisimo sabor frutilla en pote 125 g.,lacteos,yogures,Leche/ productos lacteos/ huevos y alimentos vegetales
 Leche UAT entera Carrefour classic brik 1 lt.,lacteos,leches,Leche/ productos lacteos/ huevos y alimentos vegetales
 Leche UAT parcialmente descremada Carrefour classic brik 1 lt.,lacteos,leches,Leche/ productos lacteos/ huevos y alimentos vegetales
 Mate cocido en saquitos Carrefour sin TACC x 50 un.,desayuno,infusiones,Bebidas no alcoholicas
-Fideos monos Matarazzo 500 g.,almacen,pastas,Alimentos
-Fideos tallarin N5 Lucchetti 500 g.,almacen,pastas,Alimentos
-Fideos tirabuzones Carrefour classic 500 g.,almacen,pastas,Alimentos
-Fideos de semola cinta spaghetti Carrefour classic 500 g.,almacen,pastas,Alimentos
-Fideos guiseros codo Carrefour classic 500 g.,almacen,pastas,Alimentos
-Fideos penne rigante Matarazzo 500 g.,almacen,pastas,Alimentos
-Fideos mostachol rayado Carrefour classic 500 g.,almacen,pastas,Alimentos
+Fideos tirabuzones Carrefour classic 500 g.,almacen,pastas,Pan / pastas y cereales
+Fideos mostachol rayado Carrefour classic 500 g.,almacen,pastas,Pan / pastas y cereales
+Pure De Tomate Salsati 520 Gr,almacen,pastas,Pan / pastas y cereales
+Salsa Para Pizza Knorr 340 G,almacen,pastas,Pan / pastas y cereales
+Uva rosada x kg.,frutas y verduras,frutas,Frutas
+Uva red globe Huella Natural x kg.,frutas y verduras,frutas,Frutas
+Berenjena negra x kg.,frutas y verduras,verduras,Verduras/ tuberculos y legumbres
+512 Slim Taper ADV,prendas y calzado,jeans,Prendas de vestir
+Jamon Paladini Cocido Fetas Finas X 200 Gr,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
+Impresora multifuncion Epson sistema continuo wi-fi Ecotank L3250 negro,electrodomesticos y tecnologia,informatica,informatica
+Cable adaptador Noga audio miniplug negro,electrodomesticos y tecnologia,informatica,informatica
+Yogur bebible Carrefour de frutilla classic 900 g.,lacteos,yogures,Leche/ productos lacteos/ huevos y alimentos vegetales
+Leche entera UAT Carrefour classic tetra 1 lt.,lacteos,leches,Leche/ productos lacteos/ huevos y alimentos vegetales
+Leche modificada en polvo Armonia 400 g.,lacteos,leches,Leche/ productos lacteos/ huevos y alimentos vegetales
+Leche en polvo entera Purisima avant 800 g.,lacteos,leches,Leche/ productos lacteos/ huevos y alimentos vegetales
+Leche ulta parcial descremada Carrefour classic sachet 1 lt.,lacteos,leches,Leche/ productos lacteos/ huevos y alimentos vegetales
+Fideos monos Matarazzo 500 g.,almacen,pastas,Pan / pastas y cereales
+Fideos tallarin N5 Lucchetti 500 g.,almacen,pastas,Pan / pastas y cereales
+Fideos tallarines N5 Matarazzo 500 g.,almacen,pastas,Pan / pastas y cereales
+Fideos de semola cinta spaghetti Carrefour classic 500 g.,almacen,pastas,Pan / pastas y cereales
+Fideos guiseros codo Carrefour classic 500 g.,almacen,pastas,Pan / pastas y cereales
+Fideos penne rigante Matarazzo 500 g.,almacen,pastas,Pan / pastas y cereales
+Fideos tirabuzon Terrabusi 3 vegetales 500 g.,almacen,pastas,Pan / pastas y cereales
 Atun Al Natural La Campagnola 170 Gr,almacen,conservas,Pescados y mariscos
 Atun En Aceite La Campagnola 170 Gr,almacen,conservas,Pescados y mariscos
 Lomo De Atun En Aceite Vegetal Cuisine-co 120 Gr,almacen,conservas,Pescados y mariscos
-Duraznos En Mitades Cuisine-co 820 Gr,almacen,conservas,Frutas
 Lomo De Atun Al Natural Cuisine & Co 120gr Escurrido 170 Gr Neto,almacen,conservas,Pescados y mariscos
+Duraznos En Mitades Cuisine-co 820 Gr,almacen,conservas,Frutas
 Palmitos Trozos Cuisine & Co 400 Gr,almacen,conservas,Otros alimentos
-Fideos Spaguetti C&c 500gr,almacen,pastas,Alimentos
-Fideos Lucchetti Tallarin N5 X500g,almacen,pastas,Alimentos
-Pure De Tomate La Campagnola 520 Gr,almacen,pastas,Alimentos
-Don Triturado Cuisine & Co 910 Gr,almacen,pastas,Alimentos
-Fideos Tirabuzon C&c 500gr,almacen,pastas,Alimentos
-Pure De Tomate La Molisana Passata X690gr,almacen,pastas,Alimentos
-Fideos Monos C&c 500gr,almacen,pastas,Alimentos
-Pure De Tomate Salsati 520 Gr,almacen,pastas,Alimentos
-Fideos Mostachol C&c 500gr,almacen,pastas,Alimentos
-Salsa Para Pizza Knorr 340 G,almacen,pastas,Alimentos
-Tirabuzon Arcor Pastas Secas 500 Gr,almacen,pastas,Alimentos
-Capelettini Giacomo Tridicci 500g,almacen,pastas,Alimentos
-Fideos La Molisana Spaghetti 500 G,almacen,pastas,Alimentos
-Salsa Salsati Italiana X340g,almacen,pastas,Alimentos
+Choclo cuisine-co 170 Gr,almacen,conservas,Otros alimentos
+Atun Desmenuzado En Agua Y En Aceite Maxima 120 Gr,almacen,conservas,Pescados y mariscos
+Atun Desmenuzado Al Natural Maxima 170 Gr,almacen,conservas,Pescados y mariscos
+Pate De Foie Swift 90 Gr,almacen,conservas,Otros alimentos
+Sardinas En Aceite cuisine-co 160 Gr,almacen,conservas,Otros alimentos
+Garbanzos Cuisine-co 300 Gr,almacen,conservas,Verduras/ tuberculos y legumbres
+Jardinera Cuisine-co 300 Gr,almacen,conservas,Verduras/ tuberculos y legumbres
+Caballa Al Natural Cuisine-co 380 Gr,almacen,conservas,Otros alimentos
+Fideos Spaguetti C&c 500gr,almacen,pastas,Pan / pastas y cereales
+Fideos Lucchetti Tallarin N5 X500g,almacen,pastas,Pan / pastas y cereales
+Pure De Tomate La Campagnola 520 Gr,almacen,pastas,Pan / pastas y cereales
+Don Triturado Cuisine & Co 910 Gr,almacen,pastas,Pan / pastas y cereales
+Fideos Tirabuzon C&c 500gr,almacen,pastas,Pan / pastas y cereales
+Pure De Tomate La Molisana Passata X690gr,almacen,pastas,Pan / pastas y cereales
+Fideos Monos C&c 500gr,almacen,pastas,Pan / pastas y cereales
+Fideos Mostachol C&c 500gr,almacen,pastas,Pan / pastas y cereales
+Pure De Tomate Cuisine & Co 520gr,almacen,pastas,Pan / pastas y cereales
+Tirabuzon Arcor Pastas Secas 500 Gr,almacen,pastas,Pan / pastas y cereales
+Capelettini Giacomo Tridicci 500g,almacen,pastas,Pan / pastas y cereales
+Fideos La Molisana Spaghetti 500 G,almacen,pastas,Pan / pastas y cereales
+Capelettini Giacomo Carne 500g,almacen,pastas,Pan / pastas y cereales
+Salsa Salsati Italiana X340g,almacen,pastas,Pan / pastas y cereales
 Manzana roja x kg.,frutas y verduras,frutas,Frutas
 Naranja de jugo x kg.,frutas y verduras,frutas,Frutas
-Uva rosada x kg.,frutas y verduras,frutas,Frutas
-Uva red globe Huella Natural x kg.,frutas y verduras,frutas,Frutas
+Ciruela x kg.,frutas y verduras,frutas,Frutas
 Melon amarillo Huella Natural x kg.,frutas y verduras,frutas,Frutas
 Manzana roja Huella Natural x kg.,frutas y verduras,frutas,Frutas
 Pera packhams Huella Natural x kg.,frutas y verduras,frutas,Frutas
+Arandanos 125 g.,frutas y verduras,frutas,Frutas
 Papa x kg.,frutas y verduras,verduras,Verduras/ tuberculos y legumbres
 Tomate x kg.,frutas y verduras,verduras,Verduras/ tuberculos y legumbres
+Pimiento rojo x kg,frutas y verduras,verduras,Verduras/ tuberculos y legumbres
 Ajo suelto x kg.,frutas y verduras,verduras,Verduras/ tuberculos y legumbres
 Tomate perita x kg.,frutas y verduras,verduras,Verduras/ tuberculos y legumbres
-Zapallo japones x kg.,frutas y verduras,verduras,Verduras/ tuberculos y legumbres
 Choclo x uni,frutas y verduras,verduras,Verduras/ tuberculos y legumbres
-Berenjena negra x kg.,frutas y verduras,verduras,Verduras/ tuberculos y legumbres
+Zapallo japones x kg.,frutas y verduras,verduras,Verduras/ tuberculos y legumbres
 Alpargata Tex lona,bazar y textil,indumentaria,Prendas de vestir
 Bermuda Rusty shaped box ws hombre,bazar y textil,indumentaria,Prendas de vestir
 Bermuda Rusty z-charge hombre,bazar y textil,indumentaria,Prendas de vestir
@@ -275,120 +260,185 @@ Aceite Girasol Legitimo 900 Ml,almacen,aceites,Aceites/ aderezos/ grasas y mante
 Aceite De Girasol Natura 900 Ml,almacen,aceites,Aceites/ aderezos/ grasas y manteca
 "Aceite Girasol Pureza 0,9 L",almacen,aceites,Aceites/ aderezos/ grasas y manteca
 Aceite Girasol Legitimo 1.5 L,almacen,aceites,Aceites/ aderezos/ grasas y manteca
+Aceite Canuelas De Girasol - 1.5 L,almacen,aceites,Aceites/ aderezos/ grasas y manteca
+Aceite De Oliva Virgen Nucete Lata 500 Ml,almacen,aceites,Aceites/ aderezos/ grasas y manteca
+Aceite De Girasol Cocinero 900 Ml,almacen,aceites,Aceites/ aderezos/ grasas y manteca
+Aceite De Girasol Lira X 900 Ml,almacen,aceites,Aceites/ aderezos/ grasas y manteca
+Aceite Alsamar Girasol X900ml,almacen,aceites,Aceites/ aderezos/ grasas y manteca
+Aceto Tipo Reduccion Casalta 500 Ml,almacen,aceites,Aceites/ aderezos/ grasas y manteca
+Vinagre De Alcohol Jumbo,almacen,aceites,Aceites/ aderezos/ grasas y manteca
+Aceto Balsamico Reducion Casalta 400 Ml,almacen,aceites,Aceites/ aderezos/ grasas y manteca
 Papas Clasicas Mc Cain Corte Tradicional 1400 Gr,congelados,congelados,Verduras/ tuberculos y legumbres
 Hamburguesas Paty De Carne 12 U - 960 Gr,congelados,congelados,Carnes y derivados
 Bombon Franui De Frambuesa Black 150 Gr,congelados,congelados,Azucar/ dulces/ chocolate/golosinas/ etc.
 Hamburguesa Swift De Carne 12 U - 960 Gr,congelados,congelados,Carnes y derivados
 Papas Clasicas Mc Cain Corte Tradicional 700 Gr,congelados,congelados,Verduras/ tuberculos y legumbres
 Medallon De Carne Paty De Casa 240 Gr,congelados,congelados,Carnes y derivados
+Hamburguesa Swift De Carne 4 U - 320 Gr,congelados,congelados,Carnes y derivados
+Hamburguesas Paty De Carne 4 U - 320 Gr,congelados,congelados,Carnes y derivados
+Choclo Granja Del Sol,congelados,congelados,Otros alimentos
+Espinaca Lucchetti 400 Gr,congelados,congelados,Otros alimentos
+Medallones Good Mark De Carne Tradicional 320 Gr,congelados,congelados,Carnes y derivados
+Hamburguesas Cuisine And Co. De Carne 996 Gr,congelados,congelados,Carnes y derivados
+Espinaca Granja Del Sol 1 Kg,congelados,congelados,Otros alimentos
+Papas Mc Cain Noissete X600g,congelados,congelados,Verduras/ tuberculos y legumbres
 Palitos De Pollo Swift 260 Gr,congelados,congelados,Carnes y derivados
 Medallones De Salmon Rosado Superbe 400 Gr,congelados,congelados,Pescados y mariscos
 Slouchy 90's Block Sweat,prendas y calzado,sweaters y buzos,Prendas de vestir
-Graphic Standard Crew Batwing,prendas y calzado,sweaters y buzos,Prendas de vestir
 Graphic Standard Hoodie Batwing,prendas y calzado,sweaters y buzos,Prendas de vestir
 Yesterday 90's Block Sweat,prendas y calzado,sweaters y buzos,Prendas de vestir
+Graphic Standard Crew Batwing,prendas y calzado,sweaters y buzos,Prendas de vestir
 Every Day Hoodie Small Batwing,prendas y calzado,sweaters y buzos,Prendas de vestir
 510 Skinny,prendas y calzado,jeans,Prendas de vestir
-511 Slim Fit,prendas y calzado,jeans,Prendas de vestir
 505 Regular Fit,prendas y calzado,jeans,Prendas de vestir
-512 Slim Taper ADV,prendas y calzado,jeans,Prendas de vestir
+511 Slim Fit,prendas y calzado,jeans,Prendas de vestir
 Classic Western,prendas y calzado,camisas,Prendas de vestir
 LS Classic One Pocket Check,prendas y calzado,camisas,Prendas de vestir
 Classic One Pocket Check,prendas y calzado,camisas,Prendas de vestir
 "SS One Shirt ""Flowers""",prendas y calzado,camisas,Prendas de vestir
 xMonsters Slouch Shirt,prendas y calzado,camisas,Prendas de vestir
 "SS One Shirt ""Palms""",prendas y calzado,camisas,Prendas de vestir
-725 Hi Rise Bootcut,prendas y calzado,jeans,Prendas de vestir
 721 Hi Rise Skinny,prendas y calzado,jeans,Prendas de vestir
+725 Hi Rise Bootcut,prendas y calzado,jeans,Prendas de vestir
 711 Skinny,prendas y calzado,jeans,Prendas de vestir
 Mile High Super Skinny,prendas y calzado,jeans,Prendas de vestir
-724 Hi Rise Straight,prendas y calzado,jeans,Prendas de vestir
 Mom Levi's(r)Jeans Stone Wash,prendas y calzado,jeans,Prendas de vestir
+724 Hi Rise Straight,prendas y calzado,jeans,Prendas de vestir
 Mixer C/vaso Varilla Metalica Liliana Ah102 R,electrodomesticos y tecnologia,pequenos electrodomesticos,pequenos electrodomesticos
 Tostador De Pan Nex Tmb8052,electrodomesticos y tecnologia,pequenos electrodomesticos,pequenos electrodomesticos
 Sodastream Megapack Terra White,electrodomesticos y tecnologia,pequenos electrodomesticos,pequenos electrodomesticos
 Jarra Electrica Nex Inoxidable Ka010oi20,electrodomesticos y tecnologia,pequenos electrodomesticos,pequenos electrodomesticos
-Sodastream Cilindro De Co2 Cqc Rosa,electrodomesticos y tecnologia,pequenos electrodomesticos,pequenos electrodomesticos
+Batidora Kitchenaid Rksm150psrer,electrodomesticos y tecnologia,pequenos electrodomesticos,pequenos electrodomesticos
 Sodastream Gasificadora De Agua Terra Black,electrodomesticos y tecnologia,pequenos electrodomesticos,pequenos electrodomesticos
+Sodastream Cilindro De Co2 Cqc Rosa,electrodomesticos y tecnologia,pequenos electrodomesticos,pequenos electrodomesticos
+Pava Electrica Nex Plastico 1.7 L,electrodomesticos y tecnologia,pequenos electrodomesticos,pequenos electrodomesticos
+Licuadora Kitchenaid K400 Lksb4026rer Empire R,electrodomesticos y tecnologia,pequenos electrodomesticos,pequenos electrodomesticos
+Vaporizador De Prendas Manual Philips Sth1010/,electrodomesticos y tecnologia,pequenos electrodomesticos,pequenos electrodomesticos
+Licuadora Black & Decker 2 Vel Jarra 1.5l,electrodomesticos y tecnologia,pequenos electrodomesticos,pequenos electrodomesticos
+Freidora Midea Negra 4l Mecanico Af-m140bar1,electrodomesticos y tecnologia,pequenos electrodomesticos,pequenos electrodomesticos
+Jarra Electrica Smartlife Sl-ek1714wpn,electrodomesticos y tecnologia,pequenos electrodomesticos,pequenos electrodomesticos
+"Pava Electrica Midea 1,7l Inox Digital",electrodomesticos y tecnologia,pequenos electrodomesticos,pequenos electrodomesticos
 Pasta Dental Colgate Original 180 G,perfumeria,cuidado oral,cuidado oral
 Pasta Dental Sensitive Pro-alivio Real White 110 G,perfumeria,cuidado oral,cuidado oral
 Pasta Dental Colgate Original 90 G,perfumeria,cuidado oral,cuidado oral
 Pasta Dental Odol 90 G,perfumeria,cuidado oral,cuidado oral
 Pasta Dental Colgate Sensitive Pro Alivio Inmediato Original 140 G,perfumeria,cuidado oral,cuidado oral
+Pasta Dental Colgate Triple Beneficio 140 G,perfumeria,cuidado oral,cuidado oral
 Pasta Dental Colgate Herbal 90 G,perfumeria,cuidado oral,cuidado oral
+Pasta Dental Colgate Triple Beneficio 90 G,perfumeria,cuidado oral,cuidado oral
+Pasta Dental Colgate Total 12 Original 140g,perfumeria,cuidado oral,cuidado oral
+Enjuague Bucal Colgate Plax Menta Suave 250ml,perfumeria,cuidado oral,cuidado oral
+Pasta Dental Colgate Luminous Charcoal 90 G,perfumeria,cuidado oral,cuidado oral
+Pasta Dental Colgate Total 12 Original 90g,perfumeria,cuidado oral,cuidado oral
+Cepillo Dental Colgate Extra Clean Medio Cerdas Multinivel 3u,perfumeria,cuidado oral,cuidado oral
+Pasta Dental Colgate Total 12 Carbon Activado 140 G,perfumeria,cuidado oral,cuidado oral
 Algodon Estrella Clasico 75 Gr,perfumeria,farmacia,farmacia
 Algodon Doncella Super 100g,perfumeria,farmacia,farmacia
 Algodon Estrella Familiar Super 100 Gr,perfumeria,farmacia,farmacia
 Algodon Estrella Premium 75g,perfumeria,farmacia,farmacia
 Curitas Transpiel X 20,perfumeria,farmacia,farmacia
+Curitas Tela X 10,perfumeria,farmacia,farmacia
 Curitas Tela X 20,perfumeria,farmacia,farmacia
+Preservativo Prime Super Fino Gel Hot X6,perfumeria,farmacia,farmacia
+Algodon Doncella Hidrofilo 70 Gr,perfumeria,farmacia,farmacia
+Preservativo Prime Retardante Gel Natural X6,perfumeria,farmacia,farmacia
+Preservativo Prime Ultra Fino Gel Natural X6,perfumeria,farmacia,farmacia
+Apositos Adhesivos Curitas Marvel Para Ninos X 20 Ud,perfumeria,farmacia,farmacia
+Apositos Adhesivos Curitas Flexible Xl Para Todo Tipo De Piel X 10 Ud,perfumeria,farmacia,farmacia
 Jamon Cocido Cuisine & Co Venta Al Peso,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
 Jamon Cocido Tripack Kg 1 Sob Minimo 800 Gr Mayorista,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
 Jamon Cocido Bocatti Feteado,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
-Jamon Paladini Cocido Fetas Finas X 200 Gr,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
 Jamon Cocido Selec C&co Venta Al Peso,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
 Jamon Cocido Paladini Feteado 1 Kg,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
+Jamon Cocido Linea Permi Paladini X 150 Gr,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
+Fiambre De Cerdo Cocido Campo Austral Kg,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
+Jamon Cocido Lario Sobre 1 Kg,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
+Salame Fuet Bocatti 130 Gr,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
+Jamon Crudo Lario Feteado X 120g,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
+Jamon Cocido Bocatti 1 Kg,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
+Salame Bocatti Feteado X 70 Gr,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
+Jamon Cocido Campo Austral,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
+Jamon Cocido Campo Austral Millenium X 200 Gr,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
 Queso Cremoso La Paulina 1/4 Hma - Minimo 1 Kg Mayorista.,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
 Queso Clasico Casancrem 480g,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
 Queso Barra Jumbo Tripack,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
 Queso Dando C&co,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
 Queso Light Casancrem 480g,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
+Queso Cremon Cremoso,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
 Queso Untable Finlandia 290 Gr,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
+Queso Rallado La Paulina,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
+Queso Mozzarella Barraza 1kg,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
+Queso Saint Paulin La Paulina,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
+Queso Clasico Casancrem 290g,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
+Queso La Serenisima Finlandia Reducido En Calorias 290 G,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
+Queso Untable Finlandia Clasico 290 Gr,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
+Queso Cremoso Punta Del Agua Horma X Kg,fiambres y quesos,quesos,Leche/ productos lacteos/ huevos y alimentos vegetales
 Carre De Cerdo Con Hueso Fresco,carnes,cerdo,Carnes y derivados
 Pechito De Cerdo Fresco,carnes,cerdo,Carnes y derivados
 Bondiola de cerdo fresca,carnes,cerdo,Carnes y derivados
 Matambrito de cerdo fresco,carnes,cerdo,Carnes y derivados
+Solomillo De Cerdo - Magret,carnes,cerdo,Carnes y derivados
 Churrasquito De Cerdo Fresco,carnes,cerdo,Carnes y derivados
 Carre De Cerdo Deshuesado - Magret,carnes,cerdo,Carnes y derivados
 Ribbs De Cerdo - Magret,carnes,cerdo,Carnes y derivados
+Matambrito De Cerdo - Magret,carnes,cerdo,Carnes y derivados
 Matambrito De Cerdo - Doina,carnes,cerdo,Carnes y derivados
 Churrasquito De Cerdo - Magret,carnes,cerdo,Carnes y derivados
+Solomillo De Cerdo - Cabana Argentina,carnes,cerdo,Carnes y derivados
 Matambrito De Cerdo - Cabana Argentina,carnes,cerdo,Carnes y derivados
-Milanesa Nalga,carnes,vaca,Carnes y derivados
 Carne Vacuna Picada Enfriada E,carnes,vaca,Carnes y derivados
+Milanesa Nalga,carnes,vaca,Carnes y derivados
 Peceto,carnes,vaca,Carnes y derivados
 Tapa De Asado,carnes,vaca,Carnes y derivados
 Asado Del Centro,carnes,vaca,Carnes y derivados
 Carne Vacuna Picada Enfriada C,carnes,vaca,Carnes y derivados
+Roast Beef Churrasco,carnes,vaca,Carnes y derivados
+Picada Premium,carnes,vaca,Carnes y derivados
+Lomo Premium,carnes,vaca,Carnes y derivados
+Cuadril Churrasco,carnes,vaca,Carnes y derivados
+Tapa De Nalga,carnes,vaca,Carnes y derivados
+Palomita,carnes,vaca,Carnes y derivados
+PALETA CHURRASCO,carnes,vaca,Carnes y derivados
+Colita De Cuadril Premium,carnes,vaca,Carnes y derivados
 Adhesivo sintetico Voligoma 2 u x 30 cc.,bazar y textil,libreria,libreria
 Repuesto escolar n3 America rayado 400 hojas,bazar y textil,libreria,libreria
 Adhesivo en barra Carrefour 2 u. x 10 g.,bazar y textil,libreria,libreria
-Repuesto Exito n5 dibujo blanco 8 hojas,bazar y textil,libreria,libreria
 Adhesivo sintetico Voligoma 30 cc.,bazar y textil,libreria,libreria
+Repuesto Exito n5 dibujo blanco 8 hojas,bazar y textil,libreria,libreria
 Goma de borrar PP 1 u.,bazar y textil,libreria,libreria
 Lapiz grafito hb 4 u.,bazar y textil,libreria,libreria
 Celular libre Xiaomi REDMI NOTE 11 4gb 128gb negro,electrodomesticos y tecnologia,celulares,celulares
 Celular libre Motorola g23 4gb 128 gb azul,electrodomesticos y tecnologia,celulares,celulares
-Celular libre Xiaomi REDMI10C 4gb 128gb verde,electrodomesticos y tecnologia,celulares,celulares
 Celular libre Samsung Galaxy A54 8GB 128GB menta,electrodomesticos y tecnologia,celulares,celulares
 Celular Libre Samsung GALAXY A04E 3GB 32GB copper,electrodomesticos y tecnologia,celulares,celulares
+Celular libre Xiaomi REDMI10C 4gb 128gb verde,electrodomesticos y tecnologia,celulares,celulares
 Celular Kodak seren d61l 2 32 gb gris,electrodomesticos y tecnologia,celulares,celulares
 Celular libre Motorola g13 4gb 64gb azul,electrodomesticos y tecnologia,celulares,celulares
 "Monitor led Chiq 27"" fhd hdmi vga",electrodomesticos y tecnologia,informatica,informatica
 "Monitor LED 32"" CHIQ / QHD/ HDMI/ 32F600",electrodomesticos y tecnologia,informatica,informatica
+Botella tinta Epson T544520-4P pack x 4 uni CMYK,electrodomesticos y tecnologia,informatica,informatica
 Impresora Multifuncion sist.cont. Canon wi-fi pixma g5010,electrodomesticos y tecnologia,informatica,informatica
 Mouse optico Maxell plata 5 botones mod 438418,electrodomesticos y tecnologia,informatica,informatica
-Impresora multifuncion Epson sistema continuo wi-fi Ecotank L3250 negro,electrodomesticos y tecnologia,informatica,informatica
 "Tablet 10"" Exo 4GB 64GB WAVE I101 T2",electrodomesticos y tecnologia,informatica,informatica
-Cable adaptador Noga audio miniplug negro,electrodomesticos y tecnologia,informatica,informatica
-Yogur bebible frutilla La SerenIsima clasico 900 g.,lacteos,yogures,Leche/ productos lacteos/ huevos y alimentos vegetales
+Tablet 7 Exo 2GB 16GB WAVE I726 A10,electrodomesticos y tecnologia,informatica,informatica
 Yogur entero natural Yogurisimo sin azucar 300 g.,lacteos,yogures,Leche/ productos lacteos/ huevos y alimentos vegetales
+Yogur bebible frutilla La SerenIsima clasico 900 g.,lacteos,yogures,Leche/ productos lacteos/ huevos y alimentos vegetales
 Yogur batido frutilla La Serenisima clasico 120 g.,lacteos,yogures,Leche/ productos lacteos/ huevos y alimentos vegetales
 Yogur descremado cremoso La serenisima 120 g.,lacteos,yogures,Leche/ productos lacteos/ huevos y alimentos vegetales
 Yogur entero cremoso La serenisima sabor vainilla 120 g.,lacteos,yogures,Leche/ productos lacteos/ huevos y alimentos vegetales
+Yogur griego Yogurisimo sabor frutilla en pote 125 g.,lacteos,yogures,Leche/ productos lacteos/ huevos y alimentos vegetales
 Yogur bebible durazno La SerenIsima clasico 900 g.,lacteos,yogures,Leche/ productos lacteos/ huevos y alimentos vegetales
-Yogur bebible Carrefour de frutilla classic 900 g.,lacteos,yogures,Leche/ productos lacteos/ huevos y alimentos vegetales
-Leche entera UAT Carrefour classic tetra 1 lt.,lacteos,leches,Leche/ productos lacteos/ huevos y alimentos vegetales
 Leche ultra entera Carrefour classic sachet 1 lt.,lacteos,leches,Leche/ productos lacteos/ huevos y alimentos vegetales
-Leche modificada en polvo Armonia 400 g.,lacteos,leches,Leche/ productos lacteos/ huevos y alimentos vegetales
-Leche en polvo entera Purisima avant 800 g.,lacteos,leches,Leche/ productos lacteos/ huevos y alimentos vegetales
+Leche multivitaminas 3% La Serenisima sachet 1 l.,lacteos,leches,Leche/ productos lacteos/ huevos y alimentos vegetales
 Leche La serenisima liviana 1% 1L,lacteos,leches,Leche/ productos lacteos/ huevos y alimentos vegetales
-Leche ulta parcial descremada Carrefour classic sachet 1 lt.,lacteos,leches,Leche/ productos lacteos/ huevos y alimentos vegetales
+Leche parcialmente descremada UAT Carrefour classic tetra 1 lt.,lacteos,leches,Leche/ productos lacteos/ huevos y alimentos vegetales
 Leche La serenisima clasica 3% 1L.,lacteos,leches,Leche/ productos lacteos/ huevos y alimentos vegetales
-Te en saquitos diamantado Taragui x 50 uni,desayuno,infusiones,Bebidas no alcoholicas
+Leche descremada larga vida La Serenisima cero lactosa 1 l.,lacteos,leches,Leche/ productos lacteos/ huevos y alimentos vegetales
+Leche descremada La Serenisima UAT proteinas 1 l.,lacteos,leches,Leche/ productos lacteos/ huevos y alimentos vegetales
 Cacao en polvo Nesquik 150 g.,desayuno,infusiones,Bebidas no alcoholicas
+Te en saquitos diamantado Taragui x 50 uni,desayuno,infusiones,Bebidas no alcoholicas
 Te de manzanilla en saquitos Carrefour 25 u.,desayuno,infusiones,Bebidas no alcoholicas
-Mate cocido Amanda 25 uni,desayuno,infusiones,Bebidas no alcoholicas
 Te en saquitos Green Hills 50 u.,desayuno,infusiones,Bebidas no alcoholicas
+Mate cocido Amanda 25 uni,desayuno,infusiones,Bebidas no alcoholicas
 Te en saquitos Carrefour sin TACC x 25 un.,desayuno,infusiones,Bebidas no alcoholicas
 Mate cocido saquitos diamantados Union x 50 uni,desayuno,infusiones,Bebidas no alcoholicas

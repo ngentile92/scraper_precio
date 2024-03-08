@@ -40,7 +40,7 @@ indice_mapping = {
         'vaca': 'Carnes y derivados'
     },
     'almacen': {
-        'pastas': 'Alimentos',
+        'pastas': 'Pan / pastas y cereales',
         'aceites': 'Aceites/ aderezos/ grasas y manteca',
         'conservas': 'Otros alimentos'
     },
@@ -69,7 +69,7 @@ indice_mapping = {
         'no alcoholica': 'Bebidas no alcoholicas'
     },
     'alimentos': {
-        'pan y lacteos': 'Pan y cereales',
+        'pan y lacteos': 'Pan / pastas y cereales',
         'aderezos': 'Aceites/ aderezos/ grasas y manteca',
         'carnes y huevo': 'Carnes y derivados',
         'otros': 'Otros alimentos'
@@ -89,9 +89,9 @@ producto_a_categoria = {
     'jardinera': 'Verduras/ tuberculos y legumbres',
     'garbanzos': 'Verduras/ tuberculos y legumbres',
     'atun': 'Pescados y mariscos',
-    'arroz': 'Pan y cereales',
-    'zucaritas': 'Pan y cereales',
-    'maiz': 'Pan y cereales',
+    'arroz': 'Pan / pastas y cereales',
+    'zucaritas': 'Pan / pastas y cereales',
+    'maiz': 'Pan / pastas y cereales',
     'soja': 'Leche/ productos lacteos/ huevos y alimentos vegetales',
     'duraznos': 'Frutas',
     'hamburguesa': 'Carnes y derivados',
@@ -260,18 +260,17 @@ def actualizar_categoria_con_palabra(df, columna_nombre_producto, columna_catego
 
 
 if __name__ == "__main__":
-    #with open('../url_productos_pruebas.csv', 'r') as f:
-    #    datos = datos = pd.read_csv(f, encoding='ISO-8859-1')
-    #    # Convertir a listas
-    #    url_list = datos['URL'].tolist()
-    #df = get_category(url_list)
-    #df = add_index_column(df)
+    with open('../url_productos_pruebas.csv', 'r') as f:
+        datos = datos = pd.read_csv(f, encoding='ISO-8859-1')
+        # Convertir a listas
+        url_list = datos['URL'].tolist()
+    df = get_category(url_list)
+    df = add_index_column(df)
 
     with open('../producto_categorias.csv', 'r') as f:
         datos = pd.read_csv(f, encoding='ISO-8859-1')
-    datos = add_index_column(datos)
     # update datos with the new columns
-    #datos = pd.concat([datos, df], axis=0)
+    datos = pd.concat([datos, df], axis=0)
     # drop duplicates
     datos = datos.drop_duplicates(subset='producto_unificado', keep='last')
     datos_actualizados = actualizar_categoria_con_palabra(datos, 'producto_unificado', 'Indice')
