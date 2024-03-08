@@ -53,14 +53,9 @@ def limpiar_y_estructurar_datos(dolar_info):
             compra = compra.replace('$', '').replace(',', '').replace('.', '')
             venta = venta.replace('$', '').replace(',', '').replace('.', '')
 
-            # Tratamiento especial para los precios del Banco Nación
-            if nombre == 'Banco Nación':
-                compra = compra[:-2] if len(compra) > 2 else compra
-                venta = venta[:-2] if len(venta) > 2 else venta
-
             # Conversión a float
-            compra = float(compra)
-            venta = float(venta)
+            compra = float(compra) / 100 if float(compra) > 10000 else float(compra)
+            venta = float(venta) / 100 if float(venta) > 10000 else float(venta)
 
             data_limpia[nombre] = {
                 'compra': compra,
@@ -68,6 +63,7 @@ def limpiar_y_estructurar_datos(dolar_info):
             }
 
     return {fecha_scrapeo: data_limpia}
+
 
 
 
