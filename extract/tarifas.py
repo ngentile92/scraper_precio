@@ -36,33 +36,37 @@ def extraer_enlaces_cuadros_tarifarios(url):
     driver.quit()
     return enlace_cuadro
 
-def obtener_html_con_selenium(enlace):
+def obtener_html_con_selenium(enlaces):
     chrome_options = Options()
     chrome_options.add_argument("--headless")
     print("Inicializando WebDriver de Chrome en modo headless...")
     
-    try:
-        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
-        print(f"Accediendo a {enlace}...")
-        
-        driver.get(enlace)
-        # Espera a que la página se cargue completamente. Ajusta el tiempo según sea necesario.
-        print("Esperando a que la página se cargue...")
-        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, "body")))
-        
-        print("Página cargada. Obteniendo el código fuente...")
-        html = driver.page_source
-        print("Código fuente obtenido con éxito.")
-        
-        return [html]
-    except Exception as e:
-        print(f"Error al obtener el HTML con Selenium: {e}")
-    finally:
-        print("Cerrando el WebDriver...")
-        driver.quit()
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
+    html_pages = []  # Lista para almacenar el HTML de cada página
     
-    print("No se pudo obtener el HTML. Retornando lista vacía.")
-    return []
+    # Asegurarse de que enlaces sea una lista
+    if not isinstance(enlaces, list):
+        enlaces = [enlaces]
+    
+    for enlace in enlaces:
+        try:
+            print(f"Accediendo a {enlace}...")
+            driver.get(enlace)
+            print("Esperando a que la página se cargue...")
+            WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, "body")))
+            print("Página cargada. Obteniendo el código fuente...")
+            html = driver.page_source
+            html_pages.append(html)
+            print("Código fuente obtenido con éxito.")
+        except Exception as e:
+            print(f"Error al obtener el HTML con Selenium para {enlace}: {e}")
+    
+    print("Cerrando el WebDriver...")
+    driver.quit()
+    
+    if not html_pages:
+        print("No se pudo obtener el HTML de ningún enlace. Retornando lista vacía.")
+    return html_pages
 
 
 
@@ -75,9 +79,10 @@ def procesar_html_para_usuarios_generales(enlace):
     print(htmls)
     for html in htmls:
         soup = BeautifulSoup(html, 'html.parser')
-
+        print(soup)
         # Buscar la fecha del cuadro tarifario
         cuadro_tarifario = soup.find('div', class_="bg-primary col-md-12 text-center")
+        print(cuadro_tarifario)
         if cuadro_tarifario:
             # Extraer la fecha del texto dentro del <h4>
             fecha_cuadro = cuadro_tarifario.find('h4').get_text(strip=True)

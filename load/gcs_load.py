@@ -189,7 +189,9 @@ def load_tarifas_to_db(json_data):
 
         # Parsear el JSON y cargar los datos
         for item in json_data:
+            print(item)
             fecha_str = item["Usuarios Generales"]["Fecha del Cuadro Tarifario"]
+            print(fecha_str)
             fecha = convertir_fecha(fecha_str)
             for proveedor in ["EDENOR", "EDESUR"]:
                 fijo = item["Usuarios Generales"][proveedor]["Fijo"].replace(',', '')
