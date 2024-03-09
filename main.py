@@ -59,8 +59,8 @@ def pipeline_tarifas_electricas():
     URL = "https://www.argentina.gob.ar/enre/cuadros_tarifarios"
     enlace_cuadro_tarifario = extraer_enlaces_cuadros_tarifarios(URL)
     resultados_globales = []
-    enlace_cuadro_tarifario = ["https://www.enre.gov.ar/web/TARIFASD.nsf/todoscuadros/4B0D920E8442B44003258AD6004ACEBA?opendocument",
-                               "https://www.enre.gov.ar/web/TARIFASD.nsf/todoscuadros/7242983470F67FBA03258ACC005427F9?opendocument",]
+    #enlace_cuadro_tarifario = ["https://www.enre.gov.ar/web/TARIFASD.nsf/todoscuadros/4B0D920E8442B44003258AD6004ACEBA?opendocument",
+    #                           "https://www.enre.gov.ar/web/TARIFASD.nsf/todoscuadros/7242983470F67FBA03258ACC005427F9?opendocument",]
     #enlace_cuadro_tarifario = [
     #    "https://www.enre.gov.ar/web/tarifasd.nsf/todoscuadros/EE287D6D2EC07DE70325894B00640A20?opendocument",
     #    "https://www.enre.gov.ar/web/TARIFASD.nsf/todoscuadros/6AF98FD8169DDCB403258966004CE1ED?opendocument",
