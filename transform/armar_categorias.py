@@ -5,8 +5,8 @@ from extract.db import fetch_data
 
 indice_mapping = {
     'electrodomesticos y tecnologia': {
-        'celulares': 'celulares',
-        'pequenos electrodomesticos': 'pequenos electrodomesticos',
+        'celulares': 'celulares y pequenos electrodomesticos',
+        'pequenos electrodomesticos': 'celulares y pequenos electrodomesticos',
         'informatica': 'informatica'
     },
     'fiambres y quesos': {
@@ -49,7 +49,7 @@ indice_mapping = {
         'verduras': 'Verduras/ tuberculos y legumbres'
     },
     'libreria': {
-        'cuadernos': 'cuadernos',
+        'cuadernos': 'libreria',
         'lapiceras': 'libreria',
         'lapices': 'libreria',
         'marcadores': 'libreria',
@@ -80,7 +80,7 @@ indice_mapping = {
     }
 }
 
-
+# pequenos electrodomesticos deberia ser celulares y pequenos electrodomesticos junto a celulares
 producto_a_categoria = {
     'tomate': 'Verduras/ tuberculos y legumbres',
     'papas': 'Verduras/ tuberculos y legumbres',
@@ -265,12 +265,13 @@ if __name__ == "__main__":
         # Convertir a listas
         url_list = datos['URL'].tolist()
     df = get_category(url_list)
-    df = add_index_column(df)
 
     with open('../producto_categorias.csv', 'r') as f:
         datos = pd.read_csv(f, encoding='ISO-8859-1')
     # update datos with the new columns
     datos = pd.concat([datos, df], axis=0)
+    datos = add_index_column(datos)
+
     # drop duplicates
     datos = datos.drop_duplicates(subset='producto_unificado', keep='last')
     datos_actualizados = actualizar_categoria_con_palabra(datos, 'producto_unificado', 'Indice')
