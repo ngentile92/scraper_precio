@@ -48,7 +48,7 @@ class Scraper:
 
     def scrap_website(self):
         page_number = 1
-        max_pages = 2
+        max_pages = 4
         estates = []
         estates_scraped = 0
         estates_quantity = self.get_estates_quantity()
