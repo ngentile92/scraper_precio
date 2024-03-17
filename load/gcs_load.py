@@ -248,12 +248,12 @@ def load_alquileres_to_db(df):
                 expensas = None  # Si no se puede convertir, establecer alquiler a None
             moneda_alquiler = row['price_type']
             moneda_expensas = row['expenses_type'] if pd.notnull(row['expenses_type']) else None
-
+            localidad = row['localidad']
             # SQL para insertar datos
-            sql = """INSERT INTO alquileres (url, date, alquiler, moneda_alquiler, expensas, moneda_expensas)
-                     VALUES (%s, %s, %s, %s, %s, %s);
+            sql = """INSERT INTO alquileres (url, date, alquiler, moneda_alquiler, expensas, moneda_expensas, localidad)
+                     VALUES (%s, %s, %s, %s, %s, %s, %s);
                   """
-            cursor.execute(sql, (url, date, alquiler, moneda_alquiler, expensas, moneda_expensas))
+            cursor.execute(sql, (url, date, alquiler, moneda_alquiler, expensas, moneda_expensas,localidad))
 
         # Confirmar cambios
         conn.commit()

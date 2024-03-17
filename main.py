@@ -111,6 +111,7 @@ def pipeline_zonaprop(should_save: bool = True) -> None:
         load_alquileres_to_db(final_df)
     else:
         final_df.to_csv('final_df.csv', index=False)
+
 def main() -> None:
 
 
