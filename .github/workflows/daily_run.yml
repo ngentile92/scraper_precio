@@ -7,7 +7,7 @@
   # Descomenta la siguiente sección si deseas ejecutar este workflow en un horario programado,
 #  schedule:
     # Ejecuta todos los días a las 12:00 UTC
-    - cron: '0 12 * * *'
+#    - cron: '0 12 * * *'
 
 #jobs:
 #  run-scraper:
