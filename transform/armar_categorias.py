@@ -1,4 +1,8 @@
 import datetime
+# add pathfile
+import sys
+sys.path.append('../')
+
 from extract.precios import get_store_name_from_url, extract_multiple_prices_and_names_selenium, get_type_store
 import pandas as pd
 from extract.db import fetch_data
@@ -260,13 +264,13 @@ def actualizar_categoria_con_palabra(df, columna_nombre_producto, columna_catego
 
 
 if __name__ == "__main__":
-    with open('../url_productos_pruebas.csv', 'r') as f:
+    with open('url_productos_pruebas.csv', 'r') as f:
         datos = datos = pd.read_csv(f, encoding='ISO-8859-1')
         # Convertir a listas
         url_list = datos['URL'].tolist()
     df = get_category(url_list)
 
-    with open('../producto_categorias.csv', 'r') as f:
+    with open('producto_categorias.csv', 'r') as f:
         datos = pd.read_csv(f, encoding='ISO-8859-1')
     # update datos with the new columns
     datos = pd.concat([datos, df], axis=0)
