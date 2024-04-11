@@ -7,7 +7,8 @@ import json
 
 def extract_BCRA_info(url: str ='https://www.bcra.gob.ar/PublicacionesEstadisticas/Principales_variables.asp') -> json:
     # Realizamos la petición a la web
-    response = requests.get(url)
+    response = requests.get(url, verify=False)
+    print(f"{response.status_code} status")
 
     # Verificamos que la petición se haya realizado correctamente con response.status_code == 200
     if response.status_code == 200:
@@ -55,6 +56,9 @@ def clean_json_data(json_data):
     return cleaned_data
 
 def process_BCRA():
+    print("Extrayendo información de BCRA...")
     data_json = extract_BCRA_info()
+    print("Información extraída con éxito.")
     data_json = clean_json_data(data_json)
+    print("Datos limpios.")
     return data_json
