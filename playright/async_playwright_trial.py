@@ -3,6 +3,9 @@
 import asyncio
 from playwright.async_api import async_playwright
 import re
+import datetime
+import json
+import pandas as pd
 
 STORE_SINGLE_SELECTORS = {
     'disco': 'discoargentina-store-theme-1dCOMij_MzTzZOCohX1K7w',
@@ -51,6 +54,19 @@ POPUP_SELECTORS = [
 ]
 next_button_selector = 'div.valtech-carrefourar-search-result-0-x-paginationButtonChangePage:last-child button'
 
+
+def transform_data(data, url):
+    today = datetime.datetime.now().strftime("%d/%m/%Y")
+    store_name = get_store_name_from_url(url)
+    formatted_data = {today: {store_name: {}}}
+
+    for product in data:
+        product_name = product['name']
+        cleaned_price = re.sub(r'[^\d.,]', '', product['price']).replace('.', '').replace(',', '.')
+        price_number = float(re.search(r'\d+(\.\d+)?', cleaned_price).group(0)) if re.search(r'\d+(\.\d+)?', cleaned_price) else None
+        formatted_data[today][store_name][product_name] = price_number
+
+    return formatted_data
 def get_store_name_from_url(url):
     store_domains = {
         'disco.com.ar': 'disco',
@@ -74,9 +90,6 @@ class StorePage:
     def __init__(self, page, max_pages=None):
         self.page = page
         self.max_pages = max_pages
-
-
-
 
     async def extract_price(self, url):
         store_name = get_store_name_from_url(url)
@@ -110,36 +123,49 @@ class StorePage:
                 print(f"No se pudo cerrar pop-up con {selector}: {str(e)}")
 
     async def navigate_and_extract(self, url):
+        # Limpiar cookies y permisos antes de iniciar la navegación
+        await self.page.context.clear_cookies()
+        await self.page.context.clear_permissions()
+
         await self.page.goto(url, wait_until="networkidle")
         data = []
         pages_visited = 0
 
         while True:
-            await self.close_popups()  # Cierra pop-ups antes de intentar extraer datos o navegar
+            await self.close_popups()
 
+            # Extraer datos de la página actual
             current_data = await self.extract_multiple_prices_and_names(url)
-            if current_data:
-                # Evitar duplicados añadiendo solo nuevos productos
-                for product in current_data:
-                    if product not in data:
-                        data.append(product)
+            for product in current_data:
+                if product not in data:
+                    data.append(product)
 
             pages_visited += 1
             if self.max_pages is not None and pages_visited >= self.max_pages:
                 break
 
-            # Selector mejorado para el botón "Siguiente"
+            # Intentar navegar a la siguiente página
             next_button = await self.page.query_selector(next_button_selector)
             if next_button and await next_button.is_visible() and await next_button.is_enabled():
+                # Guardar la URL actual antes de hacer clic
+                current_url = self.page.url
                 await next_button.click()
-                # Espera a que la página siguiente cargue completamente
                 await self.page.wait_for_load_state('networkidle')
-                await asyncio.sleep(3)  # Dar tiempo adicional para asegurar la carga
+
+                # Comprobar si la URL ha cambiado después de navegar
+                new_url = self.page.url
+                if new_url == current_url:
+                    print("La página no ha cambiado después de hacer clic en 'Siguiente'.")
+                else:
+                    await asyncio.sleep(3)  # Esperar para asegurar que la nueva página se ha cargado completamente
             else:
                 print("No se encontró el botón 'Siguiente' o no está disponible.")
                 break
 
-        return data            
+        print(f"Total de productos únicos extraídos: {len(data)}")
+        transformed_data = transform_data(data, url)
+        return transformed_data
+
     async def extract_multiple_prices_and_names(self, url):
         store_name = get_store_name_from_url(url)
         if store_name not in STORE_MULT_SELECTORS:
@@ -180,22 +206,34 @@ class StorePage:
         
         return products
 
-
+def merge_data(all_data, new_data):
+    for date, stores in new_data.items():
+        if date not in all_data:
+            all_data[date] = stores
+        else:
+            for store, products in stores.items():
+                if store not in all_data[date]:
+                    all_data[date][store] = products
+                else:
+                    all_data[date][store].update(products)
 
 async def main():
+    with open('url_productos_pruebas.csv', 'r') as f:
+        datos = pd.read_csv(f, encoding='ISO-8859-1')
+        url_list = datos['URL'].tolist()
+
+    all_data = {}
     async with async_playwright() as p:
-        browser = await p.chromium.launch(headless=False, args=['--no-sandbox', '--disable-setuid-sandbox'])
-        page = await browser.new_page()
-        store_page = StorePage(page, max_pages=2)
-        # Example usage
-        type_of_store = get_type_store('https://www.carrefour.com.ar/Almacen/Pastas-secas?order=')
-        if type_of_store == 'all':
-            products = await store_page.navigate_and_extract('https://www.carrefour.com.ar/Almacen/Pastas-secas?order=')
-            print(products)
-        else:
-            price = await store_page.extract_price('https://www.carrefour.com.ar/fideos-monos-matarazzo-500-g/p')
-            print(price)
+        browser = await p.chromium.launch(headless=True, args=['--no-sandbox', '--disable-setuid-sandbox'])
+        for url in url_list:
+            page = await browser.new_page()
+            store_page = StorePage(page, max_pages=4)
+            formatted_data = await store_page.navigate_and_extract(url)
+            merge_data(all_data, formatted_data)
+            await page.close()
         await browser.close()
+
+    print(json.dumps(all_data, indent=4))
 
 if __name__ == '__main__':
     asyncio.run(main())
