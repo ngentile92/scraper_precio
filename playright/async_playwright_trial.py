@@ -6,6 +6,7 @@ import re
 import datetime
 import json
 import pandas as pd
+import unicodedata
 
 STORE_SINGLE_SELECTORS = {
     'disco': 'discoargentina-store-theme-1dCOMij_MzTzZOCohX1K7w',
@@ -53,20 +54,32 @@ POPUP_SELECTORS = [
     # Añade más selectores según los necesites
 ]
 next_button_selector = 'div.valtech-carrefourar-search-result-0-x-paginationButtonChangePage:last-child button'
-
+def normalize_text(text):
+    # Normalizar el texto para reemplazar caracteres con tilde y ñ
+    text = unicodedata.normalize('NFD', text)  # Descomponer en caracteres y diacríticos
+    text = text.encode('ascii', 'ignore')  # Convertir a ASCII y omitir errores
+    text = text.decode('utf-8')  # Decodificar de vuelta a UTF-8
+    return text
 
 def transform_data(data, url):
+    all_data = {}
     today = datetime.datetime.now().strftime("%d/%m/%Y")
     store_name = get_store_name_from_url(url)
-    formatted_data = {today: {store_name: {}}}
+
+    # Asegúrate de que existen las claves necesarias en el diccionario all_data
+    if today not in all_data:
+        all_data[today] = {}
+    if store_name not in all_data[today]:
+        all_data[today][store_name] = {}
 
     for product in data:
-        product_name = product['name']
+        product_name = normalize_text(product['name'])
         cleaned_price = re.sub(r'[^\d.,]', '', product['price']).replace('.', '').replace(',', '.')
         price_number = float(re.search(r'\d+(\.\d+)?', cleaned_price).group(0)) if re.search(r'\d+(\.\d+)?', cleaned_price) else None
-        formatted_data[today][store_name][product_name] = price_number
+        all_data[today][store_name][product_name] = price_number
 
-    return formatted_data
+    return all_data
+
 def get_store_name_from_url(url):
     store_domains = {
         'disco.com.ar': 'disco',
