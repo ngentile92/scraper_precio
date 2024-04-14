@@ -19,41 +19,47 @@ STORE_MULT_SELECTORS = {
     # Actualiza los selectores según sea necesario
     'levis': {
         'price': 'vtex-product-price-1-x-sellingPriceValue',
-        'name': '.vtex-product-summary-2-x-productBrand.vtex-product-summary-2-x-brandName.t-body'
+        'name': '.vtex-product-summary-2-x-productBrand.vtex-product-summary-2-x-brandName.t-body',
+        'next_button': 'div.vtex-search-result-3-x-gallery.vtex-search-result-3-x-gallery--normal .vtex-button__label'
     },
     'carrefour': {
         'price': '.valtech-carrefourar-search-result-0-x-gallery .valtech-carrefourar-product-price-0-x-sellingPriceValue',
-        'name': '.valtech-carrefourar-search-result-0-x-gallery .vtex-product-summary-2-x-productBrand.vtex-product-summary-2-x-brandName.t-body'
+        'name': '.valtech-carrefourar-search-result-0-x-gallery .vtex-product-summary-2-x-productBrand.vtex-product-summary-2-x-brandName.t-body',
+        'next_button' : 'div.valtech-carrefourar-search-result-0-x-paginationButtonChangePage:last-child button'
     },
     'disco': {
-        'price': 'discoargentina-store-theme-1dCOMij_MzTzZOCohX1K7w',
-        'name': '.vtex-product-summary-2-x-productBrand.vtex-product-summary-2-x-brandName.t-body'
+        'price': '#priceContainer',
+        'name': 'span.vtex-product-summary-2-x-productBrand.vtex-product-summary-2-x-brandName.t-body',
+        'next_button': 'div.discoargentina-search-result-custom-1-x-new-btn button:not([class*="clicked"])'
     },
     'fravega': {
-        'price': '[data-test-id="product-price"] .sc-66d25270-0.eiLwiO',
+        'price': 'div[data-test-id="product-price"] .sc-66d25270-0.eiLwiO',  
         'name': '.sc-ca346929-0',
+        'next_button': 'a[data-test-id="pagination-next-button"]'
     },
     'musimundo': {
-        'price': 'span.mus-pro-price-number span',
-        'name': 'h3.mus-pro-name a[data-test-plp="item_name"]',
+        'price': '[data-test-item-price="item_price"] > span',
+        'name': 'a[data-test-plp="item_name"]',
+        'next_button': 'a[data-test-next-page-btn="next_page_btn"]'
     },
     'zonaprop': {
-        'price': '[data-qa="POSTING_CARD_PRICE"]',  # Actualizado para uso de atributos
-        'name': '[data-qa="POSTING_CARD_LOCATION"]',  # Actualizado para uso de atributos
+        'price': '[data-qa="POSTING_CARD_PRICE"]',
+        'name': '[data-qa="POSTING_CARD_LOCATION"]',
+        'next_button': 'div.vtex-search-result-3-x-gallery.vtex-search-result-3-x-gallery--normal .vtex-button__label'
     }
 }
 
 # Configuraciones de pop-ups
 POPUP_SELECTORS = [
-    '.valtech-carrefourar-minicart-repeat-order-0-x-closeDrawer',  # Ejemplo Carrefour
-    '.close-popup',  # Ejemplo genérico para otro tipo de pop-up
-    '.modal-close',  # Otro posible botón de cierre
-    '[data-action="close-popup"]',  # Atributo específico para cierre
-    '.onetrust-close-btn-handler',  # Ejemplo de cierre de pop-up de cookies
+    '.valtech-carrefourar-minicart-repeat-order-0-x-closeDrawer', 
+    '.close-popup',
+    '.modal-close',
+    '[data-action="close-popup"]',
+    '.onetrust-close-btn-handler',
     '.dy-lb-close',
-    # Añade más selectores según los necesites
+    '#btnNoIdWpnPush',
+    'button[data-test-id="close-modal-button"]'
 ]
-next_button_selector = 'div.valtech-carrefourar-search-result-0-x-paginationButtonChangePage:last-child button'
 def normalize_text(text):
     # Normalizar el texto para reemplazar caracteres con tilde y ñ
     text = unicodedata.normalize('NFD', text)  # Descomponer en caracteres y diacríticos
@@ -141,6 +147,8 @@ class StorePage:
         await self.page.context.clear_permissions()
 
         await self.page.goto(url, wait_until="networkidle")
+        store_name = get_store_name_from_url(url)
+
         data = []
         pages_visited = 0
 
@@ -156,25 +164,36 @@ class StorePage:
             pages_visited += 1
             if self.max_pages is not None and pages_visited >= self.max_pages:
                 break
-
-            # Intentar navegar a la siguiente página
-            next_button = await self.page.query_selector(next_button_selector)
-            if next_button and await next_button.is_visible() and await next_button.is_enabled():
-                # Guardar la URL actual antes de hacer clic
-                current_url = self.page.url
-                await next_button.click()
-                await self.page.wait_for_load_state('networkidle')
-
-                # Comprobar si la URL ha cambiado después de navegar
-                new_url = self.page.url
-                if new_url == current_url:
-                    print("La página no ha cambiado después de hacer clic en 'Siguiente'.")
+            if store_name == 'disco':
+                # Lógica especial para Disco
+                next_page_buttons = await self.page.query_selector_all(STORE_MULT_SELECTORS['disco']['next_button'])
+                if pages_visited < len(next_page_buttons):
+                    await next_page_buttons[pages_visited - 1].click()  # Clickea el botón de la siguiente página
+                    await self.page.wait_for_load_state('networkidle')
+                    await asyncio.sleep(3)
                 else:
-                    await asyncio.sleep(3)  # Esperar para asegurar que la nueva página se ha cargado completamente
+                    print("No más páginas disponibles o límite alcanzado para Disco.")
+                    break
             else:
-                print("No se encontró el botón 'Siguiente' o no está disponible.")
-                break
 
+                # Intentar navegar a la siguiente página
+                next_button_selector = STORE_MULT_SELECTORS.get(store_name, {}).get('next_button', '')
+                next_button = await self.page.query_selector(next_button_selector)
+                if next_button and await next_button.is_visible() and await next_button.is_enabled():
+                    # Guardar la URL actual antes de hacer clic
+                    current_url = self.page.url
+                    await next_button.click()
+                    await self.page.wait_for_load_state('networkidle')
+
+                    # Comprobar si la URL ha cambiado después de navegar
+                    new_url = self.page.url
+                    if new_url == current_url:
+                        print("La página no ha cambiado después de hacer clic en 'Siguiente'.")
+                    else:
+                        await asyncio.sleep(3)  # Esperar para asegurar que la nueva página se ha cargado completamente
+                else:
+                    print(f"No se encontró el botón 'Siguiente' o no está disponible de la store {store_name}. usando el selector {next_button_selector}")
+                    break
         print(f"Total de productos únicos extraídos: {len(data)}")
         transformed_data = transform_data(data, url)
         return transformed_data
@@ -240,7 +259,7 @@ async def main():
         browser = await p.chromium.launch(headless=True, args=['--no-sandbox', '--disable-setuid-sandbox'])
         for url in url_list:
             page = await browser.new_page()
-            store_page = StorePage(page, max_pages=4)
+            store_page = StorePage(page, max_pages=3)
             formatted_data = await store_page.navigate_and_extract(url)
             merge_data(all_data, formatted_data)
             await page.close()

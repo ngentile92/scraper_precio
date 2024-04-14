@@ -6,6 +6,10 @@ sys.path.append('../')
 from extract.precios import get_store_name_from_url, extract_multiple_prices_and_names_selenium, get_type_store
 import pandas as pd
 from extract.db import fetch_data
+from playright.async_playwright_trial import StorePage
+import asyncio
+from playwright.async_api import async_playwright
+
 
 indice_mapping = {
     'electrodomesticos y tecnologia': {
@@ -200,33 +204,37 @@ def extract_subcategory(url):
         return 'otro'
 
 
-def get_category(urls: list):
-    """
-    Función que devuelve un dataframe con el producto, categoría y subcategoría.
-    """
+async def get_category(urls: list):
     all_data = []
-    for url in urls:
-        store_name = get_store_name_from_url(url)
-        type_url = get_type_store(url)
-        category = extract_category(url)  # Asume que esta función devuelve la categoría del producto
-        subcategory = extract_subcategory(url)  # Asume que esta función devuelve la subcategoría del producto
-        if type_url == 'all':
-            products_data = extract_multiple_prices_and_names_selenium(url, store_name)
-            if products_data:
-                for product in products_data:
-                    product_name = product['name']
-                    # Poblamos all_data con nombre del producto, categoría y subcategoría
-                    all_data.append({
-                        'producto_unificado': product_name,
-                        'categorias': category,
-                        'sub-categoria': subcategory
-                    })
-                    print(f"de {url} esta el Producto: {product_name}, Categoría: {category}, Subcategoría: {subcategory}")
-        else:
-            continue
-    # Convertimos all_data a un DataFrame
+    async with async_playwright() as p:
+        browser = await p.chromium.launch(headless=True, args=['--no-sandbox', '--disable-setuid-sandbox'])
+        for url in urls:
+            page = await browser.new_page()
+            store_name = get_store_name_from_url(url)
+            type_url = get_type_store(url)
+            category = extract_category(url)
+            subcategory = extract_subcategory(url)
+
+            if type_url == 'all':
+                store_page = StorePage(page, max_pages=3)
+                products_data = await store_page.navigate_and_extract(url)
+                if products_data:
+                    for date, stores in products_data.items():
+                        for store, products in stores.items():
+                            for product_name, price in products.items():
+                                # Añadir datos al DataFrame
+                                all_data.append({
+                                    'producto_unificado': product_name,
+                                    'categorias': category,
+                                    'sub-categoria': subcategory
+                                })
+                                print(f"de {url} esta el Producto: {product_name}, Categoría: {category}, Subcategoría: {subcategory}")
+            await page.close()
+        await browser.close()
+
     df = pd.DataFrame(all_data)
     return df
+
 def get_index(category, subcategory):
     """
     Función que busca la tercera categoría 'Índice' basado en la categoría y subcategoría.
@@ -263,22 +271,30 @@ def actualizar_categoria_con_palabra(df, columna_nombre_producto, columna_catego
 
 
 
-if __name__ == "__main__":
+
+
+async def main():
     with open('url_productos_pruebas.csv', 'r') as f:
-        datos = datos = pd.read_csv(f, encoding='ISO-8859-1')
-        # Convertir a listas
+        datos = pd.read_csv(f, encoding='ISO-8859-1')
         url_list = datos['URL'].tolist()
-    df = get_category(url_list)
+
+    df = await get_category(url_list)
 
     with open('producto_categorias.csv', 'r') as f:
         datos = pd.read_csv(f, encoding='ISO-8859-1')
-    # update datos with the new columns
+
     datos = pd.concat([datos, df], axis=0)
     datos = add_index_column(datos)
-
+    print("Datos actualizados: ", datos)
     # drop duplicates
     datos = datos.drop_duplicates(subset='producto_unificado', keep='last')
     datos_actualizados = actualizar_categoria_con_palabra(datos, 'producto_unificado', 'Indice')
+    print("Datos actualizados con palabras clave: ", datos_actualizados)
 
     #save datos
-    datos_actualizados.to_csv('../producto_categorias.csv', index=False, encoding='ISO-8859-1')
+    print("Guardando datos actualizados...")
+    datos_actualizados.to_csv('producto_categorias.csv', index=False, encoding='ISO-8859-1')
+    print("Datos guardados")
+
+if __name__ == "__main__":
+    asyncio.run(main())
