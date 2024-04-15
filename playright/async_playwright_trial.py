@@ -1,65 +1,14 @@
 ##### HAY QUE EJECUTAR ESTE CODIGO ANTES PARA QUE ANDE TODO playwright install
 
+import re
 import asyncio
 from playwright.async_api import async_playwright
-import re
 import datetime
 import json
 import pandas as pd
 import unicodedata
+from playright.selectors import STORE_SINGLE_SELECTORS, STORE_MULT_SELECTORS, POPUP_SELECTORS
 
-STORE_SINGLE_SELECTORS = {
-    'disco': 'discoargentina-store-theme-1dCOMij_MzTzZOCohX1K7w',
-    'carrefour': 'valtech-carrefourar-product-price-0-x-sellingPriceValue',
-    'chango_mas': 'valtech-gdn-dynamic-product-0-x-dynamicProductPrice',
-    'MELI': 'andes-money-amount__fraction',
-    'dexter': 'value'
-}
-STORE_MULT_SELECTORS = {
-    # Actualiza los selectores según sea necesario
-    'levis': {
-        'price': 'vtex-product-price-1-x-sellingPriceValue',
-        'name': '.vtex-product-summary-2-x-productBrand.vtex-product-summary-2-x-brandName.t-body',
-        'next_button': 'div.vtex-search-result-3-x-gallery.vtex-search-result-3-x-gallery--normal .vtex-button__label'
-    },
-    'carrefour': {
-        'price': '.valtech-carrefourar-search-result-0-x-gallery .valtech-carrefourar-product-price-0-x-sellingPriceValue',
-        'name': '.valtech-carrefourar-search-result-0-x-gallery .vtex-product-summary-2-x-productBrand.vtex-product-summary-2-x-brandName.t-body',
-        'next_button' : 'div.valtech-carrefourar-search-result-0-x-paginationButtonChangePage:last-child button'
-    },
-    'disco': {
-        'price': '#priceContainer',
-        'name': 'span.vtex-product-summary-2-x-productBrand.vtex-product-summary-2-x-brandName.t-body',
-        'next_button': 'div.discoargentina-search-result-custom-1-x-new-btn button:not([class*="clicked"])'
-    },
-    'fravega': {
-        'price': 'div[data-test-id="product-price"] .sc-66d25270-0.eiLwiO',  
-        'name': '.sc-ca346929-0',
-        'next_button': 'a[data-test-id="pagination-next-button"]'
-    },
-    'musimundo': {
-        'price': '[data-test-item-price="item_price"] > span',
-        'name': 'a[data-test-plp="item_name"]',
-        'next_button': 'a[data-test-next-page-btn="next_page_btn"]'
-    },
-    'zonaprop': {
-        'price': '[data-qa="POSTING_CARD_PRICE"]',
-        'name': '[data-qa="POSTING_CARD_LOCATION"]',
-        'next_button': 'div.vtex-search-result-3-x-gallery.vtex-search-result-3-x-gallery--normal .vtex-button__label'
-    }
-}
-
-# Configuraciones de pop-ups
-POPUP_SELECTORS = [
-    '.valtech-carrefourar-minicart-repeat-order-0-x-closeDrawer', 
-    '.close-popup',
-    '.modal-close',
-    '[data-action="close-popup"]',
-    '.onetrust-close-btn-handler',
-    '.dy-lb-close',
-    '#btnNoIdWpnPush',
-    'button[data-test-id="close-modal-button"]'
-]
 def normalize_text(text):
     # Normalizar el texto para reemplazar caracteres con tilde y ñ
     text = unicodedata.normalize('NFD', text)  # Descomponer en caracteres y diacríticos
@@ -112,8 +61,8 @@ class StorePage:
 
     async def extract_price(self, url):
         store_name = get_store_name_from_url(url)
-        max_retries = 5
-        retry_wait = 3
+        max_retries = 2
+        retry_wait = 1
         for attempt in range(max_retries):
             try:
                 await self.page.goto(url)
@@ -169,7 +118,12 @@ class StorePage:
                 next_page_buttons = await self.page.query_selector_all(STORE_MULT_SELECTORS['disco']['next_button'])
                 if pages_visited < len(next_page_buttons):
                     await next_page_buttons[pages_visited - 1].click()  # Clickea el botón de la siguiente página
-                    await self.page.wait_for_load_state('networkidle')
+                    try:
+                        await self.page.wait_for_load_state('networkidle', timeout=30000)
+                    except TimeoutError:
+                        print("Timeout alcanzado, continuando con la siguiente página")
+                        continue
+
                     await asyncio.sleep(3)
                 else:
                     print("No más páginas disponibles o límite alcanzado para Disco.")
@@ -183,7 +137,11 @@ class StorePage:
                     # Guardar la URL actual antes de hacer clic
                     current_url = self.page.url
                     await next_button.click()
-                    await self.page.wait_for_load_state('networkidle')
+                    try:
+                        await self.page.wait_for_load_state('networkidle', timeout=30000)
+                    except TimeoutError:
+                        print("Timeout alcanzado, continuando con la siguiente página")
+                        return data
 
                     # Comprobar si la URL ha cambiado después de navegar
                     new_url = self.page.url
@@ -205,8 +163,11 @@ class StorePage:
             return []
 
         # Asegúrate de que la página ha cargado completamente
-        await self.page.wait_for_load_state('networkidle')
-
+        try:
+            await self.page.wait_for_load_state('networkidle', timeout=30000)
+        except TimeoutError:
+            print("Timeout alcanzado, continuando con la siguiente página")
+            return []
         # Realiza scrolling para asegurar que todos los elementos se carguen
         last_height = await self.page.evaluate("document.body.scrollHeight")
         while True:
@@ -219,8 +180,8 @@ class StorePage:
 
         # Espera explícita por los selectores de precios y nombres
         try:
-            await self.page.wait_for_selector(STORE_MULT_SELECTORS[store_name]['price'], state="visible", timeout=10000)
-            await self.page.wait_for_selector(STORE_MULT_SELECTORS[store_name]['name'], state="visible", timeout=10000)
+            await self.page.wait_for_selector(STORE_MULT_SELECTORS[store_name]['price'], state="visible", timeout=5000)
+            await self.page.wait_for_selector(STORE_MULT_SELECTORS[store_name]['name'], state="visible", timeout=5000)
         except Exception as e:
             print(f"Error esperando los selectores: {e}")
             return []
