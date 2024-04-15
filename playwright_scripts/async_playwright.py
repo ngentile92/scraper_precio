@@ -5,7 +5,8 @@ import datetime
 import json
 import re
 import unicodedata
-
+import random
+import time
 import pandas as pd
 
 from load.gcs_load import load_data_to_db
@@ -97,7 +98,13 @@ class StorePage:
                 print(f"No se pudo cerrar pop-up con {selector}: {str(e)}")
 
     async def navigate_and_extract(self, url):
+        await asyncio.sleep(random.uniform(1, 5))  # Espera de 1 a 5 segundos de manera aleatoria
         try:
+            # Configurar headers HTTP para la página
+            await self.page.set_extra_http_headers({
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36',
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+            })
             # Limpiar cookies y permisos antes de iniciar la navegación
             await self.page.context.clear_cookies()
             await self.page.context.clear_permissions()
@@ -126,7 +133,7 @@ class StorePage:
                     if pages_visited < len(next_page_buttons):
                         await next_page_buttons[pages_visited - 1].click()  # Clickea el botón de la siguiente página
                         try:
-                            await self.page.wait_for_load_state('networkidle', timeout=80000)
+                            await self.page.wait_for_load_state('networkidle', timeout=50000)
                         except TimeoutError:
                             print("Timeout alcanzado, continuando con la siguiente página")
                             continue
