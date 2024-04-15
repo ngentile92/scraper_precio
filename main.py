@@ -4,6 +4,12 @@ Archivo principal de lógica del programa
 import json
 import argparse
 import pandas as pd
+import asyncio
+import pandas as pd
+from playwright.async_api import async_playwright
+
+from playwright_scripts.async_playwright_trial import StorePage  # Asegúrate de ajustar el import según la ubicación de tu módulo
+from playwright_scripts.async_playwright_trial import merge_data, transform_data  # Asegúrate de que estas funciones están correctamente definidas en algún módulo
 
 from extract.precios import process_all
 from extract.dolar import scrapeo_dolar
@@ -12,29 +18,29 @@ from load.gcs_load import load_data_to_db, load_dolar_to_db, load_bcra_to_db, lo
 from extract.tarifas import extraer_enlaces_cuadros_tarifarios, procesar_html_para_usuarios_generales, limpiar_titulos
 from zonaprop_scraping import procesar_zonaprop
 
-# add filepath C:\Users\nagge\Desktop\Nico\scraper_precio\zona-prop-scraper to sys.path
-def pipeline_supermercados():
+async def pipeline_supermercados():
     """
     Función que ejecuta el pipeline de supermercados
     - Scrapea los datos de las URLs provistas en el .csv
     - Carga los datos en la base de datos
     """
-    # Extraer los datos de las URLs
-    # Open csv file
-    with open('url_productos.csv', 'r') as f:
-        datos = datos = pd.read_csv(f, encoding='ISO-8859-1')
-        # Convertir a listas
-        url_list = datos['URL'].tolist()
+    datos = pd.read_csv('url_productos_pruebas.csv', encoding='ISO-8859-1')
 
-    # Extraer los nombres de los productos
-    product_names_unified = datos['producto_unificado'].tolist()
-    # Extraer los precios de las URLs para cada producto
-    data_json = process_all(url_list, product_names_unified)
+    all_data = {}
+    async with async_playwright() as p:
+        browser = await p.chromium.launch(headless=True, args=['--no-sandbox', '--disable-setuid-sandbox', '--user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36"'])
+        for index, row in datos.iterrows():
+            page = await browser.new_page()
+            max_pages = int(row['cantidad_paginas'])  # Convierte a entero para asegurar la correcta manipulación
+            store_page = StorePage(page, max_pages=max_pages)
+            formatted_data = await store_page.navigate_and_extract(row['URL'])
+            merge_data(all_data, formatted_data)
+            await page.close()
+        await browser.close()
 
-    print(data_json)
+    load_data_to_db(all_data)
 
-    # Cargar los datos en la base de datos
-    load_data_to_db(data_json)
+
 
 def pipeline_dolar():
     """
@@ -155,7 +161,7 @@ def main() -> None:
     args = parser.parse_args()
 
     if args.supermercados:
-        pipeline_supermercados()
+        asyncio.run(pipeline_supermercados())
     elif args.dolar:
         pipeline_dolar()
     elif args.bcra:
@@ -169,7 +175,7 @@ def main() -> None:
     elif args.correr_todo:
         pipeline_dolar()
         pipeline_BCRA()
-        pipeline_supermercados()
+        asyncio.run(pipeline_supermercados())
     else:
         print("Debe especificar el pipeline a ejecutar")
         parser.print_help()

@@ -232,7 +232,7 @@ async def main():
     all_data = {}
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=True, args=['--no-sandbox', '--disable-setuid-sandbox','--user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36"'])
-        for index,row in datos.iterrows():
+        for index, row in datos.iterrows():
             page = await browser.new_page()
             max_pages = row['cantidad_paginas']
             store_page = StorePage(page, max_pages=max_pages)
@@ -241,7 +241,6 @@ async def main():
             await page.close()
         await browser.close()
 
-    # FORMAT JSON TO PRINT IT
     load_data_to_db(all_data)
 
 if __name__ == '__main__':
