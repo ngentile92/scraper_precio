@@ -7,7 +7,7 @@ import re
 from extract.precios import get_store_name_from_url, extract_multiple_prices_and_names_selenium, get_type_store
 import pandas as pd
 from extract.db import fetch_data
-from playwright_scripts.async_playwright_trial import StorePage
+from playwright_scripts.async_playwright import StorePage
 import asyncio
 from playwright.async_api import async_playwright
 from transform.mappings_categorias import CATEGORIA_MAPPING, SUBCATEGORIA_MAPPING, INDICE_MAPPING, PRODUCTO_A_CATEGORIA

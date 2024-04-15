@@ -8,8 +8,8 @@ import asyncio
 import pandas as pd
 from playwright.async_api import async_playwright
 
-from playwright_scripts.async_playwright_trial import StorePage  # Asegúrate de ajustar el import según la ubicación de tu módulo
-from playwright_scripts.async_playwright_trial import merge_data, transform_data  # Asegúrate de que estas funciones están correctamente definidas en algún módulo
+from playwright_scripts.async_playwright import StorePage  # Asegúrate de ajustar el import según la ubicación de tu módulo
+from playwright_scripts.async_playwright import merge_data, transform_data  # Asegúrate de que estas funciones están correctamente definidas en algún módulo
 
 from extract.precios import process_all
 from extract.dolar import scrapeo_dolar
@@ -24,7 +24,7 @@ async def pipeline_supermercados():
     - Scrapea los datos de las URLs provistas en el .csv
     - Carga los datos en la base de datos
     """
-    datos = pd.read_csv('url_productos_pruebas.csv', encoding='ISO-8859-1')
+    datos = pd.read_csv('url_productos.csv', encoding='ISO-8859-1')
 
     all_data = {}
     async with async_playwright() as p:
