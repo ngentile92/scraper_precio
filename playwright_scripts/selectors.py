@@ -37,7 +37,12 @@ STORE_MULT_SELECTORS = {
         'price': '[data-qa="POSTING_CARD_PRICE"]',
         'name': '[data-qa="POSTING_CARD_LOCATION"]',
         'next_button': 'div.vtex-search-result-3-x-gallery.vtex-search-result-3-x-gallery--normal .vtex-button__label'
-    }
+    },
+    'dexter': {
+        'price': '.sales .value',
+        'name': 'a.link',
+        'next_button': 'div.show-more button.more'
+    },
 }
 
 # Configuraciones de pop-ups
@@ -50,5 +55,5 @@ POPUP_SELECTORS = [
     '.dy-lb-close',
     '#btnNoIdWpnPush',
     'button[data-test-id="close-modal-button"]',
-    '.vtex-modal-layout-0-x-closeButtonLabel--modal-newsletter'  # Nuevo selector añadido
+    '.vtex-modal-layout-0-x-closeButtonLabel--modal-newsletter'
 ]

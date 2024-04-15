@@ -1,16 +1,61 @@
-URL,producto_unificado
-https://www.musimundo.com/audio-tv-video/televisores/c/57?sort=relevance&q=%3AtopRated#, tv
-https://www.musimundo.com/telefonia/telefonos-celulares/c/82?sort=relevance&q=%3AtopRated#, celular
-https://www.musimundo.com/informatica/notebook/c/98?sort=relevance&q=%3AtopRated#, notebook
-https://www.musimundo.com/climatizacion/aire-acondicionado/c/21?sort=relevance&q=%3AtopRated#, aire acondicionado
-https://www.musimundo.com/electrohogar/lavarropas/c/147?sort=relevance&q=%3AtopRated#, lavarropas
-https://www.fravega.com/l/tv-y-video/tv/?sorting=TOTAL_SALES_IN_LAST_30_DAYS, tv
-https://www.fravega.com/l/informatica/notebooks/?sorting=TOTAL_SALES_IN_LAST_30_DAYS, notebook
-https://www.fravega.com/l/camaras-y-video-camaras/?sorting=TOTAL_SALES_IN_LAST_30_DAYS, camara
-https://www.fravega.com/l/informatica/impresoras/?sorting=TOTAL_SALES_IN_LAST_30_DAYS, impresora
-https://www.fravega.com/l/celulares/celulares-liberados/?sorting=TOTAL_SALES_IN_LAST_30_DAYS, celular
-https://www.fravega.com/l/pequenos-electrodomesticos/hogar/?sorting=TOTAL_SALES_IN_LAST_30_DAYS, electrodomestico
-https://www.fravega.com/l/cocina/?sorting=TOTAL_SALES_IN_LAST_30_DAYS, cocina
-https://www.fravega.com/l/lavado/?sorting=TOTAL_SALES_IN_LAST_30_DAYS, lavarropas
-https://www.fravega.com/l/pequenos-electrodomesticos/cocina/?sorting=TOTAL_SALES_IN_LAST_30_DAYS, electrodomestico
-https://www.fravega.com/l/herramientas-y-construccion/herramientas/herramientas-electricas/?sorting=TOTAL_SALES_IN_LAST_30_DAYS, herramienta
+URL,cantidad_paginas
+https://www.levi.com.ar/Mujer/Sweaters-y-buzos?order=OrderByTopSaleDESC,1
+https://www.levi.com.ar/Mujer/Jeans?order=OrderByTopSaleDESC,1
+https://www.levi.com.ar/hombre/jeans?order=OrderByTopSaleDESC,1
+https://www.levi.com.ar/hombre/camisas?order=OrderByTopSaleDESC,1
+https://www.disco.com.ar/quesos-y-fiambres?order=,2
+https://www.disco.com.ar/Perfumeria/Farmacia?order=,1
+https://www.disco.com.ar/Perfumeria/Cuidado-Oral?order=,1
+https://www.disco.com.ar/limpieza/d?order=,2
+https://www.disco.com.ar/lacteos?order=,3
+https://www.disco.com.ar/frutas-y-verduras?order=,3
+https://www.disco.com.ar/Electro/Pequenos-Electros?order=,1
+https://www.disco.com.ar/congelados?order=,2
+https://www.disco.com.ar/carnes/pollos?order=,1
+https://www.disco.com.ar/carnes/carne-vacuna?order=,2
+https://www.disco.com.ar/Carnes/Carne-de-Cerdo?order=,1
+https://www.disco.com.ar/bebidas/jugos?order=,1
+https://www.disco.com.ar/bebidas/gaseosas?order=,1
+https://www.disco.com.ar/bebidas/cervezas?order=,1
+https://www.disco.com.ar/bebidas/aperitivos?order=,1
+https://www.disco.com.ar/almacen/sal-pimienta-y-especias?order=,1
+https://www.disco.com.ar/Almacen/Pastas-Secas-y-Salsas?order=,3
+https://www.disco.com.ar/almacen/panificados?order=,1
+https://www.disco.com.ar/almacen/golosinas-y-chocolates?order=,2
+https://www.disco.com.ar/almacen/desayuno-y-merienda?order=,3
+https://www.disco.com.ar/Almacen/Conservas?order=,2
+https://www.disco.com.ar/almacen/arroz-y-legumbres?order=,1
+https://www.disco.com.ar/almacen/aderezos?order=,1
+https://www.disco.com.ar/almacen/aceites-y-vinagres?order=,1
+https://www.dexter.com.ar/mujer/indumentaria/remeras,1
+https://www.dexter.com.ar/mujer/indumentaria/buzos,1
+https://www.dexter.com.ar/mujer/calzado,1
+https://www.dexter.com.ar/hombre/indumentaria/remeras,1
+https://www.dexter.com.ar/hombre/indumentaria/buzos,1
+https://www.carrefour.com.ar/perfumeria?order=,2
+https://www.carrefour.com.ar/panaderia/panificados?order=,1
+https://www.carrefour.com.ar/limpieza?order=,3
+https://www.carrefour.com.ar/lacteos-y-productos-frescos?order=,3
+https://www.carrefour.com.ar/Lacteos-y-productos-frescos/Yogures?order=,1
+https://www.carrefour.com.ar/Lacteos-y-productos-frescos/Leches?order=,1
+https://www.carrefour.com.ar/Frutas-y-verduras/Verduras?order=,3
+https://www.carrefour.com.ar/Frutas-y-verduras/Frutas?order=,3
+https://www.carrefour.com.ar/Electro-y-tecnologia/Informatica-y-gaming?order=,1
+https://www.carrefour.com.ar/electro-y-tecnologia/celulares?order=,1
+https://www.carrefour.com.ar/desayuno-y-merienda?order=,2
+https://www.carrefour.com.ar/desayuno-y-merienda/yerba?order=,1
+https://www.carrefour.com.ar/Desayuno-y-merienda/Infusiones?order=,1
+https://www.carrefour.com.ar/desayuno-y-merienda/golosinas-y-chocolates,1
+https://www.carrefour.com.ar/Desayuno-y-merienda/Galletitas-bizcochitos-y-tostadas,1
+https://www.carrefour.com.ar/carnes-y-pescados?order=,3
+https://www.carrefour.com.ar/bebidas/jugos?order=,1
+https://www.carrefour.com.ar/Bebidas/Gaseosas?order=,1
+https://www.carrefour.com.ar/Bebidas/Fernet-y-aperitivos?order=,1
+https://www.carrefour.com.ar/Bebidas/Cervezas?order=,1
+https://www.carrefour.com.ar/Bazar-y-textil/Libreria?order=,3
+https://www.carrefour.com.ar/bazar-y-textil/indumentaria/adultos?order=OrderByNameASC,1
+https://www.carrefour.com.ar/almacen/sal-aderezos-y-saborizadores,1
+https://www.carrefour.com.ar/Almacen/Pastas-secas?order=,2
+https://www.carrefour.com.ar/almacen/arroz-y-legumbres?order=,2
+https://www.carrefour.com.ar/almacen/aceites-y-vinagres?order=,2
+https://www.carrefour.com.ar/163?map=productClusterIds&order=,2

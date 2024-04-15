@@ -7,7 +7,7 @@ import re
 from extract.precios import get_store_name_from_url, extract_multiple_prices_and_names_selenium, get_type_store
 import pandas as pd
 from extract.db import fetch_data
-from playright.async_playwright_trial import StorePage
+from playwright_scripts.async_playwright_trial import StorePage
 import asyncio
 from playwright.async_api import async_playwright
 from transform.mappings_categorias import CATEGORIA_MAPPING, SUBCATEGORIA_MAPPING, INDICE_MAPPING, PRODUCTO_A_CATEGORIA
@@ -114,7 +114,7 @@ async def main():
 
     #save datos
     print("Guardando datos actualizados...")
-    datos_actualizados.to_csv('producto_categoriasPRUEBA.csv', index=False, encoding='ISO-8859-1')
+    datos_actualizados.to_csv('producto_categorias.csv', index=False, encoding='ISO-8859-1')
     print("Datos guardados")
 
 if __name__ == "__main__":

@@ -1,13 +1,18 @@
 ##### HAY QUE EJECUTAR ESTE CODIGO ANTES PARA QUE ANDE TODO playwright install
 
-import re
 import asyncio
-from playwright.async_api import async_playwright
 import datetime
 import json
-import pandas as pd
+import re
 import unicodedata
-from playright.selectors import STORE_SINGLE_SELECTORS, STORE_MULT_SELECTORS, POPUP_SELECTORS
+
+import pandas as pd
+
+from load.gcs_load import load_data_to_db
+from playwright.async_api import async_playwright
+from playwright_scripts.selectors import (POPUP_SELECTORS, STORE_MULT_SELECTORS,
+                                  STORE_SINGLE_SELECTORS)
+
 
 def normalize_text(text):
     # Normalizar el texto para reemplazar caracteres con tilde y ñ
@@ -49,6 +54,7 @@ def get_store_name_from_url(url):
     }
     domain = url.split('/')[2].replace('www.', '')  # Strip 'www.' if present
     return store_domains.get(domain, 'unknown')
+
 def get_type_store(url):
     if any(word in url.lower() for word in ['order', 'sort', 'depar']):
         return 'all'
@@ -91,70 +97,74 @@ class StorePage:
                 print(f"No se pudo cerrar pop-up con {selector}: {str(e)}")
 
     async def navigate_and_extract(self, url):
-        # Limpiar cookies y permisos antes de iniciar la navegación
-        await self.page.context.clear_cookies()
-        await self.page.context.clear_permissions()
+        try:
+            # Limpiar cookies y permisos antes de iniciar la navegación
+            await self.page.context.clear_cookies()
+            await self.page.context.clear_permissions()
 
-        await self.page.goto(url, wait_until="networkidle")
-        store_name = get_store_name_from_url(url)
+            await self.page.goto(url, wait_until="networkidle", timeout=50000)
+            store_name = get_store_name_from_url(url)
 
-        data = []
-        pages_visited = 0
+            data = []
+            pages_visited = 0
 
-        while True:
-            await self.close_popups()
+            while True:
+                await self.close_popups()
 
-            # Extraer datos de la página actual
-            current_data = await self.extract_multiple_prices_and_names(url)
-            for product in current_data:
-                if product not in data:
-                    data.append(product)
+                # Extraer datos de la página actual
+                current_data = await self.extract_multiple_prices_and_names(url)
+                for product in current_data:
+                    if product not in data:
+                        data.append(product)
 
-            pages_visited += 1
-            if self.max_pages is not None and pages_visited >= self.max_pages:
-                break
-            if store_name == 'disco':
-                # Lógica especial para Disco
-                next_page_buttons = await self.page.query_selector_all(STORE_MULT_SELECTORS['disco']['next_button'])
-                if pages_visited < len(next_page_buttons):
-                    await next_page_buttons[pages_visited - 1].click()  # Clickea el botón de la siguiente página
-                    try:
-                        await self.page.wait_for_load_state('networkidle', timeout=30000)
-                    except TimeoutError:
-                        print("Timeout alcanzado, continuando con la siguiente página")
-                        continue
-
-                    await asyncio.sleep(3)
-                else:
-                    print("No más páginas disponibles o límite alcanzado para Disco.")
+                pages_visited += 1
+                if self.max_pages is not None and pages_visited >= self.max_pages:
                     break
-            else:
+                if store_name == 'disco':
+                    # Lógica especial para Disco
+                    next_page_buttons = await self.page.query_selector_all(STORE_MULT_SELECTORS['disco']['next_button'])
+                    if pages_visited < len(next_page_buttons):
+                        await next_page_buttons[pages_visited - 1].click()  # Clickea el botón de la siguiente página
+                        try:
+                            await self.page.wait_for_load_state('networkidle', timeout=80000)
+                        except TimeoutError:
+                            print("Timeout alcanzado, continuando con la siguiente página")
+                            continue
 
-                # Intentar navegar a la siguiente página
-                next_button_selector = STORE_MULT_SELECTORS.get(store_name, {}).get('next_button', '')
-                next_button = await self.page.query_selector(next_button_selector)
-                if next_button and await next_button.is_visible() and await next_button.is_enabled():
-                    # Guardar la URL actual antes de hacer clic
-                    current_url = self.page.url
-                    await next_button.click()
-                    try:
-                        await self.page.wait_for_load_state('networkidle', timeout=30000)
-                    except TimeoutError:
-                        print("Timeout alcanzado, continuando con la siguiente página")
-                        return data
-
-                    # Comprobar si la URL ha cambiado después de navegar
-                    new_url = self.page.url
-                    if new_url == current_url:
-                        print("La página no ha cambiado después de hacer clic en 'Siguiente'.")
+                        await asyncio.sleep(3)
                     else:
-                        await asyncio.sleep(3)  # Esperar para asegurar que la nueva página se ha cargado completamente
+                        print("No más páginas disponibles o límite alcanzado para Disco.")
+                        break
                 else:
-                    print(f"No se encontró el botón 'Siguiente' o no está disponible de la store {store_name}. usando el selector {next_button_selector}")
-                    break
-        print(f"Total de productos únicos extraídos: {len(data)}")
-        transformed_data = transform_data(data, url)
-        return transformed_data
+
+                    # Intentar navegar a la siguiente página
+                    next_button_selector = STORE_MULT_SELECTORS.get(store_name, {}).get('next_button', '')
+                    next_button = await self.page.query_selector(next_button_selector)
+                    if next_button and await next_button.is_visible() and await next_button.is_enabled():
+                        # Guardar la URL actual antes de hacer clic
+                        current_url = self.page.url
+                        await next_button.click()
+                        try:
+                            await self.page.wait_for_load_state('networkidle', timeout=50000)
+                        except TimeoutError:
+                            print("Timeout alcanzado, continuando con la siguiente página")
+                            return data
+
+                        # Comprobar si la URL ha cambiado después de navegar
+                        new_url = self.page.url
+                        if new_url == current_url:
+                            print("La página no ha cambiado después de hacer clic en 'Siguiente'.")
+                        else:
+                            await asyncio.sleep(3)  # Esperar para asegurar que la nueva página se ha cargado completamente
+                    else:
+                        print(f"No se encontró el botón 'Siguiente' o no está disponible de la store {store_name}. usando el selector {next_button_selector} en la url {url}")
+                        break
+            print(f"Total de productos únicos extraídos: {len(data)}")
+            transformed_data = transform_data(data, url)
+            return transformed_data
+        except Exception as e:
+            print(f"Error en la navegación y extracción: {e}")
+            return {}
 
     async def extract_multiple_prices_and_names(self, url):
         store_name = get_store_name_from_url(url)
@@ -164,7 +174,7 @@ class StorePage:
 
         # Asegúrate de que la página ha cargado completamente
         try:
-            await self.page.wait_for_load_state('networkidle', timeout=30000)
+            await self.page.wait_for_load_state('networkidle', timeout=50000)
         except TimeoutError:
             print("Timeout alcanzado, continuando con la siguiente página")
             return []
@@ -184,7 +194,7 @@ class StorePage:
             await self.page.wait_for_selector(STORE_MULT_SELECTORS[store_name]['price'], state="visible", timeout=5000)
             await self.page.wait_for_selector(STORE_MULT_SELECTORS[store_name]['name'], state="visible", timeout=5000)
         except Exception as e:
-            print(f"Error esperando los selectores: {e}")
+            print(f"Error esperando los selectores: {e} de la pagina {url}")
             return []
 
         price_elements = await self.page.query_selector_all(STORE_MULT_SELECTORS[store_name]['price'])
@@ -196,7 +206,12 @@ class StorePage:
             name = await name_el.text_content()
 
             cleaned_price = re.sub(r'[^\d,]', '', raw_price)
-            products.append({'name': name.strip(), 'price': cleaned_price})
+            price = None if cleaned_price == '' else cleaned_price
+
+            if price is not None:  # Only add products with a valid price
+                products.append({'name': name.strip(), 'price': price})
+            else:
+                print(f"Invalid or missing price for product: {name.strip()}")
         
         return products
 
@@ -212,22 +227,22 @@ def merge_data(all_data, new_data):
                     all_data[date][store].update(products)
 
 async def main():
-    with open('url_productos_pruebas.csv', 'r') as f:
-        datos = pd.read_csv(f, encoding='ISO-8859-1')
-        url_list = datos['URL'].tolist()
+    datos = pd.read_csv('url_productos_pruebas.csv', encoding='ISO-8859-1')
 
     all_data = {}
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=True, args=['--no-sandbox', '--disable-setuid-sandbox','--user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36"'])
-        for url in url_list:
+        for index,row in datos.iterrows():
             page = await browser.new_page()
-            store_page = StorePage(page, max_pages=3)
-            formatted_data = await store_page.navigate_and_extract(url)
+            max_pages = row['cantidad_paginas']
+            store_page = StorePage(page, max_pages=max_pages)
+            formatted_data = await store_page.navigate_and_extract(row['URL'])
             merge_data(all_data, formatted_data)
             await page.close()
         await browser.close()
 
-    print(json.dumps(all_data, indent=4))
+    # FORMAT JSON TO PRINT IT
+    load_data_to_db(all_data)
 
 if __name__ == '__main__':
     asyncio.run(main())
