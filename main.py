@@ -173,9 +173,9 @@ def main() -> None:
     elif args.zonaprop:
         pipeline_zonaprop()
     elif args.correr_todo:
+        asyncio.run(pipeline_supermercados())
         pipeline_dolar()
         pipeline_BCRA()
-        asyncio.run(pipeline_supermercados())
     else:
         print("Debe especificar el pipeline a ejecutar")
         parser.print_help()
