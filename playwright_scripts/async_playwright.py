@@ -10,7 +10,7 @@ import pandas as pd
 
 from load.gcs_load import load_data_to_db
 from playwright.async_api import async_playwright
-from playwright_scripts.selectors import (POPUP_SELECTORS, STORE_MULT_SELECTORS,
+from playwright_scripts.selectores_playwright import (POPUP_SELECTORS, STORE_MULT_SELECTORS,
                                   STORE_SINGLE_SELECTORS)
 
 
