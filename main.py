@@ -122,7 +122,6 @@ def main() -> None:
         action="store_true",
         help="Ejecuta el pipeline de supermercados"
     )
-
     parser.add_argument(
         "--dolar",
         action="store_true",

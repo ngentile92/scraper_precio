@@ -54,4 +54,4 @@ jobs:
        playwright install
        pip install playwright-stealth
    - name: 'Run script'
-     run: python main.py --correr-todo
+     run: python playwright_scripts/async_playwright_trial.py
