@@ -10,7 +10,7 @@ from extract.db import fetch_data
 from playright.async_playwright_trial import StorePage
 import asyncio
 from playwright.async_api import async_playwright
-from transform.mappings import CATEGORIA_MAPPING, SUBCATEGORIA_MAPPING, INDICE_MAPPING, PRODUCTO_A_CATEGORIA
+from transform.mappings_categorias import CATEGORIA_MAPPING, SUBCATEGORIA_MAPPING, INDICE_MAPPING, PRODUCTO_A_CATEGORIA
 
 # Función de búsqueda en diccionario
 def extract_from_mapping(url_lower, mapping):
@@ -31,7 +31,7 @@ def extract_subcategory(url):
 async def get_category(urls: list):
     all_data = []
     async with async_playwright() as p:
-        browser = await p.chromium.launch(headless=True, args=['--no-sandbox', '--disable-setuid-sandbox'])
+        browser = await p.chromium.launch(headless=True, args=['--no-sandbox', '--disable-setuid-sandbox','--user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36"'])
         for url in urls:
             page = await browser.new_page()
             store_name = get_store_name_from_url(url)
@@ -52,7 +52,6 @@ async def get_category(urls: list):
                                     'categorias': category,
                                     'sub-categoria': subcategory
                                 })
-                                print(f"de {url} esta el Producto: {product_name}, Categoría: {category}, Subcategoría: {subcategory}")
             await page.close()
         await browser.close()
 
@@ -109,11 +108,9 @@ async def main():
 
     datos = pd.concat([datos, df], axis=0)
     datos = add_index_column(datos)
-    print("Datos actualizados: ", datos)
     # drop duplicates
     datos = datos.drop_duplicates(subset='producto_unificado', keep='last')
     datos_actualizados = actualizar_categoria_con_palabra(datos, 'producto_unificado', 'Indice')
-    print("Datos actualizados con palabras clave: ", datos_actualizados)
 
     #save datos
     print("Guardando datos actualizados...")

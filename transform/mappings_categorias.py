@@ -2,7 +2,13 @@ INDICE_MAPPING = {
     'electrodomesticos y tecnologia': {
         'celulares': 'celulares y pequenos electrodomesticos',
         'pequenos electrodomesticos': 'celulares y pequenos electrodomesticos',
-        'informatica': 'informatica'
+        'informatica': 'informatica',
+        'televisores': 'televisores',
+        'aires acondicionados': 'aires acondicionados',
+        'lavarropas/secarropas': 'lavarropas/secarropas',
+        'camaras': 'camaras',
+        'cocina': 'cocina',
+        'herramientas electricas': 'herramientas electricas',
     },
     'fiambres y quesos': {
         'quesos': 'Leche/ productos lacteos/ huevos y alimentos vegetales'
@@ -75,7 +81,6 @@ INDICE_MAPPING = {
     }
 }
 
-# pequenos electrodomesticos deberia ser celulares y pequenos electrodomesticos junto a celulares
 PRODUCTO_A_CATEGORIA = {
     'tomate': 'Verduras/ tuberculos y legumbres',
     'papas': 'Verduras/ tuberculos y legumbres',
@@ -113,7 +118,20 @@ CATEGORIA_MAPPING = {
     'frutas|verduras': 'frutas y verduras',
     'almacen': 'almacen',
     'congelados': 'congelados',
-    'bazar|textil': 'bazar y textil'
+    'bazar|textil': 'bazar y textil',
+    'televisores': 'electrodomesticos y tecnologia',
+    'tv-y-video': 'electrodomesticos y tecnologia',
+    'celulares': 'electrodomesticos y tecnologia',
+    'notebook': 'electrodomesticos y tecnologia',
+    'aire': 'electrodomesticos y tecnologia',
+    'lavarropas': 'electrodomesticos y tecnologia',
+    'camaras': 'electrodomesticos y tecnologia',
+    'impresoras': 'electrodomesticos y tecnologia',
+    'pequenos-electrodomesticos/hogar': 'electrodomesticos y tecnologia',
+    'l/cocina': 'electrodomesticos y tecnologia',
+    'l/lavado': 'electrodomesticos y tecnologia',
+    'pequenos-electrodomesticos/cocina': 'electrodomesticos y tecnologia',
+    'herramientas-electricas/': 'electrodomesticos y tecnologia',
 }
 
 SUBCATEGORIA_MAPPING = {
@@ -142,5 +160,17 @@ SUBCATEGORIA_MAPPING = {
     'map=productclusterids.*163': 'sin TACC',
     'federal': 'capital federal',
     '/conservas': 'conservas',
-    'pastas': 'pastas'
+    'pastas': 'pastas',
+    'televisores': 'televisores',
+    'tv-y-video': 'televisores',
+    'notebook': 'notebooks',
+    'aire': 'aires acondicionados',
+    'lavarropas': 'lavarropas/secarropas',
+    'camaras': 'camaras',
+    'impresoras': 'impresoras',
+    'pequenos-electrodomesticos': 'pequenos electrodomesticos',
+    'l/cocina': 'cocina',
+    'l/lavado': 'lavarropas/secarropas',
+    'pequenos-electrodomesticos/cocina': 'electrodomesticos de cocina',
+    'herramientas-electricas/': 'herramientas electricas',
 }

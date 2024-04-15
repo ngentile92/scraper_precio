@@ -65,7 +65,7 @@ class StorePage:
         retry_wait = 1
         for attempt in range(max_retries):
             try:
-                await self.page.goto(url)
+                await self.page.goto(url, wait_until="domcontentloaded")
                 await self.close_popups()  # Intenta cerrar pop-ups después de cargar la página
                 if store_name in STORE_SINGLE_SELECTORS:
                     price_div = await self.page.wait_for_selector(f'.{STORE_SINGLE_SELECTORS[store_name]}', timeout=retry_wait*1000)
@@ -180,6 +180,7 @@ class StorePage:
 
         # Espera explícita por los selectores de precios y nombres
         try:
+            await self.page.wait_for_load_state('networkidle')
             await self.page.wait_for_selector(STORE_MULT_SELECTORS[store_name]['price'], state="visible", timeout=5000)
             await self.page.wait_for_selector(STORE_MULT_SELECTORS[store_name]['name'], state="visible", timeout=5000)
         except Exception as e:
@@ -217,7 +218,7 @@ async def main():
 
     all_data = {}
     async with async_playwright() as p:
-        browser = await p.chromium.launch(headless=True, args=['--no-sandbox', '--disable-setuid-sandbox'])
+        browser = await p.chromium.launch(headless=True, args=['--no-sandbox', '--disable-setuid-sandbox','--user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36"'])
         for url in url_list:
             page = await browser.new_page()
             store_page = StorePage(page, max_pages=3)
