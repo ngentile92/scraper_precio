@@ -7,11 +7,13 @@ import re
 import unicodedata
 import random
 import time
+
 import pandas as pd
 
 from load.gcs_load import load_data_to_db
 from playwright.async_api import async_playwright
-from playwright_scripts.selectores_playwright import (POPUP_SELECTORS, STORE_MULT_SELECTORS,
+from playwright_scripts.selectors_supermarket import (POPUP_SELECTORS, STORE_MULT_SELECTORS,
+
                                   STORE_SINGLE_SELECTORS)
 
 
@@ -105,6 +107,7 @@ class StorePage:
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36',
                 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
             })
+
             # Limpiar cookies y permisos antes de iniciar la navegación
             await self.page.context.clear_cookies()
             await self.page.context.clear_permissions()
