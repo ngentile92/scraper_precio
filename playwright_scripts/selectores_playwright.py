@@ -19,8 +19,8 @@ STORE_MULT_SELECTORS = {
         'next_button' : 'div.valtech-carrefourar-search-result-0-x-paginationButtonChangePage:last-child button'
     },
     'disco': {
-        'price': '#priceContainer',
-        'name': 'span.vtex-product-summary-2-x-productBrand.vtex-product-summary-2-x-brandName.t-body',
+        'price': 'div.vtex-flex-layout-0-x-flexColChild--contentCol #priceContainer',
+        'name': 'div.vtex-flex-layout-0-x-flexColChild--contentCol .vtex-product-summary-2-x-productBrand',
         'next_button': 'div.discoargentina-search-result-custom-1-x-new-btn button:not([class*="clicked"])'
     },
     'fravega': {

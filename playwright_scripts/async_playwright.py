@@ -109,7 +109,7 @@ class StorePage:
             await self.page.context.clear_cookies()
             await self.page.context.clear_permissions()
 
-            await self.page.goto(url, wait_until="networkidle", timeout=50000)
+            await self.page.goto(url, wait_until="domcontentloaded", timeout=50000)
             store_name = get_store_name_from_url(url)
 
             data = []
@@ -133,7 +133,7 @@ class StorePage:
                     if pages_visited < len(next_page_buttons):
                         await next_page_buttons[pages_visited - 1].click()  # Clickea el botón de la siguiente página
                         try:
-                            await self.page.wait_for_load_state('networkidle', timeout=50000)
+                            await self.page.wait_for_load_state('domcontentloaded', timeout=50000)
                         except TimeoutError:
                             print("Timeout alcanzado, continuando con la siguiente página")
                             continue
@@ -152,7 +152,7 @@ class StorePage:
                         current_url = self.page.url
                         await next_button.click()
                         try:
-                            await self.page.wait_for_load_state('networkidle', timeout=50000)
+                            await self.page.wait_for_load_state('domcontentloaded', timeout=50000)
                         except TimeoutError:
                             print("Timeout alcanzado, continuando con la siguiente página")
                             return data
@@ -170,7 +170,7 @@ class StorePage:
             transformed_data = transform_data(data, url)
             return transformed_data
         except Exception as e:
-            print(f"Error en la navegación y extracción: {e}")
+            print(f"Error en la navegación y extracción: {e} para la url {url}")
             return {}
 
     async def extract_multiple_prices_and_names(self, url):
@@ -181,7 +181,7 @@ class StorePage:
 
         # Asegúrate de que la página ha cargado completamente
         try:
-            await self.page.wait_for_load_state('networkidle', timeout=50000)
+            await self.page.wait_for_load_state('domcontentloaded', timeout=50000)
         except TimeoutError:
             print("Timeout alcanzado, continuando con la siguiente página")
             return []
@@ -197,7 +197,7 @@ class StorePage:
 
         # Espera explícita por los selectores de precios y nombres
         try:
-            await self.page.wait_for_load_state('networkidle')
+            await self.page.wait_for_load_state('domcontentloaded')
             await self.page.wait_for_selector(STORE_MULT_SELECTORS[store_name]['price'], state="visible", timeout=5000)
             await self.page.wait_for_selector(STORE_MULT_SELECTORS[store_name]['name'], state="visible", timeout=5000)
         except Exception as e:
@@ -239,6 +239,8 @@ async def main():
     all_data = {}
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=True, args=['--no-sandbox', '--disable-setuid-sandbox','--user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36"'])
+        # sort randomly datos to avoid blocking
+        datos = datos.sample(frac=1).reset_index(drop=True)
         for index, row in datos.iterrows():
             page = await browser.new_page()
             max_pages = row['cantidad_paginas']
@@ -247,8 +249,9 @@ async def main():
             merge_data(all_data, formatted_data)
             await page.close()
         await browser.close()
-
-    load_data_to_db(all_data)
+    # print as a formated json
+    print(json.dumps(all_data, indent=4))
+    #load_data_to_db(all_data)
 
 if __name__ == '__main__':
     asyncio.run(main())

@@ -29,6 +29,7 @@ async def pipeline_supermercados():
     all_data = {}
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=True, args=['--no-sandbox', '--disable-setuid-sandbox', '--user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36"'])
+        datos = datos.sample(frac=1).reset_index(drop=True)
         for index, row in datos.iterrows():
             page = await browser.new_page()
             max_pages = int(row['cantidad_paginas'])  # Convierte a entero para asegurar la correcta manipulación

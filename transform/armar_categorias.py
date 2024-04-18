@@ -94,7 +94,7 @@ def actualizar_categoria_con_palabra(df, columna_nombre_producto, columna_catego
 
 
 async def main():
-    with open('url_productos_pruebas.csv', 'r') as f:
+    with open('url_productos.csv', 'r') as f:
         datos = pd.read_csv(f, encoding='ISO-8859-1')
         url_list = datos['URL'].tolist()
 
