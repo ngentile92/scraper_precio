@@ -55,5 +55,6 @@ POPUP_SELECTORS = [
     '.dy-lb-close',
     '#btnNoIdWpnPush',
     'button[data-test-id="close-modal-button"]',
+    'button[class="sc-eifrsQ bvPMIe"]',
     '.vtex-modal-layout-0-x-closeButtonLabel--modal-newsletter'
 ]

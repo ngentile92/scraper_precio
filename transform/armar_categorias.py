@@ -33,6 +33,7 @@ async def get_category(urls: list):
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=True, args=['--no-sandbox', '--disable-setuid-sandbox','--user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36"'])
         for url in urls:
+            print(f"Procesando URL: {url}")
             page = await browser.new_page()
             store_name = get_store_name_from_url(url)
             type_url = get_type_store(url)
@@ -75,21 +76,26 @@ def add_index_column(df):
 
 def mapear_categoria_por_palabra(nombre_producto, categoria_actual):
     nombre_producto = nombre_producto.lower()
-    # Solo actualizamos si la categoría actual contiene la palabra "otro"
+    # Verificar si la categoría actual contiene palabras clave específicas
     if 'otro' in categoria_actual.lower() or 'otros alimentos' in categoria_actual.lower() or 'congelados' in categoria_actual.lower() or 'conservas' in categoria_actual.lower():
-        for palabra_clave, nueva_categoria in PRODUCTO_A_CATEGORIA.items():
+        # Verificar si alguna de las palabras clave está presente en el nombre del producto
+        for palabra_clave, nueva_categoria in CATEGORIA_MAPPING.items():
             if palabra_clave in nombre_producto:
+                print(f"Producto: {nombre_producto} - Nueva categoría: {nueva_categoria}")
                 return nueva_categoria
-    return categoria_actual  # Devuelve la categoría actual si no hay coincidencia
+    # Si la categoría actual no contiene las palabras clave, devolver la categoría actual
+    return categoria_actual
+
 
 # Función para actualizar la categoría basada en palabras clave dentro del nombre del producto
 def actualizar_categoria_con_palabra(df, columna_nombre_producto, columna_categoria):
     # Usar `apply` para mapear la nueva categoría usando la función `mapear_categoria_por_palabra`
     # Se consideran las filas donde columna_categoria contiene 'otro', 'congelados' o 'conservas'
     condicion = df[columna_categoria].str.lower().str.contains('otro|congelados|conservas', na=False)
-    df.loc[condicion, columna_categoria] = df.loc[condicion].apply(
-        lambda row: mapear_categoria_por_palabra(row[columna_nombre_producto], row[columna_categoria]), axis=1
-    )
+    # print todos los que cumplen la condición
+    print(df[condicion])
+    # ver quienes complen la condición y usar mapear_categoria_por_palabra y actualizar la columna
+    df.loc[condicion, columna_categoria] = df[condicion].apply(lambda row: mapear_categoria_por_palabra(row[columna_nombre_producto], row[columna_categoria]), axis=1)
     return df
 
 
@@ -97,12 +103,10 @@ async def main():
     with open('url_productos.csv', 'r') as f:
         datos = pd.read_csv(f, encoding='ISO-8859-1')
         url_list = datos['URL'].tolist()
-
+#
     df = await get_category(url_list)
-
-    with open('producto_categorias.csv', 'r') as f:
-        datos = pd.read_csv(f, encoding='ISO-8859-1')
-
+    # abrir productos_categorias.csv
+    datos = pd.read_csv('producto_categorias.csv', encoding='ISO-8859-1')
     datos = pd.concat([datos, df], axis=0)
     datos = add_index_column(datos)
     # drop duplicates
