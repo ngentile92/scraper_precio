@@ -22,6 +22,7 @@ def normalize_text(text):
     text = unicodedata.normalize('NFD', text)  # Descomponer en caracteres y diacríticos
     text = text.encode('ascii', 'ignore')  # Convertir a ASCII y omitir errores
     text = text.decode('utf-8')  # Decodificar de vuelta a UTF-8
+    text = re.sub(r'"', '', text)  # Eliminar comillas dobles
     return text
 
 def transform_data(data, url):
@@ -254,6 +255,15 @@ async def main():
         await browser.close()
     # print as a formated json
     print(json.dumps(all_data, indent=4))
+    # transform en dataframe con cada producto como linea
+    all_data_list = []
+    for date, stores in all_data.items():
+        for store, products in stores.items():
+            for product, price in products.items():
+                all_data_list.append({'date': date, 'store': store, 'product': product, 'price': price})
+    df = pd.DataFrame(all_data_list)
+    # save in a csv
+    df.to_csv('all_productos_prueba.csv')
     #load_data_to_db(all_data)
 
 if __name__ == '__main__':

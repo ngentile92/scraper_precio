@@ -24,7 +24,7 @@ STORE_MULT_SELECTORS = {
         'next_button': 'div.discoargentina-search-result-custom-1-x-new-btn button:not([class*="clicked"])'
     },
     'fravega': {
-        'price': 'div[data-test-id="product-price"] .sc-66d25270-0.eiLwiO',  
+        'price': 'div[data-test-id="product-price"] .sc-1d9b1d9e-0',  
         'name': '.sc-ca346929-0',
         'next_button': 'a[data-test-id="pagination-next-button"]'
     },
